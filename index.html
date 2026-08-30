@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,19 +11,21 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&family=Barlow-Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
+
 </head>
+
 
 <body>
 
+
 <div id="lottery-root">
 
-    <!-- ===========================
-         HEADER
-    ============================ -->
+
+    <!-- HEADER -->
 
     <header class="header">
 
@@ -41,156 +45,294 @@
 
 
 
-    <!-- ===========================
-         NAVIGATION
-    ============================ -->
+    <!-- NAVIGATION -->
 
     <nav class="tabs">
 
-        <button
-            class="tab active"
-            onclick="switchTab('lottery')">
-
+        <button class="tab active" onclick="switchTab('lottery')">
             Lottery Draw Arena
-
         </button>
 
-        <button
-            class="tab"
-            onclick="switchTab('picks')">
-
+        <button class="tab" onclick="switchTab('picks')">
             Draft Board
-
         </button>
 
-        <button
-            class="tab"
-            onclick="switchTab('admin')">
-
+        <button class="tab" onclick="switchTab('admin')">
             League Controls & Settings
-
         </button>
 
     </nav>
 
 
 
-    <!-- ===========================
-         LOTTERY TAB
-    ============================ -->
+    <!-- LOTTERY TAB -->
 
-    <section
-        id="tab-lottery"
-        class="tab-content active">
+    <section id="tab-lottery" class="tab-content active">
+
 
         <div class="dashboard-wrapper">
 
+
             <div class="main-draw-zone">
+
 
                 <div class="balls-section">
 
-                    <div
-                        id="balls-instruction"
-                        class="balls-label">
 
+                    <div id="balls-instruction" class="balls-label">
                         Select a Ball to Draw
-
                     </div>
 
-                    <div
-                        id="balls-row"
-                        class="balls-row">
+
+                    <div id="balls-row" class="balls-row">
                     </div>
 
-                    <div
-                        id="sequence-display"
-                        class="sequence-display">
+
+                    <div id="sequence-display" class="sequence-display">
                     </div>
+
 
                 </div>
 
-                <div id="winner-area"></div>
 
-                <div
-                    id="controls-row"
-                    class="controls-row">
+
+                <div id="winner-area">
                 </div>
+
+
+
+                <div id="controls-row" class="controls-row">
+                </div>
+
 
             </div>
 
+
+
             <aside>
+
 
                 <div class="teams-pane-title">
                     Real-Time Probability Tracking
                 </div>
 
-                <div
-                    id="teams-grid"
-                    class="teams-grid">
+
+                <div id="teams-grid" class="teams-grid">
                 </div>
+
 
             </aside>
 
+
         </div>
+
 
     </section>
 
 
 
-    <!-- ===========================
-         DRAFT BOARD
-    ============================ -->
 
-    <section
-        id="tab-picks"
-        class="tab-content">
 
-        <div
-            id="picks-list"
-            class="picks-list">
+    <!-- DRAFT BOARD -->
+
+    <section id="tab-picks" class="tab-content">
+
+
+        <div id="picks-list" class="picks-list">
         </div>
+
 
     </section>
 
 
 
-    <!-- ===========================
-         ADMIN PANEL
-    ============================ -->
 
-    <section
-        id="tab-admin"
-        class="tab-content">
+
+    <!-- ADMIN PANEL -->
+
+    <section id="tab-admin" class="tab-content">
+
 
         <div class="admin-panel">
 
-            <!-- Everything that currently
-                 lives in the admin tab
-                 will be recreated here
-                 by admin.js -->
 
             <div id="admin-root">
 
-    <div class="config-grid">
-        <!-- config inputs will go here later -->
-    </div>
 
-    <div class="admin-scroller" id="admin-teams-container">
-    </div>
 
-</div>
+                <div class="config-grid">
+
+
+                    <div class="config-group">
+
+                        <label>
+                            Team Count
+                        </label>
+
+                        <input
+                            id="cfg-team-count"
+                            class="admin-input"
+                            type="number"
+                            value="8"
+                            onchange="handleTeamCountChange()">
+
+                    </div>
+
+
+
+                    <div class="config-group">
+
+                        <label>
+                            Ball Pool Size
+                        </label>
+
+                        <input
+                            id="cfg-balls-pool"
+                            class="admin-input"
+                            type="number"
+                            value="10"
+                            onchange="calculateMathLimits()">
+
+                    </div>
+
+
+
+                    <div class="config-group">
+
+                        <label>
+                            Draw Sequence Size
+                        </label>
+
+                        <input
+                            id="cfg-draw-size"
+                            class="admin-input"
+                            type="number"
+                            value="3"
+                            onchange="calculateMathLimits()">
+
+                    </div>
+
+
+
+                    <div class="config-group">
+
+                        <label>
+                            Total Permutations
+                        </label>
+
+                        <input
+                            id="cfg-max-perms"
+                            class="admin-input"
+                            type="number"
+                            value="360"
+                            onchange="updateAdminTotal()">
+
+                    </div>
+
+
+                </div>
+
+
+
+
+                <span id="math-max-hint" class="math-hint">
+                </span>
+
+
+
+
+                <div class="admin-section-title">
+                    Team Weight Allocation
+                </div>
+
+
+
+
+                <div class="admin-table-header">
+
+                    <div class="admin-label">
+                        Team Name
+                    </div>
+
+                    <div class="admin-label">
+                        Weights
+                    </div>
+
+                    <div class="admin-label">
+                        Percentage
+                    </div>
+
+                </div>
+
+
+
+
+
+                <div
+                    class="admin-scroller"
+                    id="admin-teams-container">
+                </div>
+
+
+
+
+
+                <div
+                    id="total-label"
+                    class="total-perms">
+                </div>
+
+
+
+
+
+                <div class="controls-row">
+
+
+                    <button
+                        class="btn btn-gold"
+                        onclick="applySettings()">
+
+                        Apply Settings
+
+                    </button>
+
+
+
+
+                    <button
+                        class="btn btn-outline"
+                        onclick="resetSettingsToDefault()">
+
+                        Reset Defaults
+
+                    </button>
+
+
+                </div>
+
+
+
+
+            </div>
+
 
         </div>
 
+
     </section>
+
 
 </div>
 
 
 
-<!-- ===================================
-     PERMUTATION MODAL
-==================================== -->
+
+
+
+
+<!-- PERMUTATION MODAL -->
+
 
 <div
     id="perm-overlay"
@@ -198,25 +340,36 @@
     style="display:none"
     onclick="closePermModal(event)">
 
+
+
     <div
         class="perm-modal"
         onclick="event.stopPropagation()">
 
+
+
         <div class="perm-modal-header">
 
+
             <div>
+
 
                 <div
                     id="modal-team-name"
                     class="perm-modal-title">
                 </div>
 
+
+
                 <div
                     id="modal-team-sub"
                     class="perm-modal-sub">
                 </div>
 
+
             </div>
+
+
 
             <button
                 class="perm-close-btn"
@@ -226,45 +379,68 @@
 
             </button>
 
+
+
         </div>
 
+
+
+
+
         <div class="perm-legend">
+
 
             <div>
                 <span class="legend-dot alive"></span>
                 Active Opportunity
             </div>
 
+
             <div>
                 <span class="legend-dot struck"></span>
                 Eliminated Sequence
             </div>
+
 
             <div>
                 <span class="legend-dot winner-perm"></span>
                 Winning Sequence
             </div>
 
+
         </div>
 
+
+
+
+
         <div class="perm-scroll">
+
 
             <div
                 id="modal-perm-grid"
                 class="perm-grid">
             </div>
 
+
         </div>
 
+
+
     </div>
+
+
 
 </div>
 
 
 
-<!-- ===================================
-     JAVASCRIPT
-==================================== -->
+
+
+
+
+<!-- JAVASCRIPT -->
+
 
 <script src="js/config.js"></script>
 <script src="js/lottery.js"></script>
@@ -273,8 +449,8 @@
 <script src="js/modal.js"></script>
 <script src="js/app.js"></script>
 
+
+
 </body>
 
-<!-- GitHub Pages deployment test -->
- 
 </html>
