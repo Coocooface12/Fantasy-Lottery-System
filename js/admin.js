@@ -37,54 +37,24 @@ function calculateMathLimits() {
 
 
   /*
-    Save current admin values before recalculating.
-    This keeps percentages intact.
+    IMPORTANT:
+    Do NOT rebuild activeConfig.teams from the HTML inputs here.
+    
+    The HTML is the display layer.
+    activeConfig is the data layer.
   */
 
-  const permInputs =
-    document.querySelectorAll('.clan-perm-input');
 
+  if (
+    activeConfig.teams &&
+    activeConfig.teams.length > 0
+  ) {
 
-  const nameInputs =
-    document.querySelectorAll('.clan-name-input');
-
-
-
-  if (permInputs.length > 0) {
-
-
-    activeConfig.teams =
-      [];
-
-
-    permInputs.forEach((input,index)=>{
-
-
-      activeConfig.teams.push({
-
-        name:
-          nameInputs[index].value.trim()
-          ||
-          `Team ${index + 1}`,
-
-
-        perms:
-          parseInt(input.value) || 0
-
-      });
-
-
-    });
+    recalculateTeamWeights(absoluteMax);
 
   }
 
-
-
-  recalculateTeamWeights(absoluteMax);
-
 }
-
-
 
 
 // =======================================================
@@ -103,7 +73,7 @@ function recalculateTeamWeights(newTotal) {
 
 
 
-  const currentTotal =
+  const oldTotal =
     activeConfig.teams.reduce(
       (sum,team)=>
         sum + team.perms,
@@ -112,32 +82,31 @@ function recalculateTeamWeights(newTotal) {
 
 
 
-  if (currentTotal <= 0) return;
+  if(oldTotal <= 0){
+    return;
+  }
 
 
 
-  let assigned = 0;
+  let runningTotal = 0;
 
 
 
   activeConfig.teams.forEach((team,index)=>{
 
 
-    // Last team receives rounding adjustment
+    if(index === activeConfig.teams.length - 1){
 
-    if(
-      index === activeConfig.teams.length - 1
-    ){
 
       team.perms =
-        newTotal - assigned;
+        newTotal - runningTotal;
 
 
     } else {
 
 
       const percentage =
-        team.perms / currentTotal;
+        team.perms / oldTotal;
 
 
 
@@ -148,7 +117,7 @@ function recalculateTeamWeights(newTotal) {
 
 
 
-      assigned += team.perms;
+      runningTotal += team.perms;
 
     }
 
@@ -157,7 +126,9 @@ function recalculateTeamWeights(newTotal) {
 
 
 
-  renderAdminTeamRows(activeConfig.teams);
+  renderAdminTeamRows(
+    activeConfig.teams
+  );
 
 }
 
