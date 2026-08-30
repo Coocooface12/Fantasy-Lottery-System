@@ -5,11 +5,57 @@ function calculateMathLimits() {
   
   document.getElementById('math-max-hint').textContent = `Absolute limit for chosen ball config: ${absoluteMax}`;
   
-  let targetInput = document.getElementById('cfg-max-perms');
-  if (parseInt(targetInput.value) > absoluteMax || targetInput.value === "") {
-    targetInput.value = absoluteMax;
-  }
+  function recalculateTeamWeights(newTotal) {
+
+  const permInputs = document.querySelectorAll('.clan-perm-input');
+
+  if (!permInputs.length) return;
+
+
+  let currentTotal = 0;
+  const percentages = [];
+
+
+  permInputs.forEach(input => {
+
+    const value = parseInt(input.value) || 0;
+
+    currentTotal += value;
+
+  });
+
+
+  permInputs.forEach(input => {
+
+    const value = parseInt(input.value) || 0;
+
+    percentages.push(
+      currentTotal > 0 
+      ? value / currentTotal
+      : 0
+    );
+
+  });
+
+
+  permInputs.forEach((input, index) => {
+
+    const newValue = Math.round(
+      percentages[index] * newTotal
+    );
+
+    input.value = newValue;
+
+  });
+
+
   updateAdminTotal();
+}
+    let targetInput = document.getElementById('cfg-max-perms');
+
+    targetInput.value = absoluteMax;
+
+    recalculateTeamWeights(absoluteMax);
 }
 
 function renderAdminTeamRows(teamsArray) {
