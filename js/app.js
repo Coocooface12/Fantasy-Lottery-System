@@ -1,6 +1,3 @@
-
-
-
 // =======================================================
 // CONFIGURATION
 // League settings that persist for the session
