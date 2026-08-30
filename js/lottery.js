@@ -244,3 +244,14 @@ function advanceToNextLotteryRound() {
   
   initializeDrawSequenceRound();
 }
+
+function initSystemOnBoot() {
+  activeConfig.teamCount = 8;
+  activeConfig.totalBalls = 10;
+  activeConfig.drawSize = 3;
+  activeConfig.targetPerms = 360;
+  activeConfig.teams = generateDefaultWeightedTeams(8, 360);
+
+  renderAdminTeamRows(activeConfig.teams);
+  resetRuntimeEngine();
+}
