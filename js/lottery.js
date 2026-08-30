@@ -162,10 +162,10 @@ function resolveDrawSequenceWinner() {
     }
   });
   
-  if (!winner) {
-    const activeUnseededList = runtimeState.teams.filter(t => !t.hasSecuredPlacement);
-    winner = activeUnseededList[0];
-  }
+if (!winner) {
+  alert("No team owns this sequence. Redistribution error detected.");
+  return;
+}
   
   runtimeState.roundWinner = winner;
   runtimeState.roundDone = true;
