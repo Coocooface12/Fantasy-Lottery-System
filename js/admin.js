@@ -10,47 +10,39 @@ function calculateMathLimits() {
 
   targetInput.value = absoluteMax;
 
-  recalculateTeamWeights(absoluteMax);
+  if (activeConfig.teams.length > 0) {
+    recalculateTeamWeights(absoluteMax);
+}
 }
 
 function recalculateTeamWeights(newTotal) {
 
-  const permInputs = document.querySelectorAll('.clan-perm-input');
-
-  if (!permInputs.length) return;
-
-  let currentTotal = 0;
-  const percentages = [];
-
-  permInputs.forEach(input => {
-    const value = parseInt(input.value) || 0;
-    currentTotal += value;
-  });
+  if (!activeConfig.teams || activeConfig.teams.length === 0) return;
 
 
-  permInputs.forEach(input => {
-    const value = parseInt(input.value) || 0;
+  const currentTotal = activeConfig.teams.reduce(
+    (sum, team) => sum + team.perms,
+    0
+  );
 
-    percentages.push(
+
+  activeConfig.teams.forEach(team => {
+
+    const percentage = 
       currentTotal > 0 
-      ? value / currentTotal
-      : 0
+      ? team.perms / currentTotal
+      : 0;
+
+
+    team.perms = Math.round(
+      percentage * newTotal
     );
-  });
-
-
-  permInputs.forEach((input, index) => {
-
-    const newValue = Math.round(
-      percentages[index] * newTotal
-    );
-
-    input.value = newValue;
 
   });
 
 
-  updateAdminTotal();
+  renderAdminTeamRows(activeConfig.teams);
+
 }
 
 function renderAdminTeamRows(teamsArray) {
