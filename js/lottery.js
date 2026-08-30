@@ -101,58 +101,6 @@ function handleTeamCountChange() {
   renderAdminTeamRows(transientTeams);
 }
 
-// =======================================================
-// USER INTERFACE
-// Updates everything visible on the screen
-// =======================================================
-
-function renderAdminTeamRows(teamsArray) {
-  const container = document.getElementById('admin-teams-container');
-  if (!container) return;
-  container.innerHTML = '';
-  const targetPerms = parseInt(document.getElementById('cfg-max-perms').value) || 360;
-
-  teamsArray.forEach((t, i) => {
-    const row = document.createElement('div');
-    row.className = 'admin-team-row';
-    const pct = ((t.perms / targetPerms) * 100).toFixed(1);
-    
-    row.innerHTML = `
-      <input class="admin-input clan-name-input" data-index="${i}" value="${t.name}" placeholder="Team Name" />
-      <input class="admin-input clan-perm-input" type="number" min="1" data-index="${i}" value="${t.perms}" oninput="updateAdminTotal()" style="text-align:center;" />
-      <div class="clan-pct-label" id="apct-${i}" style="font-size:14px; font-weight:500; color:var(--silver); text-align:right; padding-right:12px;">${pct}%</div>
-    `;
-    container.appendChild(row);
-  });
-  updateAdminTotal();
-}
-
-// =======================================================
-// USER INTERFACE
-// Updates everything visible on the screen
-// =======================================================
-
-function updateAdminTotal() {
-  const permInputs = document.querySelectorAll('.clan-perm-input');
-  const pctLabels = document.querySelectorAll('.clan-pct-label');
-  const targetPerms = parseInt(document.getElementById('cfg-max-perms').value) || 0;
-  
-  let total = 0;
-  permInputs.forEach(input => { total += parseInt(input.value) || 0; });
-  
-  permInputs.forEach((input, idx) => {
-    const val = parseInt(input.value) || 0;
-    const computedPct = total > 0 ? ((val / total) * 100).toFixed(1) : '0.0';
-    if(pctLabels[idx]) pctLabels[idx].textContent = `${computedPct}%`;
-  });
-
-  const lbl = document.getElementById('total-label');
-  if (lbl) {
-    lbl.textContent = `Total Weight Allocated: ${total} / ${targetPerms} Targets`;
-    lbl.className = 'total-perms ' + (total === targetPerms ? 'ok' : 'over');
-  }
-}
-
 function initSystemOnBoot() {
   activeConfig.teamCount = 8;
   activeConfig.totalBalls = 6;
