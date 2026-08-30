@@ -13,6 +13,46 @@ function calculateMathLimits() {
   recalculateTeamWeights(absoluteMax);
 }
 
+function recalculateTeamWeights(newTotal) {
+
+  const permInputs = document.querySelectorAll('.clan-perm-input');
+
+  if (!permInputs.length) return;
+
+  let currentTotal = 0;
+  const percentages = [];
+
+  permInputs.forEach(input => {
+    const value = parseInt(input.value) || 0;
+    currentTotal += value;
+  });
+
+
+  permInputs.forEach(input => {
+    const value = parseInt(input.value) || 0;
+
+    percentages.push(
+      currentTotal > 0 
+      ? value / currentTotal
+      : 0
+    );
+  });
+
+
+  permInputs.forEach((input, index) => {
+
+    const newValue = Math.round(
+      percentages[index] * newTotal
+    );
+
+    input.value = newValue;
+
+  });
+
+
+  updateAdminTotal();
+}
+
 function renderAdminTeamRows(teamsArray) {
   const container = document.getElementById('admin-teams-container');
   if (!container) return;
