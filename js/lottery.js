@@ -249,8 +249,8 @@ function initSystemOnBoot() {
   activeConfig.teamCount = 8;
   activeConfig.totalBalls = 10;
   activeConfig.drawSize = 3;
-  activeConfig.targetPerms = 360;
-  activeConfig.teams = generateDefaultWeightedTeams(8, 360);
+  activeConfig.targetPerms = 720;
+  activeConfig.teams = generateDefaultWeightedTeams(8, 720);
 
   renderAdminTeamRows(activeConfig.teams);
   resetRuntimeEngine();

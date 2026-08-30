@@ -16,7 +16,7 @@ function renderAdminTeamRows(teamsArray) {
   const container = document.getElementById('admin-teams-container');
   if (!container) return;
   container.innerHTML = '';
-  const targetPerms = parseInt(document.getElementById('cfg-max-perms').value) || 360;
+  const targetPerms = parseInt(document.getElementById('cfg-max-perms').value) || 720;
 
   teamsArray.forEach((t, i) => {
     const row = document.createElement('div');
@@ -59,7 +59,7 @@ function handleTeamCountChange() {
   if (count < 4) { count = 4; document.getElementById('cfg-team-count').value = 4; }
   if (count > 20) { count = 20; document.getElementById('cfg-team-count').value = 20; }
   
-  const targetPerms = parseInt(document.getElementById('cfg-max-perms').value) || 360;
+  const targetPerms = parseInt(document.getElementById('cfg-max-perms').value) || 720;
   const transientTeams = generateDefaultWeightedTeams(count, targetPerms);
   renderAdminTeamRows(transientTeams);
 }
@@ -73,8 +73,10 @@ function applySettings() {
   
   if (count < 4 || count > 20) { alert("System checks limit team counts between 4 and 20."); return; }
   if (k > n) { alert("Sequence draw steps (k) cannot exceed structural pool cap sizes (n)."); return; }
-  if (targetPerms > absoluteMax) { alert(`Mathematical Impossibility: Weight limits exceed absolute pool caps (${absoluteMax}).`); return; }
-  
+  if (targetPerms !== absoluteMax) { 
+  alert(`Permutation Pool Error: Your target (${targetPerms}) must equal the maximum possible sequences (${absoluteMax}) for this lottery format.`);
+  return; 
+}
   const permInputs = document.querySelectorAll('.clan-perm-input');
   const nameInputs = document.querySelectorAll('.clan-name-input');
   

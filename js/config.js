@@ -7,7 +7,7 @@ let activeConfig = {
   teamCount: 8,
   totalBalls: 10,
   drawSize: 3,
-  targetPerms: 360,
+  targetPerms: 720,
   teams: []
 };
 
