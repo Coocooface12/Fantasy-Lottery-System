@@ -36,20 +36,3 @@ function closePermModal(e) {
   document.getElementById('perm-overlay').style.display = 'none';
   document.body.style.overflow = '';
 }
-
-function initSystemOnBoot() {
-  activeConfig.teamCount = 8;
-  activeConfig.totalBalls = 6;
-  activeConfig.drawSize = 4;
-  activeConfig.targetPerms = 360;
-  activeConfig.teams = generateDefaultWeightedTeams(8, 360);
-  
-  document.getElementById('cfg-team-count').value = 8;
-  document.getElementById('cfg-balls-pool').value = 6;
-  document.getElementById('cfg-draw-size').value = 4;
-  document.getElementById('cfg-max-perms').value = 360;
-  
-  // Render the team input rows right away so they don't break the system!
-  renderAdminTeamRows(activeConfig.teams);
-  resetRuntimeEngine();
-}
