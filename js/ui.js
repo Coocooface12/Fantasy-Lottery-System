@@ -422,5 +422,4 @@ function switchTab(targetTabName) {
 
 window.addEventListener('DOMContentLoaded', () => {
   initSystemOnBoot();
-  calculateMathLimits();
 });
