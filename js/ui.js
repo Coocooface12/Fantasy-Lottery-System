@@ -1,69 +1,383 @@
-function renderAdminTeamRows(teamsArray) {
-  const container = document.getElementById('admin-teams-container');
-  if (!container) return;
-  container.innerHTML = '';
-  const targetPerms = parseInt(document.getElementById('cfg-max-perms').value) || 360;
+// =======================================================
+// USER INTERFACE
+// Updates everything visible on the screen
+// =======================================================
 
-  teamsArray.forEach((t, i) => {
-    const row = document.createElement('div');
-    row.className = 'admin-team-row';
-    const pct = ((t.perms / targetPerms) * 100).toFixed(1);
-    
-    row.innerHTML = `
-      <input class="admin-input clan-name-input" data-index="${i}" value="${t.name}" placeholder="Team Name" />
-      <input class="admin-input clan-perm-input" type="number" min="1" data-index="${i}" value="${t.perms}" oninput="updateAdminTotal()" style="text-align:center;" />
-      <div class="clan-pct-label" id="apct-${i}" style="font-size:14px; font-weight:500; color:var(--silver); text-align:right; padding-right:12px;">${pct}%</div>
-    `;
-    container.appendChild(row);
-  });
-  updateAdminTotal();
-}
+function renderLotteryInterface() {
 
-function updateAdminTotal() {
-  const permInputs = document.querySelectorAll('.clan-perm-input');
-  const pctLabels = document.querySelectorAll('.clan-pct-label');
-  const targetPerms = parseInt(document.getElementById('cfg-max-perms').value) || 0;
-  
-  let total = 0;
-  permInputs.forEach(input => { total += parseInt(input.value) || 0; });
-  
-  permInputs.forEach((input, idx) => {
-    const val = parseInt(input.value) || 0;
-    const computedPct = total > 0 ? ((val / total) * 100).toFixed(1) : '0.0';
-    if(pctLabels[idx]) pctLabels[idx].textContent = `${computedPct}%`;
-  });
+  const row = document.getElementById('balls-row');
+  if (!row) return;
 
-  const lbl = document.getElementById('total-label');
-  if (lbl) {
-    lbl.textContent = `Total Weight Allocated: ${total} / ${targetPerms} Targets`;
-    lbl.className = 'total-perms ' + (total === targetPerms ? 'ok' : 'over');
+  row.innerHTML = '';
+
+  for (let i = 1; i <= activeConfig.totalBalls; i++) {
+    const isDrawn = runtimeState.drawnBalls.includes(i);
+
+    const btn = document.createElement('button');
+
+    btn.className = 'ball' + (isDrawn ? ' drawn' : '');
+    btn.textContent = i;
+    btn.disabled = isDrawn || runtimeState.roundDone;
+
+    if (!isDrawn && !runtimeState.roundDone) {
+      btn.onclick = () => drawBall(i);
+    }
+
+    row.appendChild(btn);
   }
-}
 
- function renderLotteryInterface() { 
 
   const seqDisplay = document.getElementById('sequence-display');
-    seqDisplay.innerHTML = '';
-    for (let i = 0; i < activeConfig.drawSize; i++) {
-      if (i > 0) {
-        const arrow = document.createElement('span');
-        arrow.className = 'seq-arrow';
-        arrow.textContent = '→';
-        seqDisplay.appendChild(arrow);
-      }
-      if (i < runtimeState.drawnBalls.length) {
-        const b = document.createElement('div');
-        b.className = 'seq-ball';
-        b.textContent = runtimeState.drawnBalls[i];
-        seqDisplay.appendChild(b);
-      } else {
-        const slot = document.createElement('div');
-        slot.className = 'seq-slot';
-        slot.textContent = (i + 1);
-        seqDisplay.appendChild(slot);
-      }
+  seqDisplay.innerHTML = '';
+
+  for (let i = 0; i < activeConfig.drawSize; i++) {
+
+    if (i > 0) {
+      const arrow = document.createElement('span');
+      arrow.className = 'seq-arrow';
+      arrow.textContent = '→';
+      seqDisplay.appendChild(arrow);
     }
+
+
+    if (i < runtimeState.drawnBalls.length) {
+
+      const b = document.createElement('div');
+      b.className = 'seq-ball';
+      b.textContent = runtimeState.drawnBalls[i];
+
+      seqDisplay.appendChild(b);
+
+    } else {
+
+      const slot = document.createElement('div');
+      slot.className = 'seq-slot';
+      slot.textContent = (i + 1);
+
+      seqDisplay.appendChild(slot);
     }
+  }
+
+
+
+  const winnerArea = document.getElementById('winner-area');
+
+  const targetDraftPositionNum =
+    activeConfig.teamCount - runtimeState.currentRoundIndex;
+
+
+  if (runtimeState.roundWinner) {
+
+    winnerArea.innerHTML = `
+      <div class="winner-banner">
+
+        <div class="winner-label">
+          Sequence Found — Allocation Complete
+        </div>
+
+        <div class="winner-name">
+          ${runtimeState.roundWinner.name}
+        </div>
+
+        <div class="winner-perm">
+          Secures 
+          <strong>
+            Pick #${targetDraftPositionNum}
+          </strong>
+          on loop sequence:
+          [ ${runtimeState.drawnBalls.join(' → ')} ]
+        </div>
+
+      </div>
+    `;
+
+  } else {
+
+    winnerArea.innerHTML = '';
+
+  }
+
+
+
+  const grid = document.getElementById('teams-grid');
+
+  grid.innerHTML = '';
+
+
+  const nonSeededActiveTeams =
+    runtimeState.teams.filter(t => !t.hasSecuredPlacement);
+
+
+  const aggregateLivePermsPool =
+    nonSeededActiveTeams.reduce(
+      (acc, t) => acc + t.livePermutations.length,
+      0
+    );
+
+
+
+  runtimeState.teams.forEach(t => {
+
+
+    const card = document.createElement('div');
+
+
+    const matchesCurrentWinner =
+      runtimeState.roundWinner &&
+      runtimeState.roundWinner.id === t.id;
+
+
+    const isEliminatedPreviousRound =
+      t.hasSecuredPlacement &&
+      !matchesCurrentWinner;
+
+
+    const outOfSystemContention =
+      !t.hasSecuredPlacement &&
+      t.livePermutations.length === 0 &&
+      runtimeState.drawnBalls.length > 0;
+
+
+
+    card.className =
+      'team-card' +
+      (isEliminatedPreviousRound ? ' eliminated' : '') +
+      (matchesCurrentWinner ? ' winner-card' : '') +
+      (outOfSystemContention ? ' no-surviving' : '');
+
+
+
+    let displayPercentage = '0.0';
+    let progressBarWidthPercent = 0;
+
+
+
+    if (!t.hasSecuredPlacement && aggregateLivePermsPool > 0) {
+
+      const calculatedRatio =
+        (t.livePermutations.length / aggregateLivePermsPool) * 100;
+
+
+      displayPercentage =
+        calculatedRatio.toFixed(1);
+
+
+      progressBarWidthPercent =
+        calculatedRatio;
+    }
+
+
+
+    let dynamicStatusText = '';
+
+
+    if (t.hasSecuredPlacement) {
+
+      const boardPlacementIdx =
+        runtimeState.draftBoard.findIndex(
+          entry => entry && entry.teamName === t.name
+        );
+
+
+      dynamicStatusText =
+        `Locked in Draft Pick Slot #${boardPlacementIdx + 1}`;
+
+
+    } else if (runtimeState.drawnBalls.length === 0) {
+
+
+      dynamicStatusText =
+        `${t.assignedPermsCount} Static Baseline Keys`;
+
+
+    } else {
+
+
+      dynamicStatusText =
+        `${t.livePermutations.length} / ${t.allPermutations.length} Combinations Alive`;
+
+    }
+
+
+
+    card.innerHTML = `
+
+      <div class="team-top">
+
+        <div class="team-name">
+          ${t.name}
+        </div>
+
+
+        <button 
+          class="view-perms-btn"
+          ${t.hasSecuredPlacement
+            ? 'disabled style="opacity:0;cursor:default;"'
+            : ''}
+          onclick="openPermModal(${t.id})">
+
+          Keys ↗
+
+        </button>
+
+      </div>
+
+
+      <div class="team-mid-row">
+
+        <div class="team-perms-badge">
+          ${t.assignedPermsCount} WT
+        </div>
+
+
+        <div class="team-pct">
+
+          ${t.hasSecuredPlacement
+            ? 'Locked'
+            : displayPercentage + '% Match'}
+
+        </div>
+
+      </div>
+
+
+      <div class="perm-bar-bg">
+
+        <div 
+          class="perm-bar-fill"
+          style="width:${progressBarWidthPercent}%">
+        </div>
+
+      </div>
+
+
+      <div class="team-surviving">
+
+        <span>
+          ${dynamicStatusText}
+        </span>
+
+      </div>
+
+    `;
+
+
+    grid.appendChild(card);
+
+  });
+
+
+
+  const controlsStrip =
+    document.getElementById('controls-row');
+
+
+  controlsStrip.innerHTML = '';
+
+
+  const completelyFinished =
+    runtimeState.draftBoard.every(
+      slot => slot !== null
+    );
+
+
+
+  if (completelyFinished) {
+
+
+    const doneBtn =
+      document.createElement('button');
+
+
+    doneBtn.className =
+      'btn btn-gold';
+
+
+    doneBtn.textContent =
+      'Draft Board Locked — View Consolidated Standings';
+
+
+    doneBtn.onclick =
+      () => switchTab('picks');
+
+
+    controlsStrip.appendChild(doneBtn);
+
+
+
+  } else if (runtimeState.roundDone) {
+
+
+    const advanceBtn =
+      document.createElement('button');
+
+
+    advanceBtn.className =
+      'btn btn-gold';
+
+
+    advanceBtn.textContent =
+      `Initialize Next Lottery Round`;
+
+
+    advanceBtn.onclick =
+      advanceToNextLotteryRound;
+
+
+    controlsStrip.appendChild(advanceBtn);
+
+  }
+
+
+
+  const abortResetBtn =
+    document.createElement('button');
+
+
+  abortResetBtn.className =
+    'btn btn-outline';
+
+
+  abortResetBtn.textContent =
+    'Reset Draft Engine';
+
+
+  abortResetBtn.onclick = () => {
+
+    if (
+      confirm(
+        "Reset active tracking setups? Progress details will be dropped."
+      )
+    ) {
+
+      resetRuntimeEngine();
+
+    }
+
+  };
+
+
+  controlsStrip.appendChild(abortResetBtn);
+
+
+
+  const badge =
+    document.getElementById('round-badge');
+
+
+  if (completelyFinished) {
+
+    badge.textContent =
+      "Lottery Sequencer Finished";
+
+  } else {
+
+    badge.textContent =
+      `Round ${runtimeState.currentRoundIndex + 1} — Resolving Pick #${activeConfig.teamCount - runtimeState.currentRoundIndex}`;
+
+  }
+
+}
 
     function renderDraftBoardResults() {
   const container = document.getElementById('picks-list');
