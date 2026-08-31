@@ -564,12 +564,10 @@ function handleTeamCountChange() {
 function applySettings() {
 
 
-  const count =
-    parseInt(
-      document.getElementById(
-        'cfg-team-count'
-      ).value
-    );
+ const revealMode =
+    document.getElementById(
+        'cfg-reveal-mode'
+    ).value;
 
 
 
@@ -725,8 +723,8 @@ function applySettings() {
     k;
 
 
-  activeConfig.targetPerms =
-    targetPerms;
+  activeConfig.revealMode =
+    revealMode;
 
 
   activeConfig.teams =

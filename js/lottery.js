@@ -66,10 +66,20 @@ function generateDefaultWeightedTeams(count, totalPermsTarget) {
     if (tempWeights[0] < 1) tempWeights[0] = 1;
   }
 
-  for (let i = 0; i < count; i++) {
-    teamsList.push({ name: `Team ${i + 1}`, perms: tempWeights[i] });
-  }
-  return teamsList;
+for (let i = 0; i < count; i++) {
+
+  teamsList.push({
+
+    name: `Team ${i + 1}`,
+
+    seed: i + 1,
+
+    percentage: 0,
+
+    perms: tempWeights[i]
+
+  });
+
 }
 
 // =======================================================
@@ -77,18 +87,25 @@ function generateDefaultWeightedTeams(count, totalPermsTarget) {
 // Core lottery logic and draw processing
 // =======================================================
 
-function resetRuntimeEngine() {
-  runtimeState.draftBoard = new Array(activeConfig.teamCount).fill(null);
-  runtimeState.currentRoundIndex = 0;
-  
-  runtimeState.teams = activeConfig.teams.map((t, idx) => ({
+runtimeState.teams = activeConfig.teams.map((t, idx) => ({
+
     id: idx,
+
     name: t.name,
+
+    seed: t.seed || idx + 1,
+
+    percentage: t.percentage || 0,
+
     assignedPermsCount: t.perms,
+
     allPermutations: [],
+
     livePermutations: [],
+
     hasSecuredPlacement: false
-  }));
+
+}));
   
   dealInitialPermutationPool();
   initializeDrawSequenceRound();
