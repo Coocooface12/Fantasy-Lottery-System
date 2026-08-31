@@ -1,14 +1,3 @@
-// =======================================================
-// ADMIN SETTINGS ENGINE
-// Handles configuration, team weights, and league setup
-// =======================================================
-
-
-// =======================================================
-// CALCULATE PERMUTATION LIMITS
-// Runs whenever balls or draw size changes
-// =======================================================
-
 function calculateMathLimits() {
 
   const n =
@@ -55,7 +44,6 @@ function calculateMathLimits() {
   }
 
 }
-
 
 // =======================================================
 // PRESERVE TEAM ODDS WHILE CHANGING TOTAL PERMUTATIONS
