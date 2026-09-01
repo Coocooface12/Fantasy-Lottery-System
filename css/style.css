@@ -290,7 +290,7 @@
   .admin-label { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--silver); }
   .admin-scroller { max-height: 340px; overflow-y: auto; padding-right: 6px; margin-bottom: 14px; }
   .admin-team-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; align-items: center; margin-bottom: 8px; }
-  .admin-input { background: var(--ice3); border: 1px solid #2a4a7a; color: var(--white); font-size: 16px; padding: 10px 14px; border-radius: 6px; width: 100%; }
+  .admin-input { background: var(--ice3); border: 1px solid #2a4a7a; color: var(--white); font-size: 15px; padding: 10px 14px; border-radius: 6px; width: 100%; }
   .admin-input:focus { outline: none; border-color: var(--gold); }
   
   .total-perms { font-size: 18px; font-weight: 600; text-align: right; margin-top: 8px; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.5px; }
