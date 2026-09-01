@@ -257,7 +257,21 @@ if (!winner) {
   runtimeState.roundDone = true;
   winner.hasSecuredPlacement = true;
   
-  const targetDraftSlotIndex = activeConfig.teamCount - 1 - runtimeState.currentRoundIndex;
+  let targetDraftSlotIndex;
+
+if (activeConfig.revealMode === "reverse") {
+
+  // Pick 8 → Pick 1
+  targetDraftSlotIndex =
+    activeConfig.teamCount - 1 - runtimeState.currentRoundIndex;
+
+} else {
+
+  // Pick 1 → Pick 8
+  targetDraftSlotIndex =
+    runtimeState.currentRoundIndex;
+
+}
   
   runtimeState.draftBoard[targetDraftSlotIndex] = {
     teamName: winner.name,

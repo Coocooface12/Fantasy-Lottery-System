@@ -62,8 +62,19 @@ function renderLotteryInterface() {
 
   const winnerArea = document.getElementById('winner-area');
 
-  const targetDraftPositionNum =
+  let targetDraftPositionNum;
+
+if (activeConfig.revealMode === "reverse") {
+
+  targetDraftPositionNum =
     activeConfig.teamCount - runtimeState.currentRoundIndex;
+
+} else {
+
+  targetDraftPositionNum =
+    runtimeState.currentRoundIndex + 1;
+
+}
 
 
   if (runtimeState.roundWinner) {
@@ -372,9 +383,37 @@ function renderLotteryInterface() {
 
   } else {
 
-    badge.textContent =
-      `Round ${runtimeState.currentRoundIndex + 1} — Resolving Pick #${activeConfig.teamCount - runtimeState.currentRoundIndex}`;
+   let resolvingPick;
 
+if (activeConfig.revealMode === "reverse") {
+
+  resolvingPick =
+    activeConfig.teamCount - runtimeState.currentRoundIndex;
+
+} else {
+
+  resolvingPick =
+    runtimeState.currentRoundIndex + 1;
+
+}
+
+let resolvingPick;
+
+if (activeConfig.revealMode === "reverse") {
+
+  resolvingPick =
+    activeConfig.teamCount - runtimeState.currentRoundIndex;
+
+} else {
+
+  resolvingPick =
+    runtimeState.currentRoundIndex + 1;
+
+}
+
+
+badge.textContent =
+  `Round ${runtimeState.currentRoundIndex + 1} — Resolving Pick #${resolvingPick}`;
   }
 
 }
