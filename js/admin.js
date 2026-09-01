@@ -139,16 +139,31 @@ function applyLotteryFormat(){
 // BUTTON SELECTOR - DRAFT REVEAL MODE
 // =======================================================
 
-function setRevealMode(value, button) {
+// =======================================================
+// UNIVERSAL BUTTON SELECTOR
+// Used by all admin button controls
+// =======================================================
+
+function setSelectorValue(configKey, value, button) {
 
 
-    activeConfig.revealMode = value;
+    activeConfig[configKey] = value;
+
+
+
+    const selector =
+        button.closest('.button-selector');
+
+
+    if (!selector) return;
+
 
 
     const buttons =
-        document.querySelectorAll(
-            '#cfg-reveal-mode .selector-btn'
+        selector.querySelectorAll(
+            '.selector-btn'
         );
+
 
 
     buttons.forEach(btn => {
