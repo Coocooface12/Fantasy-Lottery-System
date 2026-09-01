@@ -44,21 +44,38 @@ function shuffle(arr) {
   return clean;
 }
 
-function generateDefaultWeightedTeams(count, totalPermsTarget) {
+function generateDefaultWeightedTeams(
+    count,
+    totalPermsTarget,
+    presetPercentages = null
+) {
 
   const teamsList = [];
 
-  let weightsRaw = [];
+ let weightsRaw = [];
 
 
-  // Create descending weight curve
-  for (let i = 0; i < count; i++) {
+if(presetPercentages){
 
-    weightsRaw.push(
-      Math.pow(0.82, i)
-    );
+    presetPercentages.forEach(p=>{
 
-  }
+        weightsRaw.push(p);
+
+    });
+
+}
+else {
+
+
+    for(let i = 0; i < count; i++){
+
+        weightsRaw.push(
+            Math.pow(0.82,i)
+        );
+
+    }
+
+}
 
 
   const sumRaw =

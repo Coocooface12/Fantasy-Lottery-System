@@ -142,10 +142,11 @@ function applyLotteryFormat(selected, button){
 
 
     activeConfig.teams =
-        generateDefaultWeightedTeams(
-            activeConfig.teamCount,
-            activeConfig.targetPerms
-        );
+    generateDefaultWeightedTeams(
+        activeConfig.teamCount,
+        activeConfig.targetPerms,
+        format.percentages || null
+    );
 
 
 
@@ -631,7 +632,8 @@ function handleTeamCountChange() {
   const transientTeams =
     generateDefaultWeightedTeams(
       count,
-      targetPerms
+      targetPerms,
+      null
     );
 
 
