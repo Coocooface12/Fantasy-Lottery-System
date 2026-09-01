@@ -162,7 +162,7 @@ function calculateMathLimits() {
 
 
   targetInput.value = absoluteMax;
-
+  activeConfig.targetPerms = absoluteMax;
 
 
   /*
@@ -391,13 +391,7 @@ function updateAdminTotal() {
 
 
   const targetPerms =
-    parseInt(
-      document.getElementById(
-        'cfg-max-perms'
-      ).value
-    )
-    ||
-    0;
+    activeConfig.targetPerms;
 
 
 
