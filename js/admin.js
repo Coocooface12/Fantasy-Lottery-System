@@ -391,11 +391,13 @@ function updateAdminTotal() {
 
 
   const targetPerms =
-    activeConfig.targetPerms;
-
-
-
-  let total = 0;
+    parseInt(
+      document.getElementById(
+        'cfg-max-perms'
+      ).value
+    )
+    ||
+    0;
 
 
 
