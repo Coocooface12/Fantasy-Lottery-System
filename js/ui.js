@@ -395,6 +395,7 @@ if (completelyFinished) {
     `Round ${runtimeState.currentRoundIndex + 1} — Resolving Pick #${resolvingPick}`;
 
 }
+}
 
     function renderDraftBoardResults() {
   const container = document.getElementById('picks-list');
@@ -453,4 +454,3 @@ window.addEventListener('DOMContentLoaded', () => {
   initSystemOnBoot();
 
 });
-}
