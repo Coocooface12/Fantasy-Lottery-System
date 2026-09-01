@@ -263,12 +263,39 @@ function advanceToNextLotteryRound() {
 }
 
 function initSystemOnBoot() {
-  activeConfig.teamCount = 8;
-  activeConfig.totalBalls = 10;
-  activeConfig.drawSize = 3;
-  activeConfig.targetPerms = 720;
-  activeConfig.teams = generateDefaultWeightedTeams(8, 720);
 
-  renderAdminTeamRows(activeConfig.teams);
+  activeConfig.teamCount = 8;
+
+  activeConfig.totalBalls = 10;
+
+  activeConfig.drawSize = 3;
+
+  activeConfig.targetPerms = 720;
+
+
+  activeConfig.curveType =
+    "NHL Draft Curve";
+
+
+  activeConfig.curveSettings = {};
+
+
+  activeConfig.revealMode =
+    "reverse";
+
+
+  activeConfig.teams =
+    generateDefaultWeightedTeams(
+      activeConfig.teamCount,
+      activeConfig.targetPerms
+    );
+
+
+  renderAdminTeamRows(
+    activeConfig.teams
+  );
+
+
   resetRuntimeEngine();
+
 }

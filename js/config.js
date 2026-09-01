@@ -54,7 +54,7 @@ let activeConfig = {
 
  revealMode: "reverse",
 
- teams: []
+ teams: null
 
 };
 // =======================================================
