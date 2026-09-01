@@ -565,7 +565,12 @@ function applySettings() {
         'cfg-reveal-mode'
     ).value;
 
-
+   const count =
+   parseInt(
+     document.getElementById(
+       'cfg-team-count'
+     ).value
+   );
 
   const n =
     parseInt(
@@ -675,18 +680,23 @@ function applySettings() {
 
 
 
-    parsedTeams.push({
+   parsedTeams.push({
 
-      name:
-        nameInputs[index].value.trim()
-        ||
-        `Team ${index+1}`,
+  name:
+    nameInputs[index].value.trim()
+    ||
+    `Team ${index+1}`,
 
+  seed:
+    index + 1,
 
-      perms:
-        weight
+  percentage:
+    0,
 
-    });
+  perms:
+    weight
+
+});
 
 
   });
