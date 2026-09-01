@@ -442,7 +442,7 @@ function switchTab(targetTabName) {
     ).value =
         activeConfig.revealMode;
 
-}
+  }
   if (targetTabName === 'lottery') renderLotteryInterface();
 }
 
@@ -453,3 +453,4 @@ window.addEventListener('DOMContentLoaded', () => {
   initSystemOnBoot();
 
 });
+}
