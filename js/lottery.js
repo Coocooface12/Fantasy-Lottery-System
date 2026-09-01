@@ -45,70 +45,96 @@ function shuffle(arr) {
 }
 
 function generateDefaultWeightedTeams(count, totalPermsTarget) {
+
   const teamsList = [];
+
   let weightsRaw = [];
+
+
+  // Create descending weight curve
   for (let i = 0; i < count; i++) {
-    weightsRaw.push(Math.pow(0.82, i));
+
+    weightsRaw.push(
+      Math.pow(0.82, i)
+    );
+
   }
-  const sumRaw = weightsRaw.reduce((a, b) => a + b, 0);
+
+
+  const sumRaw =
+    weightsRaw.reduce(
+      (a, b) => a + b,
+      0
+    );
+
+
   let assignedSum = 0;
-  
-  let tempWeights = weightsRaw.map(w => {
-    let allocated = Math.round((w / sumRaw) * totalPermsTarget);
-    if (allocated < 1) allocated = 1;
-    assignedSum += allocated;
-    return allocated;
-  });
 
-  let discrepancy = totalPermsTarget - assignedSum;
+
+  // Convert curve into actual permutation counts
+  let tempWeights =
+    weightsRaw.map(w => {
+
+      let allocated =
+        Math.round(
+          (w / sumRaw) * totalPermsTarget
+        );
+
+
+      if (allocated < 1) {
+        allocated = 1;
+      }
+
+
+      assignedSum += allocated;
+
+
+      return allocated;
+
+    });
+
+
+
+  // Fix rounding difference
+  let discrepancy =
+    totalPermsTarget - assignedSum;
+
+
   if (discrepancy !== 0) {
+
     tempWeights[0] += discrepancy;
-    if (tempWeights[0] < 1) tempWeights[0] = 1;
+
+
+    if (tempWeights[0] < 1) {
+
+      tempWeights[0] = 1;
+
+    }
+
   }
 
-for (let i = 0; i < count; i++) {
 
-  teamsList.push({
 
-    name: `Team ${i + 1}`,
+  // Build team objects
+  for (let i = 0; i < count; i++) {
 
-    seed: i + 1,
+    teamsList.push({
 
-    percentage: 0,
+      name: `Team ${i + 1}`,
 
-    perms: tempWeights[i]
+      seed: i + 1,
 
-  });
+      percentage: 0,
 
-}
+      perms: tempWeights[i]
 
-// =======================================================
-// LOTTERY ENGINE
-// Core lottery logic and draw processing
-// =======================================================
+    });
 
-runtimeState.teams = activeConfig.teams.map((t, idx) => ({
+  }
 
-    id: idx,
 
-    name: t.name,
+  return teamsList;
 
-    seed: t.seed || idx + 1,
-
-    percentage: t.percentage || 0,
-
-    assignedPermsCount: t.perms,
-
-    allPermutations: [],
-
-    livePermutations: [],
-
-    hasSecuredPlacement: false
-
-}));
-  
-  dealInitialPermutationPool();
-  initializeDrawSequenceRound();
 }
 
 function dealInitialPermutationPool() {
