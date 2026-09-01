@@ -62,8 +62,19 @@ function renderLotteryInterface() {
 
   const winnerArea = document.getElementById('winner-area');
 
-  const targetDraftPositionNum =
+  let targetDraftPositionNum;
+
+if (activeConfig.revealMode === "reverse") {
+
+  targetDraftPositionNum =
     activeConfig.teamCount - runtimeState.currentRoundIndex;
+
+} else {
+
+  targetDraftPositionNum =
+    runtimeState.currentRoundIndex + 1;
+
+}
 
 
   if (runtimeState.roundWinner) {
@@ -365,18 +376,25 @@ function renderLotteryInterface() {
     document.getElementById('round-badge');
 
 
-  if (completelyFinished) {
+if (completelyFinished) {
 
-    badge.textContent =
-      "Lottery Sequencer Finished";
+  badge.textContent =
+    "Lottery Sequencer Finished";
 
-  } else {
+} else {
 
-    badge.textContent =
-      `Round ${runtimeState.currentRoundIndex + 1} — Resolving Pick #${activeConfig.teamCount - runtimeState.currentRoundIndex}`;
+  const resolvingPick =
+    activeConfig.revealMode === "reverse"
 
-  }
+      ? activeConfig.teamCount - runtimeState.currentRoundIndex
 
+      : runtimeState.currentRoundIndex + 1;
+
+
+  badge.textContent =
+    `Round ${runtimeState.currentRoundIndex + 1} — Resolving Pick #${resolvingPick}`;
+
+}
 }
 
     function renderDraftBoardResults() {
@@ -416,10 +434,23 @@ function switchTab(targetTabName) {
   document.querySelectorAll('.tab')[linkIndexMap[targetTabName]].classList.add('active');
   
   if (targetTabName === 'picks') renderDraftBoardResults();
-  if (targetTabName === 'admin') renderAdminTeamRows(activeConfig.teams);
+  if (targetTabName === 'admin') {
+
+    renderAdminTeamRows(activeConfig.teams);
+
+    document.getElementById(
+        'cfg-reveal-mode'
+    ).value =
+        activeConfig.revealMode;
+
+  }
   if (targetTabName === 'lottery') renderLotteryInterface();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+
+  populateLotteryFormats();
+
   initSystemOnBoot();
+
 });

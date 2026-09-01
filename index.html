@@ -159,158 +159,237 @@
             <div id="admin-root">
 
 
+<!-- ==========================================
+     LOTTERY SETTINGS
+========================================== -->
 
-                <div class="config-grid">
+<div class="admin-card">
 
 
-                    <div class="config-group">
+    <div class="admin-section-title">
+        Lottery Configuration
+    </div>
 
-                        <label>
-                            Team Count
-                        </label>
 
-                        <input
-                            id="cfg-team-count"
-                            class="admin-input"
-                            type="number"
-                            value="8"
-                            onchange="handleTeamCountChange()">
 
-                    </div>
+    <div class="config-grid">
 
 
+        <div class="config-group">
 
-                    <div class="config-group">
+            <label>
+                Lottery Format
+            </label>
 
-                        <label>
-                            Ball Pool Size
-                        </label>
 
-                        <input
-                            id="cfg-balls-pool"
-                            class="admin-input"
-                            type="number"
-                            value="10"
-                            oninput="calculateMathLimits()">
+            <select
+                id="cfg-lottery-format"
+                class="admin-input"
+                onchange="applyLotteryFormat()">
 
-                    </div>
+            </select>
 
+        </div>
 
 
-                    <div class="config-group">
 
-                        <label>
-                            Draw Sequence Size
-                        </label>
+        <div class="config-group">
 
-                        <input
-                            id="cfg-draw-size"
-                            class="admin-input"
-                            type="number"
-                            value="3"
-                            oninput="calculateMathLimits()">
+            <label>
+                Draft Reveal Order
+            </label>
 
-                    </div>
 
+            <select
+                id="cfg-reveal-mode"
+                class="admin-input">
 
+                <option value="reverse">
+                    Reverse (Last Pick → First Pick)
+                </option>
 
-                    <div class="config-group">
+                <option value="standard">
+                    Standard (First Pick → Last Pick)
+                </option>
 
-                        <label>
-                            Total Permutations
-                        </label>
+            </select>
 
-                        <input
-                            id="cfg-max-perms"
-                            class="admin-input"
-                            type="number"
-                            value="720"
-                            onchange="updateAdminTotal()">
+        </div>
 
-                    </div>
 
 
-                </div>
+        <div class="config-group">
 
+            <label>
+                Team Count
+            </label>
 
 
+            <input
+                id="cfg-team-count"
+                class="admin-input"
+                type="number"
+                value="8"
+                onchange="handleTeamCountChange()">
 
-                <span id="math-max-hint" class="math-hint">
-                </span>
+        </div>
 
 
 
+        <div class="config-group">
 
-                <div class="admin-section-title">
-                    Team Weight Allocation
-                </div>
+            <label>
+                Ball Pool Size
+            </label>
 
 
+            <input
+                id="cfg-balls-pool"
+                class="admin-input"
+                type="number"
+                value="10"
+                oninput="calculateMathLimits()">
 
+        </div>
 
-                <div class="admin-table-header">
 
-                    <div class="admin-label">
-                        Team Name
-                    </div>
 
-                    <div class="admin-label">
-                        Weights
-                    </div>
+        <div class="config-group">
 
-                    <div class="admin-label">
-                        Percentage
-                    </div>
+            <label>
+                Draw Sequence Size
+            </label>
 
-                </div>
 
+            <input
+                id="cfg-draw-size"
+                class="admin-input"
+                type="number"
+                value="3"
+                oninput="calculateMathLimits()">
 
+        </div>
 
 
 
-                <div
-                    class="admin-scroller"
-                    id="admin-teams-container">
-                </div>
+        <div class="config-group">
 
+            <label>
+                Total Permutations
+            </label>
 
 
+            <input
+                id="cfg-max-perms"
+                class="admin-input"
+                type="number"
+                value="720"
+                onchange="updateAdminTotal()">
 
+        </div>
 
-                <div
-                    id="total-label"
-                    class="total-perms">
-                </div>
 
+    </div>
 
 
+</div>
 
 
-                <div class="controls-row">
+<span id="math-max-hint" class="math-hint">
+</span>
 
 
-                    <button
-                        class="btn btn-gold"
-                        onclick="applySettings()">
 
-                        Apply Settings
 
-                    </button>
+                <!-- ==========================================
+     TEAM WEIGHT MANAGEMENT
+========================================== -->
 
+<div class="admin-card">
 
 
+    <div class="admin-section-title">
+        Team Weight Allocation
+    </div>
 
-                    <button
-                        class="btn btn-outline"
-                        onclick="resetSettingsToDefault()">
 
-                        Reset Defaults
 
-                    </button>
+    <div class="admin-table-header">
 
 
-                </div>
+        <div class="admin-label">
+            Team Name
+        </div>
 
+
+        <div class="admin-label">
+            Weights
+        </div>
+
+
+        <div class="admin-label">
+            Percentage
+        </div>
+
+
+    </div>
+
+
+
+    <div
+        class="admin-scroller"
+        id="admin-teams-container">
+    </div>
+
+
+
+    <div
+        id="total-label"
+        class="total-perms">
+    </div>
+
+
+</div>
+
+<!-- ==========================================
+     SYSTEM CONTROLS
+========================================== -->
+
+<div class="admin-card">
+
+
+    <div class="admin-section-title">
+        System Controls
+    </div>
+
+
+
+    <div class="controls-row">
+
+
+        <button
+            class="btn btn-gold"
+            onclick="applySettings()">
+
+            Apply Settings
+
+        </button>
+
+
+
+        <button
+            class="btn btn-outline"
+            onclick="resetSettingsToDefault()">
+
+            Reset Defaults
+
+        </button>
+
+
+    </div>
+
+
+</div>
 
 
 

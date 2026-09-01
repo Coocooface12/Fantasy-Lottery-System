@@ -1,3 +1,144 @@
+
+// =======================================================
+// LOTTERY FORMAT SELECTOR
+// Loads preset configurations
+// =======================================================
+
+
+function populateLotteryFormats(){
+
+    const selector =
+        document.getElementById(
+            'cfg-lottery-format'
+        );
+
+
+    if(!selector) return;
+
+
+    selector.innerHTML = '';
+
+
+    Object.keys(lotteryFormats).forEach(format=>{
+
+
+        const option =
+            document.createElement('option');
+
+
+        option.value = format;
+        option.textContent = format;
+
+
+        selector.appendChild(option);
+
+
+    });
+
+
+    selector.value =
+        activeConfig.lotteryFormat;
+
+}
+
+
+
+
+
+function applyLotteryFormat(){
+
+
+    const selected =
+        document.getElementById(
+            'cfg-lottery-format'
+        ).value;
+
+
+
+    const format =
+        lotteryFormats[selected];
+
+
+
+    if(!format) return;
+
+
+
+    activeConfig.lotteryFormat =
+        selected;
+
+
+
+    activeConfig.teamCount =
+        format.teamCount;
+
+
+
+    activeConfig.totalBalls =
+        format.totalBalls;
+
+
+
+    activeConfig.drawSize =
+        format.drawSize;
+
+
+
+    activeConfig.targetPerms =
+        getMathMaxPermutations(
+            format.totalBalls,
+            format.drawSize
+        );
+
+
+
+    document.getElementById(
+        'cfg-team-count'
+    ).value =
+        activeConfig.teamCount;
+
+
+
+    document.getElementById(
+        'cfg-balls-pool'
+    ).value =
+        activeConfig.totalBalls;
+
+
+
+    document.getElementById(
+        'cfg-draw-size'
+    ).value =
+        activeConfig.drawSize;
+
+
+
+    document.getElementById(
+        'cfg-max-perms'
+    ).value =
+        activeConfig.targetPerms;
+
+
+
+    activeConfig.teams =
+        generateDefaultWeightedTeams(
+            activeConfig.teamCount,
+            activeConfig.targetPerms
+        );
+
+
+
+    renderAdminTeamRows(
+        activeConfig.teams
+    );
+
+
+}
+// =======================================================
+// CALCULATE PERMUTATION LIMITS
+// Runs whenever balls or draw size changes
+// =======================================================
+
 function calculateMathLimits() {
 
   const n =
@@ -22,7 +163,7 @@ function calculateMathLimits() {
 
 
   targetInput.value = absoluteMax;
-
+  activeConfig.targetPerms = absoluteMax;
 
 
   /*
@@ -258,11 +399,7 @@ function updateAdminTotal() {
     ||
     0;
 
-
-
   let total = 0;
-
-
 
   permInputs.forEach(input=>{
 
@@ -423,14 +560,17 @@ function handleTeamCountChange() {
 function applySettings() {
 
 
-  const count =
-    parseInt(
-      document.getElementById(
-        'cfg-team-count'
-      ).value
-    );
+ const revealMode =
+    document.getElementById(
+        'cfg-reveal-mode'
+    ).value;
 
-
+   const count =
+   parseInt(
+     document.getElementById(
+       'cfg-team-count'
+     ).value
+   );
 
   const n =
     parseInt(
@@ -540,18 +680,23 @@ function applySettings() {
 
 
 
-    parsedTeams.push({
+   parsedTeams.push({
 
-      name:
-        nameInputs[index].value.trim()
-        ||
-        `Team ${index+1}`,
+  name:
+    nameInputs[index].value.trim()
+    ||
+    `Team ${index+1}`,
 
+  seed:
+    index + 1,
 
-      perms:
-        weight
+  percentage:
+    0,
 
-    });
+  perms:
+    weight
+
+});
 
 
   });
@@ -584,8 +729,8 @@ function applySettings() {
     k;
 
 
-  activeConfig.targetPerms =
-    targetPerms;
+  activeConfig.revealMode =
+    revealMode;
 
 
   activeConfig.teams =

@@ -45,31 +45,96 @@ function shuffle(arr) {
 }
 
 function generateDefaultWeightedTeams(count, totalPermsTarget) {
+
   const teamsList = [];
+
   let weightsRaw = [];
+
+
+  // Create descending weight curve
   for (let i = 0; i < count; i++) {
-    weightsRaw.push(Math.pow(0.82, i));
+
+    weightsRaw.push(
+      Math.pow(0.82, i)
+    );
+
   }
-  const sumRaw = weightsRaw.reduce((a, b) => a + b, 0);
+
+
+  const sumRaw =
+    weightsRaw.reduce(
+      (a, b) => a + b,
+      0
+    );
+
+
   let assignedSum = 0;
-  
-  let tempWeights = weightsRaw.map(w => {
-    let allocated = Math.round((w / sumRaw) * totalPermsTarget);
-    if (allocated < 1) allocated = 1;
-    assignedSum += allocated;
-    return allocated;
-  });
 
-  let discrepancy = totalPermsTarget - assignedSum;
+
+  // Convert curve into actual permutation counts
+  let tempWeights =
+    weightsRaw.map(w => {
+
+      let allocated =
+        Math.round(
+          (w / sumRaw) * totalPermsTarget
+        );
+
+
+      if (allocated < 1) {
+        allocated = 1;
+      }
+
+
+      assignedSum += allocated;
+
+
+      return allocated;
+
+    });
+
+
+
+  // Fix rounding difference
+  let discrepancy =
+    totalPermsTarget - assignedSum;
+
+
   if (discrepancy !== 0) {
+
     tempWeights[0] += discrepancy;
-    if (tempWeights[0] < 1) tempWeights[0] = 1;
+
+
+    if (tempWeights[0] < 1) {
+
+      tempWeights[0] = 1;
+
+    }
+
   }
 
+
+
+  // Build team objects
   for (let i = 0; i < count; i++) {
-    teamsList.push({ name: `Team ${i + 1}`, perms: tempWeights[i] });
+
+    teamsList.push({
+
+      name: `Team ${i + 1}`,
+
+      seed: i + 1,
+
+      percentage: 0,
+
+      perms: tempWeights[i]
+
+    });
+
   }
+
+
   return teamsList;
+
 }
 
 // =======================================================
@@ -77,21 +142,42 @@ function generateDefaultWeightedTeams(count, totalPermsTarget) {
 // Core lottery logic and draw processing
 // =======================================================
 
+
 function resetRuntimeEngine() {
-  runtimeState.draftBoard = new Array(activeConfig.teamCount).fill(null);
+
+  runtimeState.draftBoard =
+    new Array(activeConfig.teamCount).fill(null);
+
+
   runtimeState.currentRoundIndex = 0;
-  
-  runtimeState.teams = activeConfig.teams.map((t, idx) => ({
-    id: idx,
-    name: t.name,
-    assignedPermsCount: t.perms,
-    allPermutations: [],
-    livePermutations: [],
-    hasSecuredPlacement: false
-  }));
-  
+
+
+  runtimeState.teams =
+    activeConfig.teams.map((t, idx) => ({
+
+      id: idx,
+
+      name: t.name,
+
+      seed: t.seed || idx + 1,
+
+      percentage: t.percentage || 0,
+
+      assignedPermsCount: t.perms,
+
+      allPermutations: [],
+
+      livePermutations: [],
+
+      hasSecuredPlacement: false
+
+    }));
+
+
   dealInitialPermutationPool();
+
   initializeDrawSequenceRound();
+
 }
 
 function dealInitialPermutationPool() {
@@ -171,7 +257,21 @@ if (!winner) {
   runtimeState.roundDone = true;
   winner.hasSecuredPlacement = true;
   
-  const targetDraftSlotIndex = activeConfig.teamCount - 1 - runtimeState.currentRoundIndex;
+  let targetDraftSlotIndex;
+
+if (activeConfig.revealMode === "reverse") {
+
+  // Pick 8 → Pick 1
+  targetDraftSlotIndex =
+    activeConfig.teamCount - 1 - runtimeState.currentRoundIndex;
+
+} else {
+
+  // Pick 1 → Pick 8
+  targetDraftSlotIndex =
+    runtimeState.currentRoundIndex;
+
+}
   
   runtimeState.draftBoard[targetDraftSlotIndex] = {
     teamName: winner.name,
@@ -246,12 +346,39 @@ function advanceToNextLotteryRound() {
 }
 
 function initSystemOnBoot() {
-  activeConfig.teamCount = 8;
-  activeConfig.totalBalls = 10;
-  activeConfig.drawSize = 3;
-  activeConfig.targetPerms = 720;
-  activeConfig.teams = generateDefaultWeightedTeams(8, 720);
 
-  renderAdminTeamRows(activeConfig.teams);
+  activeConfig.teamCount = 8;
+
+  activeConfig.totalBalls = 10;
+
+  activeConfig.drawSize = 3;
+
+  activeConfig.targetPerms = 720;
+
+
+  activeConfig.curveType =
+    "NHL Draft Curve";
+
+
+  activeConfig.curveSettings = {};
+
+
+  activeConfig.revealMode =
+    "reverse";
+
+
+  activeConfig.teams =
+    generateDefaultWeightedTeams(
+      activeConfig.teamCount,
+      activeConfig.targetPerms
+    );
+
+
+  renderAdminTeamRows(
+    activeConfig.teams
+  );
+
+
   resetRuntimeEngine();
+
 }
