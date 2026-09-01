@@ -335,3 +335,17 @@
   }
   .perm-chip.struck { background: #1a0a0a; border-color: #5a2020; color: #5a2020; text-decoration: line-through; opacity: 0.35; }
   .perm-chip.match { background: #1a3010; border-color: var(--green); color: #52be80; }
+
+  .admin-card {
+
+    background: var(--panel);
+
+    border: 1px solid #1e3560;
+
+    border-radius: 10px;
+
+    padding: 22px;
+
+    margin-bottom: 22px;
+
+}
