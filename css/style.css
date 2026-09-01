@@ -268,6 +268,20 @@
   .config-group { display: flex; flex-direction: column; gap: 6px; }
   .config-group label { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; color: var(--silver); }
   
+.admin-card {
+
+    background: var(--panel);
+
+    border: 1px solid #1e3560;
+
+    border-radius: 10px;
+
+    padding: 22px;
+
+    margin-bottom: 22px;
+
+}
+
   .admin-section-title {
     font-family: 'Barlow Condensed', sans-serif; font-size: 16px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--gold2); margin-bottom: 14px; margin-top: 24px; border-bottom: 1px solid #1e3560; padding-bottom: 6px;

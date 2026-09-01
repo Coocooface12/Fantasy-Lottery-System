@@ -159,122 +159,144 @@
             <div id="admin-root">
 
 
+<!-- ==========================================
+     LOTTERY SETTINGS
+========================================== -->
 
-               <div class="config-grid">
+<div class="admin-card">
 
-    Existing Config Boxes
 
-    <div class="config-group">
+    <div class="admin-section-title">
+        Lottery Configuration
+    </div>
 
-        <label>
-            Draft Reveal Order
-        </label>
 
-        <select
-            id="cfg-reveal-mode"
-            class="admin-input">
 
-            <option value="reverse">
-                Reverse (Pick 8 → Pick 1)
-            </option>
+    <div class="config-grid">
 
-            <option value="standard">
-                Standard (Pick 1 → Pick 8)
-            </option>
 
-        </select>
+        <div class="config-group">
+
+            <label>
+                Lottery Format
+            </label>
+
+
+            <select
+                id="cfg-lottery-format"
+                class="admin-input"
+                onchange="applyLotteryFormat()">
+
+            </select>
+
+        </div>
+
+
+
+        <div class="config-group">
+
+            <label>
+                Draft Reveal Order
+            </label>
+
+
+            <select
+                id="cfg-reveal-mode"
+                class="admin-input">
+
+                <option value="reverse">
+                    Reverse (Pick 8 → Pick 1)
+                </option>
+
+                <option value="standard">
+                    Standard (Pick 1 → Pick 8)
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <div class="config-group">
+
+            <label>
+                Team Count
+            </label>
+
+
+            <input
+                id="cfg-team-count"
+                class="admin-input"
+                type="number"
+                value="8"
+                onchange="handleTeamCountChange()">
+
+        </div>
+
+
+
+        <div class="config-group">
+
+            <label>
+                Ball Pool Size
+            </label>
+
+
+            <input
+                id="cfg-balls-pool"
+                class="admin-input"
+                type="number"
+                value="10"
+                oninput="calculateMathLimits()">
+
+        </div>
+
+
+
+        <div class="config-group">
+
+            <label>
+                Draw Sequence Size
+            </label>
+
+
+            <input
+                id="cfg-draw-size"
+                class="admin-input"
+                type="number"
+                value="3"
+                oninput="calculateMathLimits()">
+
+        </div>
+
+
+
+        <div class="config-group">
+
+            <label>
+                Total Permutations
+            </label>
+
+
+            <input
+                id="cfg-max-perms"
+                class="admin-input"
+                type="number"
+                value="720"
+                onchange="updateAdminTotal()">
+
+        </div>
+
 
     </div>
 
-</div>
-
-    <label>
-        Lottery Format
-    </label>
-
-    <select
-        id="cfg-lottery-format"
-        class="admin-input"
-        onchange="applyLotteryFormat()">
-
-    </select>
 
 </div>
 
-                    <div class="config-group">
 
-                        <label>
-                            Team Count
-                        </label>
-
-                        <input
-                            id="cfg-team-count"
-                            class="admin-input"
-                            type="number"
-                            value="8"
-                            onchange="handleTeamCountChange()">
-
-                    </div>
-
-
-
-                    <div class="config-group">
-
-                        <label>
-                            Ball Pool Size
-                        </label>
-
-                        <input
-                            id="cfg-balls-pool"
-                            class="admin-input"
-                            type="number"
-                            value="10"
-                            oninput="calculateMathLimits()">
-
-                    </div>
-
-
-
-                    <div class="config-group">
-
-                        <label>
-                            Draw Sequence Size
-                        </label>
-
-                        <input
-                            id="cfg-draw-size"
-                            class="admin-input"
-                            type="number"
-                            value="3"
-                            oninput="calculateMathLimits()">
-
-                    </div>
-
-
-
-                    <div class="config-group">
-
-                        <label>
-                            Total Permutations
-                        </label>
-
-                        <input
-                            id="cfg-max-perms"
-                            class="admin-input"
-                            type="number"
-                            value="720"
-                            onchange="updateAdminTotal()">
-
-                    </div>
-
-
-                </div>
-
-
-
-
-                <span id="math-max-hint" class="math-hint">
-                </span>
+<span id="math-max-hint" class="math-hint">
+</span>
 
 
 
