@@ -5,7 +5,12 @@
 // =======================================================
 
 
+// =======================================================
+// LOTTERY FORMAT BUTTON SELECTOR
+// =======================================================
+
 function populateLotteryFormats(){
+
 
     const selector =
         document.getElementById(
@@ -16,43 +21,59 @@ function populateLotteryFormats(){
     if(!selector) return;
 
 
+
     selector.innerHTML = '';
+
 
 
     Object.keys(lotteryFormats).forEach(format=>{
 
 
-        const option =
-            document.createElement('option');
+        const button =
+            document.createElement('button');
 
 
-        option.value = format;
-        option.textContent = format;
+
+        button.className =
+            'selector-btn';
 
 
-        selector.appendChild(option);
+
+        button.dataset.value =
+            format;
+
+
+
+        button.innerHTML = format;
+
+
+
+        button.onclick = () => {
+
+
+            applyLotteryFormat(
+                format,
+                button
+            );
+
+
+        };
+
+
+
+        selector.appendChild(button);
 
 
     });
 
 
-    selector.value =
-        activeConfig.lotteryFormat;
+
+    updateLotteryFormatSelector();
+
 
 }
 
-
-
-
-
-function applyLotteryFormat(){
-
-
-    const selected =
-        document.getElementById(
-            'cfg-lottery-format'
-        ).value;
-
+function applyLotteryFormat(selected, button){
 
 
     const format =
@@ -132,6 +153,37 @@ function applyLotteryFormat(){
         activeConfig.teams
     );
 
+
+
+    updateLotteryFormatSelector();
+
+
+}
+
+function updateLotteryFormatSelector(){
+
+
+    const buttons =
+        document.querySelectorAll(
+            '#cfg-lottery-format .selector-btn'
+        );
+
+
+
+    buttons.forEach(btn => {
+
+
+        btn.classList.toggle(
+
+            'active',
+
+            btn.dataset.value ===
+            activeConfig.lotteryFormat
+
+        );
+
+
+    });
 
 }
 

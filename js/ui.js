@@ -458,6 +458,7 @@ if (targetTabName === 'admin') {
 
 
     });
+updateLotteryFormatSelector();
 
 }
   if (targetTabName === 'lottery') renderLotteryInterface();
