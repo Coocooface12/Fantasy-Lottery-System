@@ -399,7 +399,7 @@ function updateAdminTotal() {
     ||
     0;
 
-let total = 0;
+  let total = 0;
 
   permInputs.forEach(input=>{
 

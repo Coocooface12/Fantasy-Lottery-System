@@ -137,6 +137,49 @@ function generateDefaultWeightedTeams(count, totalPermsTarget) {
 
 }
 
+// =======================================================
+// LOTTERY ENGINE
+// Core lottery logic and draw processing
+// =======================================================
+
+
+function resetRuntimeEngine() {
+
+  runtimeState.draftBoard =
+    new Array(activeConfig.teamCount).fill(null);
+
+
+  runtimeState.currentRoundIndex = 0;
+
+
+  runtimeState.teams =
+    activeConfig.teams.map((t, idx) => ({
+
+      id: idx,
+
+      name: t.name,
+
+      seed: t.seed || idx + 1,
+
+      percentage: t.percentage || 0,
+
+      assignedPermsCount: t.perms,
+
+      allPermutations: [],
+
+      livePermutations: [],
+
+      hasSecuredPlacement: false
+
+    }));
+
+
+  dealInitialPermutationPool();
+
+  initializeDrawSequenceRound();
+
+}
+
 function dealInitialPermutationPool() {
   const allCombinationsPool = shuffle(generatePermutationPool(activeConfig.totalBalls, activeConfig.drawSize));
   let cursor = 0;
