@@ -434,16 +434,32 @@ function switchTab(targetTabName) {
   document.querySelectorAll('.tab')[linkIndexMap[targetTabName]].classList.add('active');
   
   if (targetTabName === 'picks') renderDraftBoardResults();
-  if (targetTabName === 'admin') {
+if (targetTabName === 'admin') {
 
-    renderAdminTeamRows(activeConfig.teams);
 
-    document.getElementById(
-        'cfg-reveal-mode'
-    ).value =
-        activeConfig.revealMode;
+    renderAdminTeamRows(
+        activeConfig.teams
+    );
 
-  }
+
+    const revealButtons =
+        document.querySelectorAll(
+            '#cfg-reveal-mode .selector-btn'
+        );
+
+
+    revealButtons.forEach(btn => {
+
+
+        btn.classList.toggle(
+            'active',
+            btn.dataset.value === activeConfig.revealMode
+        );
+
+
+    });
+
+}
   if (targetTabName === 'lottery') renderLotteryInterface();
 }
 

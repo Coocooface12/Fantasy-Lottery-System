@@ -134,6 +134,36 @@ function applyLotteryFormat(){
 
 
 }
+
+// =======================================================
+// BUTTON SELECTOR - DRAFT REVEAL MODE
+// =======================================================
+
+function setRevealMode(value, button) {
+
+
+    activeConfig.revealMode = value;
+
+
+    const buttons =
+        document.querySelectorAll(
+            '#cfg-reveal-mode .selector-btn'
+        );
+
+
+    buttons.forEach(btn => {
+
+        btn.classList.remove('active');
+
+    });
+
+
+
+    button.classList.add('active');
+
+
+}
+
 // =======================================================
 // CALCULATE PERMUTATION LIMITS
 // Runs whenever balls or draw size changes
@@ -561,9 +591,7 @@ function applySettings() {
 
 
  const revealMode =
-    document.getElementById(
-        'cfg-reveal-mode'
-    ).value;
+    activeConfig.revealMode;
 
    const count =
    parseInt(
