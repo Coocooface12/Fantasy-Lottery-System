@@ -1,3 +1,4 @@
+
 // =======================================================
 // LOTTERY FORMAT SELECTOR
 // Loads preset configurations
@@ -184,7 +185,6 @@ function calculateMathLimits() {
   }
 
 }
-
 
 // =======================================================
 // PRESERVE TEAM ODDS WHILE CHANGING TOTAL PERMUTATIONS
