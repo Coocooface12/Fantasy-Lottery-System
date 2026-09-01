@@ -376,45 +376,23 @@ if (activeConfig.revealMode === "reverse") {
     document.getElementById('round-badge');
 
 
-  if (completelyFinished) {
+if (completelyFinished) {
 
-    badge.textContent =
-      "Lottery Sequencer Finished";
-
-  } else {
-
-   let resolvingPick;
-
-if (activeConfig.revealMode === "reverse") {
-
-  resolvingPick =
-    activeConfig.teamCount - runtimeState.currentRoundIndex;
+  badge.textContent =
+    "Lottery Sequencer Finished";
 
 } else {
 
-  resolvingPick =
-    runtimeState.currentRoundIndex + 1;
+  const resolvingPick =
+    activeConfig.revealMode === "reverse"
 
-}
+      ? activeConfig.teamCount - runtimeState.currentRoundIndex
 
-let resolvingPick;
-
-if (activeConfig.revealMode === "reverse") {
-
-  resolvingPick =
-    activeConfig.teamCount - runtimeState.currentRoundIndex;
-
-} else {
-
-  resolvingPick =
-    runtimeState.currentRoundIndex + 1;
-
-}
+      : runtimeState.currentRoundIndex + 1;
 
 
-badge.textContent =
-  `Round ${runtimeState.currentRoundIndex + 1} — Resolving Pick #${resolvingPick}`;
-  }
+  badge.textContent =
+    `Round ${runtimeState.currentRoundIndex + 1} — Resolving Pick #${resolvingPick}`;
 
 }
 
