@@ -193,29 +193,49 @@
 
 
 
-        <div class="config-group">
+       <div class="config-group">
 
-            <label>
-                Draft Reveal Order
-            </label>
+    <label>
+        Draft Reveal Order
+    </label>
 
 
-            <select
-                id="cfg-reveal-mode"
-                class="admin-input">
+    <div 
+        class="button-selector"
+        id="cfg-reveal-mode">
 
-                <option value="reverse">
-                    Reverse (Last Pick → First Pick)
-                </option>
 
-                <option value="standard">
-                    Standard (First Pick → Last Pick)
-                </option>
+        <button
+            class="selector-btn active"
+            data-value="reverse"
+            onclick="setRevealMode('reverse', this)">
 
-            </select>
+            Reverse
+            <span>
+                (Pick 8 → Pick 1)
+            </span>
 
-        </div>
+        </button>
 
+
+
+        <button
+            class="selector-btn"
+            data-value="standard"
+            onclick="setRevealMode('standard', this)">
+
+            Standard
+            <span>
+                (Pick 1 → Pick 8)
+            </span>
+
+        </button>
+
+
+    </div>
+
+
+</div>
 
 
         <div class="config-group">
