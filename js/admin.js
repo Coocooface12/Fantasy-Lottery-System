@@ -476,15 +476,15 @@ function renderAdminTeamRows(teamsArray) {
       />
 
 
-      <input 
-        class="admin-input clan-perm-input"
-        type="number"
-        min="1"
-        data-index="${i}"
-        value="${t.perms}"
-        oninput="updateAdminTotal()"
-        style="text-align:center;"
-      />
+      <input
+    class="admin-input clan-perm-input"
+    type="number"
+    ...
+    oninput="
+        switchToCustomFormat();
+        updateAdminTotal();
+    "
+>
 
 
       <div 
@@ -524,8 +524,6 @@ function renderAdminTeamRows(teamsArray) {
 // =======================================================
 
 function updateAdminTotal() {
-
-switchToCustomFormat();
 
   const permInputs =
     document.querySelectorAll(
