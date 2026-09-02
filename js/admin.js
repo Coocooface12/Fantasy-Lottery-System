@@ -455,16 +455,15 @@ function renderAdminTeamRows(teamsArray) {
 
 
 
-   const pct =
-t.percentage !== undefined
-?
-t.percentage.toFixed(1)
-:
-(
- (t.perms / targetPerms)
- * 100
-)
-.toFixed(1);
+const pct =
+  t.percentage !== undefined &&
+  t.percentage !== null
+    ?
+      Number(t.percentage).toFixed(1)
+    :
+      (
+        (t.perms / targetPerms) * 100
+      ).toFixed(1);
 
 
 
