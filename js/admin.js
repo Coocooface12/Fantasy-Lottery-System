@@ -830,7 +830,7 @@ function applySettings() {
 
 
 
-   parsedTeams.push({
+parsedTeams.push({
 
   name:
     nameInputs[index].value.trim()
@@ -841,7 +841,13 @@ function applySettings() {
     index + 1,
 
   percentage:
-    0,
+    activeConfig.teams[index]?.percentage
+    ??
+    Number(
+      (
+        (weight / targetPerms) * 100
+      ).toFixed(1)
+    ),
 
   perms:
     weight
