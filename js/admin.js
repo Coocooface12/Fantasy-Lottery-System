@@ -94,8 +94,6 @@ if(selected === "Custom"){
 }
 
 
-if(!format) return;
-
 
 
     if(!format) return;
@@ -246,23 +244,6 @@ function setSelectorValue(configKey, value, button) {
 
     button.classList.add('active');
 
-
-}
-
-// =======================================================
-// SWITCH TO CUSTOM FORMAT
-// Called whenever a preset is modified
-// =======================================================
-
-function switchToCustomFormat(){
-
-    if(activeConfig.lotteryFormat === "Custom"){
-        return;
-    }
-
-    activeConfig.lotteryFormat = "Custom";
-
-    updateLotteryFormatSelector();
 
 }
 
@@ -418,20 +399,15 @@ function recalculateTeamWeights(newTotal) {
 
 function renderAdminTeamRows(teamsArray) {
 
-
   const container =
     document.getElementById(
       'admin-teams-container'
     );
 
-
   if (!container) return;
 
 
-
-  container.innerHTML =
-    '';
-
+  container.innerHTML = '';
 
 
   const targetPerms =
@@ -442,9 +418,7 @@ function renderAdminTeamRows(teamsArray) {
     720;
 
 
-
   teamsArray.forEach((t,i)=>{
-
 
     const row =
       document.createElement('div');
@@ -454,23 +428,35 @@ function renderAdminTeamRows(teamsArray) {
       'admin-team-row';
 
 
+    const percentageDisplay =
+      activeConfig.editMode === "percentages"
 
-const pct =
-  t.percentage !== undefined &&
-  t.percentage !== null
-    ?
-      Number(t.percentage).toFixed(1)
-    :
-      (
-        (t.perms / targetPerms) * 100
-      ).toFixed(1);
+      ?
 
+      `
+      <input
+        class="admin-input clan-percent-input"
+        type="number"
+        step="0.1"
+        value="${t.percentage}"
+        data-index="${i}"
+        oninput="updatePercentageMode(${i}, this.value);"
+      />
+      `
+
+      :
+
+      `
+      <div class="clan-pct-label">
+      ${Number(t.percentage ?? 0).toFixed(1)}%
+      </div>
+      `;
 
 
 
     row.innerHTML = `
 
-      <input 
+      <input
         class="admin-input clan-name-input"
         data-index="${i}"
         value="${t.name}"
@@ -478,63 +464,33 @@ const pct =
       />
 
 
- <input 
-    class="admin-input clan-perm-input"
-    type="number"
-    min="1"
-    data-index="${i}"
-    value="${t.perms}"
-    oninput="
-        switchToCustomFormat();
-        updateAdminTotal();
-    "
-    style="text-align:center;"
->
+      <input
+        class="admin-input clan-perm-input"
+        type="number"
+        min="1"
+        data-index="${i}"
+        value="${t.perms}"
+        oninput="
+          switchToCustomFormat();
+          updateAdminTotal();
+        "
+        style="text-align:center;"
+      />
 
 
-${
-activeConfig.editMode === "percentages"
+      ${percentageDisplay}
 
-?
-
-`
-<input
-class="admin-input clan-percent-input"
-type="number"
-step="0.1"
-value="${t.percentage}"
-data-index="${i}"
-oninput="
-updatePercentageMode(${i}, this.value);
-"
-/>
-`
-
-:
-
-`
-<div 
-class="clan-pct-label"
->
-${pct}%
-</div>
-`
-
-}
-
+    `;
 
 
     container.appendChild(row);
 
-
   });
-
 
 
   updateAdminTotal();
 
 }
-
 
 
 
@@ -650,9 +606,11 @@ permInputs.forEach((input,index)=>{
   if(lbl){
 
     lbl.textContent =
-      `Total Weight Allocated: ${total} / ${targetPerms} Targets`;
-
-
+      'Total weight Allocated: ' +
+      total +
+      ' / ' +
+      targetPerms +
+      ' Targets';
 
     lbl.className =
       'total-perms '
@@ -1004,29 +962,6 @@ function setTeamEditMode(mode){
             "btn btn-outline";
 
     }
-
-
-    renderAdminTeamRows(
-        activeConfig.teams
-    );
-
-}
-
-function updatePercentageMode(index,value){
-
-    const pct =
-        parseFloat(value) || 0;
-
-
-    activeConfig.teams[index].percentage =
-        pct;
-
-
-    activeConfig.teams[index].perms =
-        Math.round(
-            (pct / 100) *
-            activeConfig.targetPerms
-        );
 
 
     renderAdminTeamRows(
