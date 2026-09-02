@@ -478,14 +478,17 @@ const pct =
       />
 
 
-      <input
+ <input 
     class="admin-input clan-perm-input"
     type="number"
-    ...
+    min="1"
+    data-index="${i}"
+    value="${t.perms}"
     oninput="
         switchToCustomFormat();
         updateAdminTotal();
     "
+    style="text-align:center;"
 >
 
 
