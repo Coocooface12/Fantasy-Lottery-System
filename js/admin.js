@@ -77,7 +77,24 @@ function applyLotteryFormat(selected, button){
 
 
     const format =
-        lotteryFormats[selected];
+    lotteryFormats[selected];
+
+
+// Custom mode doesn't overwrite the current settings.
+// It simply becomes the active format.
+
+if(selected === "Custom"){
+
+    activeConfig.lotteryFormat = "Custom";
+
+    updateLotteryFormatSelector();
+
+    return;
+
+}
+
+
+if(!format) return;
 
 
 
@@ -233,6 +250,39 @@ function setSelectorValue(configKey, value, button) {
 }
 
 // =======================================================
+// SWITCH TO CUSTOM FORMAT
+// Called whenever a preset is modified
+// =======================================================
+
+function switchToCustomFormat(){
+
+    if(activeConfig.lotteryFormat === "Custom"){
+        return;
+    }
+
+    activeConfig.lotteryFormat = "Custom";
+
+    updateLotteryFormatSelector();
+
+}
+
+// =======================================================
+// SWITCH TO CUSTOM LOTTERY FORMAT
+// =======================================================
+
+function switchToCustomFormat(){
+
+    if(activeConfig.lotteryFormat === "Custom"){
+        return;
+    }
+
+    activeConfig.lotteryFormat = "Custom";
+
+    updateLotteryFormatSelector();
+
+}
+
+// =======================================================
 // CALCULATE PERMUTATION LIMITS
 // Runs whenever balls or draw size changes
 // =======================================================
@@ -248,7 +298,7 @@ function calculateMathLimits() {
 
   const absoluteMax =
     getMathMaxPermutations(n, k);
-
+    switchToCustomFormat();
 
 
   document.getElementById('math-max-hint').textContent =
@@ -475,6 +525,7 @@ function renderAdminTeamRows(teamsArray) {
 
 function updateAdminTotal() {
 
+switchToCustomFormat();
 
   const permInputs =
     document.querySelectorAll(
@@ -627,6 +678,7 @@ function handleTeamCountChange() {
     ||
     720;
 
+    switchToCustomFormat();
 
 
   const transientTeams =
