@@ -492,21 +492,35 @@ const pct =
 >
 
 
-      <div 
-        class="clan-pct-label"
-        id="apct-${i}"
-        style="
-          font-size:14px;
-          font-weight:500;
-          color:var(--silver);
-          text-align:right;
-          padding-right:12px;
-        "
-      >
-        ${pct}%
-      </div>
+${
+activeConfig.editMode === "percentages"
 
-    `;
+?
+
+`
+<input
+class="admin-input clan-percent-input"
+type="number"
+step="0.1"
+value="${t.percentage}"
+data-index="${i}"
+oninput="
+updatePercentageMode(${i}, this.value);
+"
+/>
+`
+
+:
+
+`
+<div 
+class="clan-pct-label"
+>
+${pct}%
+</div>
+`
+
+}
 
 
 
@@ -536,9 +550,15 @@ function updateAdminTotal() {
     );
 
 
-  const pctLabels =
+const pctLabels =
     document.querySelectorAll(
       '.clan-pct-label'
+    );
+
+
+const percentInputs =
+    document.querySelectorAll(
+      '.clan-percent-input'
     );
 
 
@@ -603,12 +623,16 @@ permInputs.forEach((input,index)=>{
 
 
 
-    if(pctLabels[index]){
+   if(
+    activeConfig.editMode !== "percentages"
+    &&
+    pctLabels[index]
+){
 
-      pctLabels[index].textContent =
-        `${pct}%`;
+    pctLabels[index].textContent =
+      `${pct}%`;
 
-    }
+}
 
 
 });
@@ -942,5 +966,71 @@ function resetSettingsToDefault(){
     switchTab('lottery');
 
   }
+
+}
+
+function setTeamEditMode(mode){
+
+    activeConfig.editMode = mode;
+
+
+    const permBtn =
+        document.getElementById(
+            'edit-perms-btn'
+        );
+
+
+    const pctBtn =
+        document.getElementById(
+            'edit-percent-btn'
+        );
+
+
+    if(mode === "permutations"){
+
+        permBtn.className =
+            "btn btn-gold";
+
+        pctBtn.className =
+            "btn btn-outline";
+
+    }
+    else {
+
+        pctBtn.className =
+            "btn btn-gold";
+
+        permBtn.className =
+            "btn btn-outline";
+
+    }
+
+
+    renderAdminTeamRows(
+        activeConfig.teams
+    );
+
+}
+
+function updatePercentageMode(index,value){
+
+    const pct =
+        parseFloat(value) || 0;
+
+
+    activeConfig.teams[index].percentage =
+        pct;
+
+
+    activeConfig.teams[index].perms =
+        Math.round(
+            (pct / 100) *
+            activeConfig.targetPerms
+        );
+
+
+    renderAdminTeamRows(
+        activeConfig.teams
+    );
 
 }

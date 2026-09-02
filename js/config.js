@@ -210,6 +210,8 @@ let activeConfig = {
 
  revealMode: "reverse",
 
+editMode: "permutations",
+
  teams: null
 
 };
