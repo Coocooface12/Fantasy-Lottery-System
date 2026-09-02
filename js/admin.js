@@ -562,7 +562,7 @@ function updateAdminTotal() {
 
 
 
-  permInputs.forEach((input,index)=>{
+permInputs.forEach((input,index)=>{
 
 
     const value =
@@ -571,13 +571,32 @@ function updateAdminTotal() {
       0;
 
 
+    let pct;
 
-    const pct =
-      total > 0
-      ?
-      ((value / total) * 100).toFixed(1)
-      :
-      '0.0';
+
+    if(
+      activeConfig.teams &&
+      activeConfig.teams[index] &&
+      activeConfig.teams[index].percentage !== undefined
+    ){
+
+      pct =
+        Number(
+          activeConfig.teams[index].percentage
+        )
+        .toFixed(1);
+
+    }
+    else {
+
+      pct =
+        total > 0
+        ?
+        ((value / total) * 100).toFixed(1)
+        :
+        '0.0';
+
+    }
 
 
 
@@ -589,7 +608,7 @@ function updateAdminTotal() {
     }
 
 
-  });
+});
 
 
 
