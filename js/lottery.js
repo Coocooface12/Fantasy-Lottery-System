@@ -132,8 +132,8 @@ else {
 
 
 
-  // Build team objects
-  for (let i = 0; i < count; i++) {
+// Build team objects
+for (let i = 0; i < count; i++) {
 
     teamsList.push({
 
@@ -141,13 +141,20 @@ else {
 
       seed: i + 1,
 
-      percentage: 0,
+      percentage:
+        presetPercentages
+          ? presetPercentages[i]
+          : Number(
+              (
+                (tempWeights[i] / totalPermsTarget) * 100
+              ).toFixed(1)
+            ),
 
       perms: tempWeights[i]
 
     });
 
-  }
+}
 
 
   return teamsList;
