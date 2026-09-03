@@ -439,18 +439,37 @@ function renderAdminTeamRows(teamsArray) {
       />
 
 
-      <input
-        class="admin-input clan-perm-input"
-        type="number"
-        min="1"
-        data-index="${i}"
-        value="${t.perms}"
-        oninput="
+      ${
+activeConfig.editMode === "permutations"
+
+?
+
+`
+<input
+  class="admin-input clan-perm-input"
+  type="number"
+  min="1"
+  data-index="${i}"
+  value="${t.perms}"
+  oninput="
     switchToCustomFormat();
     updatePermutationMode(${i}, this.value);
-"
-        style="text-align:center;"
-      />
+  "
+  style="text-align:center;"
+/>
+`
+
+:
+
+`
+
+<div class="clan-perm-label">
+    ${t.perms}
+</div>
+
+`
+
+}
 
 
       ${percentageDisplay}
@@ -500,14 +519,25 @@ function updatePermutationMode(index, value){
     });
 
 
-    updateAdminTotal();
+        updateAdminTotal();
 
 
-    renderAdminTeamRows(
-        activeConfig.teams
-    );
+    const pctLabels =
+        document.querySelectorAll(
+            '.clan-pct-label'
+        );
+
+
+    pctLabels.forEach((label,i)=>{
+
+        label.textContent =
+            `${activeConfig.teams[i].percentage}%`;
+
+    });
+
 
 }
+
 
 function updatePercentageMode(index, value){
 
@@ -566,6 +596,8 @@ function updatePercentageMode(index, value){
 
 function updateAdminTotal() {
 
+
+  
   const permInputs =
     document.querySelectorAll(
       '.clan-perm-input'
