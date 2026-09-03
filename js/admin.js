@@ -279,7 +279,6 @@ function calculateMathLimits() {
 
   const absoluteMax =
     getMathMaxPermutations(n, k);
-    switchToCustomFormat();
 
 
   document.getElementById('math-max-hint').textContent =
@@ -322,71 +321,47 @@ function calculateMathLimits() {
 function recalculateTeamWeights(newTotal) {
 
 
-  if (
-    !activeConfig.teams ||
-    activeConfig.teams.length === 0
-  ) {
-    return;
-  }
-
-
-
-  const oldTotal =
-    activeConfig.teams.reduce(
-      (sum,team)=>
-        sum + team.perms,
-      0
-    );
-
-
-
-  if(oldTotal <= 0){
-    return;
-  }
-
-
-
-  let runningTotal = 0;
-
-
-
-  activeConfig.teams.forEach((team,index)=>{
-
-
-    if(index === activeConfig.teams.length - 1){
-
-
-      team.perms =
-        newTotal - runningTotal;
-
-
-    } else {
-
-
-      const percentage =
-        team.perms / oldTotal;
-
-
-
-      team.perms =
-        Math.round(
-          percentage * newTotal
-        );
-
-
-
-      runningTotal += team.perms;
-
+    if(
+        !activeConfig.teams ||
+        activeConfig.teams.length === 0
+    ){
+        return;
     }
 
 
-  });
+    let runningTotal = 0;
 
 
+    activeConfig.teams.forEach((team,index)=>{
 
-  renderAdminTeamRows(
-    activeConfig.teams
-  );
+
+        if(index === activeConfig.teams.length - 1){
+
+            team.perms =
+                newTotal - runningTotal;
+
+        }
+        else{
+
+            team.perms =
+                Math.round(
+                    (team.percentage / 100)
+                    *
+                    newTotal
+                );
+
+
+            runningTotal += team.perms;
+
+        }
+
+
+    });
+
+
+    renderAdminTeamRows(
+        activeConfig.teams
+    );
 
 }
 
@@ -471,9 +446,9 @@ function renderAdminTeamRows(teamsArray) {
         data-index="${i}"
         value="${t.perms}"
         oninput="
-          switchToCustomFormat();
-          updateAdminTotal();
-        "
+    switchToCustomFormat();
+    updatePermutationMode(${i}, this.value);
+"
         style="text-align:center;"
       />
 
@@ -492,7 +467,98 @@ function renderAdminTeamRows(teamsArray) {
 
 }
 
+function updatePermutationMode(index, value){
 
+    const perms =
+        parseInt(value) || 0;
+
+
+    activeConfig.teams[index].perms =
+        perms;
+
+
+    const total =
+        activeConfig.teams.reduce(
+            (sum,team)=>
+                sum + team.perms,
+            0
+        );
+
+
+    activeConfig.teams.forEach(team=>{
+
+        team.percentage =
+            total > 0
+            ?
+            Number(
+                ((team.perms / total) * 100)
+                .toFixed(1)
+            )
+            :
+            0;
+
+    });
+
+
+    updateAdminTotal();
+
+
+    renderAdminTeamRows(
+        activeConfig.teams
+    );
+
+}
+
+function updatePercentageMode(index, value){
+
+    const percentage =
+        Number(value) || 0;
+
+
+    activeConfig.teams[index].percentage =
+        percentage;
+
+
+    const targetPerms =
+        activeConfig.targetPerms;
+
+
+    let runningTotal = 0;
+
+
+    activeConfig.teams.forEach((team,i)=>{
+
+
+        if(i === activeConfig.teams.length - 1){
+
+            team.perms =
+                targetPerms - runningTotal;
+
+        }
+        else{
+
+            team.perms =
+                Math.round(
+                    (team.percentage / 100)
+                    *
+                    targetPerms
+                );
+
+
+            runningTotal += team.perms;
+
+        }
+
+
+    });
+
+
+    renderAdminTeamRows(
+        activeConfig.teams
+    );
+
+
+}
 
 // =======================================================
 // UPDATE TOTAL DISPLAY
@@ -681,9 +747,6 @@ function handleTeamCountChange() {
     )
     ||
     720;
-
-    switchToCustomFormat();
-
 
   const transientTeams =
     generateDefaultWeightedTeams(
