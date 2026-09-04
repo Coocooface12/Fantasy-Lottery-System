@@ -268,49 +268,97 @@ function switchToCustomFormat(){
 // Runs whenever balls or draw size changes
 // =======================================================
 
-function calculateMathLimits() {
-
-  const n =
-    parseInt(document.getElementById('cfg-balls-pool').value) || 4;
-
-  const k =
-    parseInt(document.getElementById('cfg-draw-size').value) || 2;
+function calculateMathLimits(){
 
 
-  const absoluteMax =
-    getMathMaxPermutations(n, k);
-
-
-  document.getElementById('math-max-hint').textContent =
-    `Absolute limit for chosen ball config: ${absoluteMax}`;
+    const n =
+        parseInt(
+            document.getElementById(
+                'cfg-balls-pool'
+            ).value
+        )
+        ||
+        4;
 
 
 
-  const targetInput =
-    document.getElementById('cfg-max-perms');
+    const k =
+        parseInt(
+            document.getElementById(
+                'cfg-draw-size'
+            ).value
+        )
+        ||
+        2;
 
 
-  targetInput.value = absoluteMax;
-  activeConfig.targetPerms = absoluteMax;
+
+    const absoluteMax =
+        getMathMaxPermutations(
+            n,
+            k
+        );
 
 
-  /*
-    IMPORTANT:
-    Do NOT rebuild activeConfig.teams from the HTML inputs here.
-    
-    The HTML is the display layer.
-    activeConfig is the data layer.
-  */
+
+    document.getElementById(
+        'math-max-hint'
+    ).textContent =
+        `Absolute limit for chosen ball config: ${absoluteMax}`;
 
 
-  if (
-    activeConfig.teams &&
-    activeConfig.teams.length > 0
-  ) {
 
-    recalculateTeamWeights(absoluteMax);
+    document.getElementById(
+        'cfg-max-perms'
+    ).value =
+        absoluteMax;
 
-  }
+
+
+    activeConfig.targetPerms =
+        absoluteMax;
+
+
+
+    if(
+        activeConfig.teams &&
+        activeConfig.teams.length > 0
+    ){
+
+
+        activeConfig.teams.forEach(team=>{
+
+
+            if(
+                team.percentage === undefined ||
+                team.percentage === null
+            ){
+
+                team.percentage =
+                    Number(
+                        (
+                            (team.perms /
+                            activeConfig.targetPerms)
+                            *
+                            100
+                        )
+                        .toFixed(1)
+                    );
+
+            }
+
+
+        });
+
+
+
+        recalculateTeamWeights(
+            absoluteMax
+        );
+
+
+    }
+
 
 }
 
@@ -374,127 +422,144 @@ function recalculateTeamWeights(newTotal) {
 
 function renderAdminTeamRows(teamsArray) {
 
-  const container =
-    document.getElementById(
-      'admin-teams-container'
-    );
-
-  if (!container) return;
+    const container =
+        document.getElementById(
+            'admin-teams-container'
+        );
 
 
-  container.innerHTML = '';
+    if(!container) return;
 
 
-  const targetPerms =
-    parseInt(
-      document.getElementById('cfg-max-perms').value
-    )
-    ||
-    720;
+    container.innerHTML = "";
 
 
-  teamsArray.forEach((t,i)=>{
-
-    const row =
-      document.createElement('div');
+    teamsArray.forEach((team,index)=>{
 
 
-    row.className =
-      'admin-team-row';
+        const row =
+            document.createElement('div');
 
 
-    const percentageDisplay =
-      activeConfig.editMode === "percentages"
-
-      ?
-
-      `
-      <input
-        class="admin-input clan-percent-input"
-        type="number"
-        step="0.1"
-        value="${t.percentage}"
-        data-index="${i}"
-        oninput="updatePercentageMode(${i}, this.value);"
-      />
-      `
-
-      :
-
-      `
-      <div class="clan-pct-label">
-      ${Number(t.percentage ?? 0).toFixed(1)}%
-      </div>
-      `;
+        row.className =
+            "admin-team-row";
 
 
 
-    row.innerHTML = `
+        const percentageHTML =
+            activeConfig.editMode === "percentages"
 
-      <input
-        class="admin-input clan-name-input"
-        data-index="${i}"
-        value="${t.name}"
-        placeholder="Team Name"
-      />
-      
-console.log("Current edit mode:", activeConfig.editMode);
+            ?
 
-${   
-activeConfig.editMode === "permutations"
+            `
+            <input
+                class="admin-input clan-percent-input"
+                type="number"
+                step="0.1"
+                data-index="${index}"
+                value="${team.percentage}"
+                oninput="
+                    updatePercentageMode(
+                        ${index},
+                        this.value
+                    );
+                "
+            />
+            `
 
-?
+            :
 
-`
-<input
-  class="admin-input clan-perm-input"
-  type="number"
-  min="1"
-  data-index="${i}"
-  value="${t.perms}"
-  oninput="
-    switchToCustomFormat();
-    updatePermutationMode(${i}, this.value);
-  "
-  style="text-align:center;"
-/>
-`
+            `
 
-:
+            <div class="clan-pct-label">
+                ${Number(team.percentage).toFixed(1)}%
+            </div>
 
-`
+            `;
 
-<div class="clan-perm-label">
-    ${t.perms}
-</div>
 
-`
+
+        const permutationHTML =
+            activeConfig.editMode === "permutations"
+
+            ?
+
+            `
+            <input
+                class="admin-input clan-perm-input"
+                type="number"
+                min="0"
+                data-index="${index}"
+                value="${team.perms}"
+                oninput="
+                    updatePermutationMode(
+                        ${index},
+                        this.value
+                    );
+                "
+                style="text-align:center;"
+            />
+            `
+
+            :
+
+            `
+
+            <div class="clan-perm-label">
+                ${team.perms}
+            </div>
+
+            `;
+
+
+
+        row.innerHTML = `
+
+
+            <input
+                class="admin-input clan-name-input"
+                data-index="${index}"
+                value="${team.name}"
+                placeholder="Team Name"
+            />
+
+
+            ${permutationHTML}
+
+
+            ${percentageHTML}
+
+
+        `;
+
+
+
+        container.appendChild(row);
+
+
+    });
+
+
+    updateAdminTotal();
 
 }
 
+function updatePermutationMode(index,value){
 
-      ${percentageDisplay}
-
-    `;
-
-
-    container.appendChild(row);
-
-  });
-
-
-  updateAdminTotal();
-
-}
-
-function updatePermutationMode(index, value){
 
     const perms =
-        parseInt(value) || 0;
+        parseInt(value);
+
+
+    if(isNaN(perms)){
+        return;
+    }
+
 
 
     activeConfig.teams[index].perms =
         perms;
+
 
 
     const total =
@@ -505,56 +570,76 @@ function updatePermutationMode(index, value){
         );
 
 
+
     activeConfig.teams.forEach(team=>{
+
 
         team.percentage =
             total > 0
+
             ?
+
             Number(
-                ((team.perms / total) * 100)
+                (
+                    (team.perms / total) * 100
+                )
                 .toFixed(1)
             )
+
             :
+
             0;
+
 
     });
 
 
-        updateAdminTotal();
+
+    updateAdminTotal();
 
 
-    const pctLabels =
+    const labels =
         document.querySelectorAll(
             '.clan-pct-label'
         );
 
 
-    pctLabels.forEach((label,i)=>{
+    labels.forEach((label,i)=>{
 
         label.textContent =
             `${activeConfig.teams[i].percentage}%`;
 
     });
 
-
 }
 
 
-function updatePercentageMode(index, value){
+function updatePercentageMode(index,value){
+
 
     const percentage =
-        Number(value) || 0;
+        Number(value);
+
+
+
+    if(isNaN(percentage)){
+        return;
+    }
+
 
 
     activeConfig.teams[index].percentage =
         percentage;
 
 
+
     const targetPerms =
         activeConfig.targetPerms;
 
 
+
     let runningTotal = 0;
+
 
 
     activeConfig.teams.forEach((team,i)=>{
@@ -562,11 +647,14 @@ function updatePercentageMode(index, value){
 
         if(i === activeConfig.teams.length - 1){
 
+
             team.perms =
                 targetPerms - runningTotal;
 
+
         }
         else{
+
 
             team.perms =
                 Math.round(
@@ -584,10 +672,26 @@ function updatePercentageMode(index, value){
     });
 
 
-    renderAdminTeamRows(
-        activeConfig.teams
-    );
 
+    updateAdminTotal();
+
+
+
+    const permLabels =
+        document.querySelectorAll(
+            '.clan-perm-label'
+        );
+
+
+
+    permLabels.forEach((label,i)=>{
+
+
+        label.textContent =
+            activeConfig.teams[i].perms;
+
+
+    });
 
 }
 
@@ -595,133 +699,121 @@ function updatePercentageMode(index, value){
 // UPDATE TOTAL DISPLAY
 // =======================================================
 
-function updateAdminTotal() {
+function updateAdminTotal(){
 
 
-  
-  const permInputs =
-    document.querySelectorAll(
-      '.clan-perm-input'
-    );
-
-
-const pctLabels =
-    document.querySelectorAll(
-      '.clan-pct-label'
-    );
-
-
-const percentInputs =
-    document.querySelectorAll(
-      '.clan-percent-input'
-    );
-
-
-  const targetPerms =
-    parseInt(
-      document.getElementById(
-        'cfg-max-perms'
-      ).value
-    )
-    ||
-    0;
-
-let total =
-    activeConfig.teams.reduce(
-        (sum,team)=>
-            sum + team.perms,
-        0
-    );
-
-
-permInputs.forEach((input,index)=>{
-
-
-    const value =
-      parseInt(input.value)
-      ||
-      0;
-
-
-    let pct;
-
-
-    if(
-      activeConfig.teams &&
-      activeConfig.teams[index] &&
-      activeConfig.teams[index].percentage !== undefined
-    ){
-
-      pct =
-        Number(
-          activeConfig.teams[index].percentage
+    const targetPerms =
+        parseInt(
+            document.getElementById(
+                'cfg-max-perms'
+            ).value
         )
-        .toFixed(1);
+        ||
+        0;
+
+
+
+    const total =
+        activeConfig.teams.reduce(
+            (sum,team)=>
+                sum + team.perms,
+            0
+        );
+
+
+
+    const pctLabels =
+        document.querySelectorAll(
+            '.clan-pct-label'
+        );
+
+
+
+    pctLabels.forEach((label,index)=>{
+
+
+        if(activeConfig.teams[index]){
+
+
+            label.textContent =
+                Number(
+                    activeConfig.teams[index].percentage
+                )
+                .toFixed(1)
+                +
+                "%";
+
+
+        }
+
+
+    });
+
+
+
+    const permLabels =
+        document.querySelectorAll(
+            '.clan-perm-label'
+        );
+
+
+
+    permLabels.forEach((label,index)=>{
+
+
+        if(activeConfig.teams[index]){
+
+
+            label.textContent =
+                activeConfig.teams[index].perms;
+
+
+        }
+
+
+    });
+
+
+
+    const lbl =
+        document.getElementById(
+            'total-label'
+        );
+
+
+
+    if(lbl){
+
+
+        lbl.textContent =
+            "Total weight Allocated: "
+            +
+            total
+            +
+            " / "
+            +
+            targetPerms
+            +
+            " Targets";
+
+
+
+        lbl.className =
+            "total-perms "
+            +
+            (
+                total === targetPerms
+                ?
+                "ok"
+                :
+                "over"
+            );
+
 
     }
-    else {
 
-      pct =
-        total > 0
-        ?
-        ((value / total) * 100).toFixed(1)
-        :
-        '0.0';
-
-    }
-
-
-
-   if(
-    activeConfig.editMode !== "percentages"
-    &&
-    pctLabels[index]
-){
-
-    pctLabels[index].textContent =
-      `${pct}%`;
 
 }
-
-
-});
-
-
-
-
-  const lbl =
-    document.getElementById(
-      'total-label'
-    );
-
-
-
-  if(lbl){
-
-    lbl.textContent =
-      'Total weight Allocated: ' +
-      total +
-      ' / ' +
-      targetPerms +
-      ' Targets';
-
-    lbl.className =
-      'total-perms '
-      +
-      (
-        total === targetPerms
-        ?
-        'ok'
-        :
-        'over'
-      );
-
-  }
-
-}
-
-
-
 
 // =======================================================
 // TEAM COUNT CHANGE
@@ -777,9 +869,12 @@ function handleTeamCountChange() {
 
   const transientTeams =
     generateDefaultWeightedTeams(
-      count,
-      targetPerms,
-      null
+        count,
+        targetPerms,
+        activeConfig.teams
+            ?.map(team=>team.percentage)
+            ||
+            null
     );
 
 
