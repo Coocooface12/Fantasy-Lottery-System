@@ -679,12 +679,6 @@ function updatePercentageMode(index, value){
     activeConfig.teams[index].perms += difference;
 
 
-
-    renderAdminTeamRows(
-        activeConfig.teams
-    );
-
-
     updateAdminTotal();
 
 }
@@ -851,7 +845,6 @@ function handleTeamCountChange() {
 
 
 
-
   const targetPerms =
     parseInt(
       document.getElementById(
@@ -861,27 +854,84 @@ function handleTeamCountChange() {
     ||
     720;
 
-  const existingPercentages =
-    activeConfig.teams
-        ?.map(team => team.percentage)
-        ||
-        [];
 
 
-const currentFormat =
-    lotteryFormats[activeConfig.lotteryFormat];
+  const currentFormat =
+    lotteryFormats[
+      activeConfig.lotteryFormat
+    ];
 
 
-const transientTeams =
+
+  const presetPercentages =
+    currentFormat
+    ?
+    currentFormat.percentages
+    :
+    null;
+
+
+
+  const transientTeams =
     generateDefaultWeightedTeams(
-        count,
-        targetPerms,
-        currentFormat
-        ?
-        currentFormat.percentages
-        :
-        null
+      count,
+      targetPerms,
+      presetPercentages
     );
+
+
+
+  /*
+    Make sure rounding never leaves the lottery
+    short on permutations.
+  */
+
+
+  let totalAssigned =
+    transientTeams.reduce(
+      (sum,team)=>
+        sum + team.perms,
+      0
+    );
+
+
+
+  const difference =
+    targetPerms - totalAssigned;
+
+
+
+  if(difference !== 0){
+
+    transientTeams[0].perms += difference;
+
+  }
+
+
+
+  /*
+    Recalculate percentages from the final
+    permutation totals.
+  */
+
+
+  transientTeams.forEach(team=>{
+
+    team.percentage =
+      Number(
+        (
+          (team.perms / targetPerms)
+          *
+          100
+        ).toFixed(1)
+      );
+
+  });
+
+
+
+  activeConfig.teamCount =
+    count;
 
 
 
@@ -893,6 +943,7 @@ const transientTeams =
   renderAdminTeamRows(
     transientTeams
   );
+
 
 }
 
