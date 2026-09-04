@@ -1091,28 +1091,23 @@ function applySettings() {
 
   }
 
-  const nameInputs =
+const nameInputs =
     document.querySelectorAll(
-      '.clan-name-input'
+        '.clan-name-input'
     );
 
 
-
-  let weightSum = 0;
-
-
-  const parsedTeams = [];
+let weightSum = 0;
 
 
+const parsedTeams = [];
 
-  permInputs.forEach((input,index)=>{
+
+activeConfig.teams.forEach((team,index)=>{
 
 
     const weight =
-      parseInt(input.value)
-      ||
-      0;
-
+        team.perms;
 
 
     weightSum += weight;
