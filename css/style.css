@@ -301,13 +301,10 @@
 }
   .admin-input:focus { outline: none; border-color: var(--gold); }
  .clan-perm-input {
-    background: #132645 !important;
-    color: #e8edf5 !important;
-    border: 1px solid #2a4a7a !important;
-    text-align: center !important;
-
-    appearance: none !important;
-    -webkit-appearance: none !important;
+    background: #132645;
+    color: #e8edf5;
+    border: 1px solid #2a4a7a;
+    text-align: center;
 }
 .clan-perm-input {
     width: 100%;
