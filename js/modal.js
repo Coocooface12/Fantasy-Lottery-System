@@ -40,10 +40,10 @@ function showModal(options){
     }
     else{
 
-        content.textContent =
-            options.message || "";
+    content.innerHTML =
+        options.message || "";
 
-    }
+}
 
 
     // Create buttons
