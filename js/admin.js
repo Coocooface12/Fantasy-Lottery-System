@@ -498,11 +498,6 @@ function renderAdminTeamRows(teamsArray) {
             this.value
         );
     "
-    style="
-        text-align:center;
-        background:var(--ice3);
-        color:var(--white);
-    "
 />
             `
 
