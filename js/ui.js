@@ -470,7 +470,28 @@ if (targetTabName === 'admin') {
     renderAdminTeamRows(
         activeConfig.teams
     );
+    
+    renderButtonSelector(
 
+    "team-count-selector",
+
+    4,
+
+    20,
+
+    activeConfig.teamCount,
+
+    function(value){
+
+        activeConfig.teamCount = value;
+
+        handleTeamCountChange();
+
+        renderTeamSelectors();
+
+    }
+
+);
 
     const revealButtons =
         document.querySelectorAll(
