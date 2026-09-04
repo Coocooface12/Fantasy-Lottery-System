@@ -487,19 +487,23 @@ function renderAdminTeamRows(teamsArray) {
 
             `
             <input
-                class="admin-input clan-perm-input"
-                type="number"
-                min="0"
-                data-index="${index}"
-                value="${team.perms}"
-                oninput="
-                    updatePermutationMode(
-                        ${index},
-                        this.value
-                    );
-                "
-                style="text-align:center;"
-            />
+    class="admin-input clan-perm-input"
+    type="number"
+    min="0"
+    data-index="${index}"
+    value="${team.perms}"
+    oninput="
+        updatePermutationMode(
+            ${index},
+            this.value
+        );
+    "
+    style="
+        text-align:center;
+        background:var(--ice3);
+        color:var(--white);
+    "
+/>
             `
 
             :
