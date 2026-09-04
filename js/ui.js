@@ -471,7 +471,7 @@ if (targetTabName === 'admin') {
         activeConfig.teams
     );
     
-    renderButtonSelector(
+    renderLotterySelectors(
 
     "team-count-selector",
 

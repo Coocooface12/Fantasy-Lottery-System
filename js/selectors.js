@@ -49,3 +49,83 @@ function renderButtonSelector(
     }
 
 }
+
+function renderLotterySelectors(){
+
+    renderButtonSelector(
+
+        "team-count-selector",
+
+        4,
+
+        20,
+
+        activeConfig.teamCount,
+
+        function(value){
+
+            activeConfig.teamCount = value;
+
+            document.getElementById(
+                "cfg-team-count"
+            ).value = value;
+
+            handleTeamCountChange();
+
+            renderLotterySelectors();
+
+        }
+
+    );
+
+
+    renderButtonSelector(
+
+        "ball-pool-selector",
+
+        4,
+
+        20,
+
+        activeConfig.totalBalls,
+
+        function(value){
+
+            activeConfig.totalBalls = value;
+
+            document.getElementById(
+                "cfg-balls-pool"
+            ).value = value;
+
+            renderLotterySelectors();
+
+        }
+
+    );
+
+
+    renderButtonSelector(
+
+        "draw-size-selector",
+
+        1,
+
+        activeConfig.totalBalls - 1,
+
+        activeConfig.drawSize,
+
+        function(value){
+
+            activeConfig.drawSize = value;
+
+            document.getElementById(
+                "cfg-draw-size"
+            ).value = value;
+
+            renderLotterySelectors();
+
+        }
+
+    );
+
+}
