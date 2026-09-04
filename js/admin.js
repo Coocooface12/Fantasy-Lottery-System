@@ -882,43 +882,86 @@ function handleTeamCountChange() {
 
 
 
-    if(
-        currentPreset &&
-        currentPreset.percentages
-    ){
+   if(
+    currentPreset &&
+    currentPreset.percentages
+){
 
-        /*
-            Preserve the curve,
-            but adjust to new team count.
-        */
-
-        percentages =
-            currentPreset.percentages
-                .slice(0,count);
+    percentages =
+        [
+            ...currentPreset.percentages
+        ];
 
 
 
-        const total =
-            percentages.reduce(
-                (sum,value)=>
-                    sum + value,
-                0
-            );
+    /*
+        Expanding team count
+    */
+
+    while(percentages.length < count){
 
 
+        const lastValue =
+            percentages[
+                percentages.length - 1
+            ];
 
-        percentages =
-            percentages.map(value =>
-                Number(
-                    (
-                        (value / total) * 100
-                    )
-                    .toFixed(1)
+
+        percentages.push(
+            Number(
+                (
+                    lastValue / 2
                 )
-            );
+                .toFixed(2)
+            )
+        );
 
 
     }
+
+
+
+    /*
+        Reducing team count
+    */
+
+    if(percentages.length > count){
+
+        percentages =
+            percentages.slice(
+                0,
+                count
+            );
+
+    }
+
+
+
+    /*
+        Normalize back to 100%
+    */
+
+    const total =
+        percentages.reduce(
+            (sum,value)=>
+                sum + value,
+            0
+        );
+
+
+
+    percentages =
+        percentages.map(value =>
+            Number(
+                (
+                    (value / total) * 100
+                )
+                .toFixed(1)
+            )
+        );
+
+
+}
     else{
 
 
