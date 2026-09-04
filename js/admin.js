@@ -597,22 +597,39 @@ function updatePermutationMode(index,value){
     });
 
 
-
-    updateAdminTotal();
-
-
-    const labels =
-        document.querySelectorAll(
-            '.clan-pct-label'
-        );
+    const pctInputs =
+    document.querySelectorAll(
+        '.clan-percent-input'
+    );
 
 
-    labels.forEach((label,i)=>{
+const pctLabels =
+    document.querySelectorAll(
+        '.clan-pct-label'
+    );
 
-        label.textContent =
-            `${activeConfig.teams[i].percentage}%`;
 
-    });
+
+pctInputs.forEach((input,i)=>{
+
+    input.value =
+        activeConfig.teams[i].percentage;
+
+
+});
+
+
+
+pctLabels.forEach((label,i)=>{
+
+    label.textContent =
+        activeConfig.teams[i].percentage
+        +
+        "%";
+
+});
+
+updateAdminTotal();
 
 }
 
@@ -695,6 +712,8 @@ function updatePercentageMode(index,value){
 
 
     });
+
+    
 
 }
 
@@ -991,15 +1010,6 @@ function applySettings() {
     return;
 
   }
-
-
-
-
-  const permInputs =
-    document.querySelectorAll(
-      '.clan-perm-input'
-    );
-
 
   const nameInputs =
     document.querySelectorAll(

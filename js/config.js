@@ -210,6 +210,8 @@ let activeConfig = {
 
  revealMode: "reverse",
 
+editMode: "permutations",
+
  weightEditMode: "weights",
 
  teams: null
