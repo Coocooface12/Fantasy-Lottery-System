@@ -270,6 +270,7 @@ function switchToCustomFormat(){
 
 function calculateMathLimits(){
 
+  switchToCustomFormat();
 
     const n =
         parseInt(
@@ -516,13 +517,15 @@ function renderAdminTeamRows(teamsArray) {
         row.innerHTML = `
 
 
-            <input
-                class="admin-input clan-name-input"
-                data-index="${index}"
-                value="${team.name}"
-                placeholder="Team Name"
-            />
-
+           <input
+    class="admin-input clan-name-input"
+    data-index="${index}"
+    value="${team.name}"
+    placeholder="Team Name"
+    oninput="
+        activeConfig.teams[${index}].name = this.value;
+    "
+/>
 
             ${permutationHTML}
 
@@ -867,13 +870,21 @@ function handleTeamCountChange() {
     ||
     720;
 
-  const transientTeams =
+  const existingPercentages =
+    activeConfig.teams
+        ?.map(team => team.percentage)
+        ||
+        [];
+
+
+const transientTeams =
     generateDefaultWeightedTeams(
         count,
         targetPerms,
-        activeConfig.teams
-            ?.map(team=>team.percentage)
-            ||
+        existingPercentages.length
+            ?
+            existingPercentages
+            :
             null
     );
 
