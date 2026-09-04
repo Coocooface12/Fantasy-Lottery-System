@@ -637,6 +637,13 @@ updateAdminTotal();
 
 function updatePercentageMode(index, value){
 
+console.log(
+    "Updating team:",
+    index,
+    "new percentage:",
+    value
+);
+
     switchToCustomFormat();
 
 
