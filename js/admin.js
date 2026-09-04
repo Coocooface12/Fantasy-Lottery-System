@@ -1006,7 +1006,54 @@ function handleTeamCountChange() {
 // APPLY SETTINGS
 // =======================================================
 
-function applySettings() {
+function applySettings(){
+
+    const summaryHTML = `
+
+        <b>Lottery Format:</b>
+        ${activeConfig.lotteryFormat}
+
+        <br><br>
+
+        <b>Teams:</b>
+        ${document.getElementById('cfg-team-count').value}
+
+        <br><br>
+
+        <b>Ball Pool:</b>
+        ${document.getElementById('cfg-balls-pool').value}
+
+        <br><br>
+
+        <b>Draw Size:</b>
+        ${document.getElementById('cfg-draw-size').value}
+
+        <br><br>
+
+        <b>Reveal Mode:</b>
+        ${activeConfig.revealMode}
+
+        <br><br>
+
+        <b>Editing Mode:</b>
+        ${activeConfig.editMode}
+
+    `;
+
+
+    showConfirm(
+
+        "Confirm Lottery Settings",
+
+        summaryHTML,
+
+        applyConfirmedSettings
+
+    );
+
+}
+
+function applyConfirmedSettings() {
 
 
  const revealMode =
@@ -1057,9 +1104,12 @@ function applySettings() {
 
   if(count < 4 || count > 20){
 
-    alert(
-      "System checks limit team counts between 4 and 20."
-    );
+   showWarning(
+    "Team Count Error",
+    `
+    System checks limit team counts between 4 and 20.
+    `
+);
 
     return;
 
@@ -1069,9 +1119,12 @@ function applySettings() {
 
   if(k > n){
 
-    alert(
-      "Sequence draw size cannot exceed ball pool size."
-    );
+    showWarning(
+    "Draw Size Error",
+    `
+    Sequence draw size cannot exceed ball pool size.
+    `
+);
 
     return;
 
@@ -1082,9 +1135,21 @@ function applySettings() {
 
   if(targetPerms !== absoluteMax){
 
-    alert(
-      `Permutation Pool Error: Your target (${targetPerms}) must equal ${absoluteMax}.`
-    );
+   showWarning(
+    "Permutation Pool Error",
+    `
+    Your target permutation pool does not match the selected lottery settings.
+    <br><br>
+
+    Required:
+    <b>${absoluteMax}</b>
+
+    <br>
+
+    Current:
+    <b>${targetPerms}</b>
+    `
+);
 
     return;
 
