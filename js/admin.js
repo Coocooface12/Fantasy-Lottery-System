@@ -549,6 +549,7 @@ function renderAdminTeamRows(teamsArray) {
 
 function updatePermutationMode(index,value){
 
+  switchToCustomFormat();
 
     const perms =
         parseInt(value);
@@ -634,18 +635,13 @@ updateAdminTotal();
 }
 
 
-function updatePercentageMode(index,value){
+function updatePercentageMode(index, value){
+
+    switchToCustomFormat();
 
 
     const percentage =
-        Number(value);
-
-
-
-    if(isNaN(percentage)){
-        return;
-    }
-
+        Number(value) || 0;
 
 
     activeConfig.teams[index].percentage =
@@ -653,67 +649,43 @@ function updatePercentageMode(index,value){
 
 
 
-    const targetPerms =
-        activeConfig.targetPerms;
+    let totalAssigned = 0;
 
 
 
-    let runningTotal = 0;
+    activeConfig.teams.forEach(team=>{
 
 
-
-    activeConfig.teams.forEach((team,i)=>{
-
-
-        if(i === activeConfig.teams.length - 1){
-
-
-            team.perms =
-                targetPerms - runningTotal;
+        team.perms =
+            Math.round(
+                (team.percentage / 100)
+                *
+                activeConfig.targetPerms
+            );
 
 
-        }
-        else{
-
-
-            team.perms =
-                Math.round(
-                    (team.percentage / 100)
-                    *
-                    targetPerms
-                );
-
-
-            runningTotal += team.perms;
-
-        }
+        totalAssigned += team.perms;
 
 
     });
 
+
+
+    const difference =
+        activeConfig.targetPerms - totalAssigned;
+
+
+
+    activeConfig.teams[index].perms += difference;
+
+
+
+    renderAdminTeamRows(
+        activeConfig.teams
+    );
 
 
     updateAdminTotal();
-
-
-
-    const permLabels =
-        document.querySelectorAll(
-            '.clan-perm-label'
-        );
-
-
-
-    permLabels.forEach((label,i)=>{
-
-
-        label.textContent =
-            activeConfig.teams[i].perms;
-
-
-    });
-
-    
 
 }
 
@@ -896,15 +868,19 @@ function handleTeamCountChange() {
         [];
 
 
+const currentFormat =
+    lotteryFormats[activeConfig.lotteryFormat];
+
+
 const transientTeams =
     generateDefaultWeightedTeams(
         count,
         targetPerms,
-        existingPercentages.length
-            ?
-            existingPercentages
-            :
-            null
+        currentFormat
+        ?
+        currentFormat.percentages
+        :
+        null
     );
 
 
