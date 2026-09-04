@@ -825,139 +825,134 @@ function updateAdminTotal(){
 function handleTeamCountChange() {
 
 
-  let count =
-    parseInt(
-      document.getElementById(
-        'cfg-team-count'
-      ).value
-    )
-    ||
-    8;
+    let count =
+        parseInt(
+            document.getElementById(
+                'cfg-team-count'
+            ).value
+        )
+        ||
+        8;
 
 
 
-  if(count < 4){
+    if(count < 4){
 
-    count = 4;
+        count = 4;
 
-    document.getElementById(
-      'cfg-team-count'
-    ).value = 4;
+        document.getElementById(
+            'cfg-team-count'
+        ).value = 4;
 
-  }
-
-
-
-  if(count > 20){
-
-    count = 20;
-
-    document.getElementById(
-      'cfg-team-count'
-    ).value = 20;
-
-  }
+    }
 
 
 
-  const targetPerms =
-    parseInt(
-      document.getElementById(
-        'cfg-max-perms'
-      ).value
-    )
-    ||
-    720;
+    if(count > 20){
+
+        count = 20;
+
+        document.getElementById(
+            'cfg-team-count'
+        ).value = 20;
+
+    }
 
 
 
-  const currentFormat =
-    lotteryFormats[
-      activeConfig.lotteryFormat
-    ];
+    const targetPerms =
+        parseInt(
+            document.getElementById(
+                'cfg-max-perms'
+            ).value
+        )
+        ||
+        720;
 
 
 
-  const presetPercentages =
-    currentFormat
-    ?
-    currentFormat.percentages
-    :
-    null;
+    const currentPreset =
+        lotteryFormats[
+            activeConfig.lotteryFormat
+        ];
 
 
 
-  const transientTeams =
-    generateDefaultWeightedTeams(
-      count,
-      targetPerms,
-      presetPercentages
+    let percentages = [];
+
+
+
+    if(
+        currentPreset &&
+        currentPreset.percentages
+    ){
+
+        /*
+            Preserve the curve,
+            but adjust to new team count.
+        */
+
+        percentages =
+            currentPreset.percentages
+                .slice(0,count);
+
+
+
+        const total =
+            percentages.reduce(
+                (sum,value)=>
+                    sum + value,
+                0
+            );
+
+
+
+        percentages =
+            percentages.map(value =>
+                Number(
+                    (
+                        (value / total) * 100
+                    )
+                    .toFixed(1)
+                )
+            );
+
+
+    }
+    else{
+
+
+        /*
+            Fallback for Custom mode
+        */
+
+        percentages =
+            Array(count).fill(
+                100 / count
+            );
+
+
+    }
+
+
+
+    activeConfig.teamCount =
+        count;
+
+
+
+    activeConfig.teams =
+        generateDefaultWeightedTeams(
+            count,
+            targetPerms,
+            percentages
+        );
+
+
+
+    renderAdminTeamRows(
+        activeConfig.teams
     );
-
-
-
-  /*
-    Make sure rounding never leaves the lottery
-    short on permutations.
-  */
-
-
-  let totalAssigned =
-    transientTeams.reduce(
-      (sum,team)=>
-        sum + team.perms,
-      0
-    );
-
-
-
-  const difference =
-    targetPerms - totalAssigned;
-
-
-
-  if(difference !== 0){
-
-    transientTeams[0].perms += difference;
-
-  }
-
-
-
-  /*
-    Recalculate percentages from the final
-    permutation totals.
-  */
-
-
-  transientTeams.forEach(team=>{
-
-    team.percentage =
-      Number(
-        (
-          (team.perms / targetPerms)
-          *
-          100
-        ).toFixed(1)
-      );
-
-  });
-
-
-
-  activeConfig.teamCount =
-    count;
-
-
-
-  activeConfig.teams =
-    transientTeams;
-
-
-
-  renderAdminTeamRows(
-    transientTeams
-  );
 
 
 }
