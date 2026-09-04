@@ -437,9 +437,11 @@ function renderAdminTeamRows(teamsArray) {
         value="${t.name}"
         placeholder="Team Name"
       />
-
+      
+console.log("Current edit mode:", activeConfig.editMode);
 
       ${
+        
 activeConfig.editMode === "permutations"
 
 ?
@@ -625,18 +627,12 @@ const percentInputs =
     ||
     0;
 
-  let total = 0;
-
-  permInputs.forEach(input=>{
-
-    total +=
-      parseInt(input.value)
-      ||
-      0;
-
-  });
-
-
+let total =
+    activeConfig.teams.reduce(
+        (sum,team)=>
+            sum + team.perms,
+        0
+    );
 
 
 permInputs.forEach((input,index)=>{
