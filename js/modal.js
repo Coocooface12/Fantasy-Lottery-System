@@ -109,20 +109,20 @@ function closeModal(){
 
 }
 
-showModal({
+window.addEventListener("DOMContentLoaded", () => {
 
-    title: "Modal Test",
+    showModal({
 
-    message: "Congratulations! Your new modal engine is working.",
+        title: "Modal Test",
 
-    buttons: [
+        message: "Congratulations! Your modal engine works.",
 
-        {
+        buttons: [
+            {
+                text: "Awesome"
+            }
+        ]
 
-            text: "Awesome"
-
-        }
-
-    ]
+    });
 
 });
