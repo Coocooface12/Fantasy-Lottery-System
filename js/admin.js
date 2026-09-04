@@ -676,7 +676,33 @@ function updatePercentageMode(index, value){
 
 
 
+    /*
+      Fix rounding differences by applying
+      the leftover to the edited team.
+    */
+
     activeConfig.teams[index].perms += difference;
+
+
+
+    /*
+      Update visible permutation labels
+      without rebuilding inputs.
+    */
+
+    const permLabels =
+        document.querySelectorAll(
+            '.clan-perm-label'
+        );
+
+
+    permLabels.forEach((label,i)=>{
+
+        label.textContent =
+            activeConfig.teams[i].perms;
+
+    });
+
 
 
     updateAdminTotal();
