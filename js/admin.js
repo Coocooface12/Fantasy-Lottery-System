@@ -1145,13 +1145,28 @@ parsedTeams.push({
 
   if(weightSum !== targetPerms){
 
-    alert(
-      `Configuration Balance Error: ${weightSum} must equal ${targetPerms}.`
+    showWarning(
+
+        "Permutation Error",
+
+        `
+        Your team weights do not equal the required permutation pool.
+        <br><br>
+
+        Required:
+        <b>${targetPerms}</b>
+
+        <br>
+
+        Current:
+        <b>${weightSum}</b>
+        `
+
     );
 
     return;
 
-  }
+}
 
 
 
