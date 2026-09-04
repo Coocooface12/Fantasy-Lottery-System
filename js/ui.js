@@ -440,7 +440,7 @@ function updateRoundBadgeVisibility(tabName){
         tabName === "picks"
     ){
 
-        badge.style.display = "block";
+        badge.style.display = "inline-flex";
 
     }
     else {
