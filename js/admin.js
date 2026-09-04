@@ -659,7 +659,7 @@ function updatePercentageMode(index, value){
             Math.round(
                 (team.percentage / 100)
                 *
-                activeConfig.targetPerms
+                targetPerms
             );
 
 
