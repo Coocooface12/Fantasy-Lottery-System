@@ -300,13 +300,21 @@
     width: 100%;
 }
   .admin-input:focus { outline: none; border-color: var(--gold); }
-  .clan-perm-input {
+ .clan-perm-input {
     background: #132645 !important;
     color: #e8edf5 !important;
     border: 1px solid #2a4a7a !important;
     text-align: center !important;
+
     appearance: none !important;
     -webkit-appearance: none !important;
+}
+.clan-perm-input {
+    width: 100%;
+    height: auto;
+    padding: 10px 14px;
+    font-size: 15px;
+    border-radius: 6px;
 }
   
   .total-perms { font-size: 18px; font-weight: 600; text-align: right; margin-top: 8px; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.5px; }
