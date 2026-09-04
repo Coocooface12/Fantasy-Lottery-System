@@ -637,12 +637,12 @@ updateAdminTotal();
 
 function updatePercentageMode(index, value){
 
-console.log(
-    "Updating team:",
-    index,
-    "new percentage:",
-    value
-);
+    console.log(
+        "START",
+        index,
+        value
+    );
+
 
     switchToCustomFormat();
 
@@ -656,7 +656,21 @@ console.log(
 
 
 
-    let totalAssigned = 0;
+    const targetPerms =
+        parseInt(
+            document.getElementById(
+                'cfg-max-perms'
+            ).value
+        )
+        ||
+        0;
+
+
+
+    console.log(
+        "Before calculation:",
+        activeConfig.teams[index]
+    );
 
 
 
@@ -669,43 +683,14 @@ console.log(
                 targetPerms
             );
 
-
-        totalAssigned += team.perms;
-
     });
 
 
 
-    const difference =
-        activeConfig.targetPerms - totalAssigned;
-
-
-
-    /*
-      Apply rounding correction to edited team
-    */
-
-    activeConfig.teams[index].perms += difference;
-
-
-
-    /*
-      Update permutation display
-      without destroying the input
-    */
-
-    const permLabels =
-        document.querySelectorAll(
-            '.clan-perm-label'
-        );
-
-
-    permLabels.forEach((label,i)=>{
-
-        label.textContent =
-            activeConfig.teams[i].perms;
-
-    });
+    console.log(
+        "After calculation:",
+        activeConfig.teams[index]
+    );
 
 
 
