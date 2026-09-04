@@ -187,7 +187,7 @@ function showSuccess(title, message){
 
         buttons:[
             {
-                text:"Continue",
+                text:"OK",
                 className:"btn btn-gold"
             }
         ]
@@ -196,8 +196,33 @@ function showSuccess(title, message){
 
 }
 
-showConfirm(
-    title,
-    html,
-    continueFunction
-)
+// =======================================================
+// CONFIRMATION MODAL
+// =======================================================
+
+function showConfirm(title, html, continueFunction){
+
+    showModal({
+
+        title: title,
+
+        html: html,
+
+        buttons:[
+
+            {
+                text:"Cancel",
+                className:"btn btn-outline"
+            },
+
+            {
+                text:"Continue",
+                className:"btn btn-gold",
+                action:continueFunction
+            }
+
+        ]
+
+    });
+
+}
