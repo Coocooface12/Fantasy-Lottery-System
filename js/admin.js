@@ -653,8 +653,7 @@ function updatePercentageMode(index, value){
 
 
 
-    activeConfig.teams.forEach(team=>{
-
+    activeConfig.teams.forEach(team => {
 
         team.perms =
             Math.round(
@@ -666,7 +665,6 @@ function updatePercentageMode(index, value){
 
         totalAssigned += team.perms;
 
-
     });
 
 
@@ -677,8 +675,7 @@ function updatePercentageMode(index, value){
 
 
     /*
-      Fix rounding differences by applying
-      the leftover to the edited team.
+      Apply rounding correction to edited team
     */
 
     activeConfig.teams[index].perms += difference;
@@ -686,8 +683,8 @@ function updatePercentageMode(index, value){
 
 
     /*
-      Update visible permutation labels
-      without rebuilding inputs.
+      Update permutation display
+      without destroying the input
     */
 
     const permLabels =
