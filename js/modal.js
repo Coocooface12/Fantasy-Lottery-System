@@ -216,7 +216,7 @@ function showConfirm(title, html, continueFunction){
             },
 
             {
-                text:"Continue",
+                text:"Continue to Lottery",
                 className:"btn btn-gold",
                 action:continueFunction
             }

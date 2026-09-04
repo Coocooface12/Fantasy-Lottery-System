@@ -1033,11 +1033,6 @@ function applySettings(){
         <b>Reveal Mode:</b>
         ${activeConfig.revealMode}
 
-        <br><br>
-
-        <b>Editing Mode:</b>
-        ${activeConfig.editMode}
-
     `;
 
 
