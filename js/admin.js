@@ -1098,6 +1098,7 @@ const nameInputs =
 
 let weightSum = 0;
 
+let percentageSum = 0;
 
 const parsedTeams = [];
 
@@ -1111,7 +1112,7 @@ activeConfig.teams.forEach((team,index)=>{
 
     weightSum += weight;
 
-
+percentageSum += Number(team.percentage) || 0;
 
 parsedTeams.push({
 
@@ -1169,7 +1170,28 @@ parsedTeams.push({
 }
 
 
+if(
+    Math.abs(percentageSum - 100) > 0.1
+){
 
+    showWarning(
+
+        "Percentage Error",
+
+        `
+        Team percentages must equal 100%.
+        <br><br>
+
+        Current Total:
+        <b>${percentageSum.toFixed(1)}%</b>
+
+        `
+
+    );
+
+    return;
+
+}
 
   activeConfig.teamCount =
     count;
