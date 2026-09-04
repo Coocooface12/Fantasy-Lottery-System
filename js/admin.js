@@ -440,8 +440,7 @@ function renderAdminTeamRows(teamsArray) {
       
 console.log("Current edit mode:", activeConfig.editMode);
 
-      ${
-        
+${   
 activeConfig.editMode === "permutations"
 
 ?
