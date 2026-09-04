@@ -1144,52 +1144,65 @@ parsedTeams.push({
 
 
 
-  if(weightSum !== targetPerms){
+if(
+    activeConfig.editMode === "permutations"
+){
 
-    showWarning(
+    if(weightSum !== targetPerms){
 
-        "Permutation Error",
+        showWarning(
 
-        `
-        Your team weights do not equal the required permutation pool.
-        <br><br>
+            "Permutation Error",
 
-        Required:
-        <b>${targetPerms}</b>
+            `
+            Your team weights do not equal the required permutation pool.
+            <br><br>
 
-        <br>
+            Required:
+            <b>${targetPerms}</b>
 
-        Current:
-        <b>${weightSum}</b>
-        `
+            <br>
 
-    );
+            Current:
+            <b>${weightSum}</b>
+            `
 
-    return;
+        );
+
+        return;
+
+    }
 
 }
 
 
+
 if(
-    Math.abs(percentageSum - 100) > 0.1
+    activeConfig.editMode === "percentages"
 ){
 
-    showWarning(
+    if(
+        Math.abs(percentageSum - 100) > 0.1
+    ){
 
-        "Percentage Error",
+        showWarning(
 
-        `
-        Team percentages must equal 100%.
-        <br><br>
+            "Percentage Error",
 
-        Current Total:
-        <b>${percentageSum.toFixed(1)}%</b>
+            `
+            Team percentages must equal 100%.
+            <br><br>
 
-        `
+            Current Total:
+            <b>${percentageSum.toFixed(1)}%</b>
 
-    );
+            `
 
-    return;
+        );
+
+        return;
+
+    }
 
 }
 
