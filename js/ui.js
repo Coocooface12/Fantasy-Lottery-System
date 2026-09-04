@@ -424,7 +424,37 @@ if (completelyFinished) {
   }
 }
 
+function updateRoundBadgeVisibility(tabName){
+
+    const badge =
+        document.getElementById(
+            'round-badge'
+        );
+
+
+    if(!badge) return;
+
+
+    if(
+        tabName === "lottery" ||
+        tabName === "picks"
+    ){
+
+        badge.style.display = "block";
+
+    }
+    else {
+
+        badge.style.display = "none";
+
+    }
+
+}
+
 function switchTab(targetTabName) {
+
+  updateRoundBadgeVisibility(targetTabName);
+
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
   
