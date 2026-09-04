@@ -109,20 +109,95 @@ function closeModal(){
 
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+// =======================================================
+// MODAL SHORTCUTS
+// =======================================================
+
+
+function showWarning(title, message){
 
     showModal({
 
-        title: "Modal Test",
+        title: "⚠ " + title,
 
-        message: "Congratulations! Your modal engine works.",
+        message: message,
 
-        buttons: [
+        buttons:[
             {
-                text: "Awesome"
+                text:"OK",
+                className:"btn btn-gold"
             }
         ]
 
     });
 
-});
+}
+
+
+
+function showError(title, message){
+
+    showModal({
+
+        title: "🛑 " + title,
+
+        message: message,
+
+        buttons:[
+            {
+                text:"OK",
+                className:"btn btn-gold"
+            }
+        ]
+
+    });
+
+}
+
+
+
+function showInfo(title, message){
+
+    showModal({
+
+        title: "ℹ " + title,
+
+        message: message,
+
+        buttons:[
+            {
+                text:"OK",
+                className:"btn btn-gold"
+            }
+        ]
+
+    });
+
+}
+
+
+
+function showSuccess(title, message){
+
+    showModal({
+
+        title: "✓ " + title,
+
+        message: message,
+
+        buttons:[
+            {
+                text:"Continue",
+                className:"btn btn-gold"
+            }
+        ]
+
+    });
+
+}
+
+showConfirm(
+    title,
+    html,
+    continueFunction
+)

@@ -1249,3 +1249,23 @@ function setTeamEditMode(mode){
     );
 
 }
+
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    showConfirm(
+        "Test Confirmation",
+        `
+        This is a test of the confirmation popup.<br><br>
+        The modal framework is working.
+        `,
+        function(){
+
+            console.log(
+                "Continue button pressed"
+            );
+
+        }
+    );
+
+});
