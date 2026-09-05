@@ -96,20 +96,22 @@ if(input){
 
         function(value){
 
-            activeConfig.totalBalls = value;
+    activeConfig.totalBalls = value;
 
-            const input =
-    document.getElementById(
-        "cfg-balls-pool"
-    );
+    const input =
+        document.getElementById(
+            "cfg-balls-pool"
+        );
 
-if(input){
-    input.value = value;
+    if(input){
+        input.value = value;
+    }
+
+    calculateMathLimits();
+
+    renderLotterySelectors();
+
 }
-
-            renderLotterySelectors();
-
-        }
 
     );
 
@@ -126,20 +128,22 @@ if(input){
 
         function(value){
 
-            activeConfig.drawSize = value;
+    activeConfig.drawSize = value;
 
-            const input =
-    document.getElementById(
-        "cfg-draw-size"
-    );
+    const input =
+        document.getElementById(
+            "cfg-draw-size"
+        );
 
-if(input){
-    input.value = value;
+    if(input){
+        input.value = value;
+    }
+
+    calculateMathLimits();
+
+    renderLotterySelectors();
+
 }
-
-            renderLotterySelectors();
-
-        }
 
     );
 

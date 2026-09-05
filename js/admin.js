@@ -295,24 +295,11 @@ function calculateMathLimits(){
   switchToCustomFormat();
 
     const n =
-        parseInt(
-            document.getElementById(
-                'cfg-balls-pool'
-            ).value
-        )
-        ||
-        4;
+    activeConfig.totalBalls || 4;
 
 
-
-    const k =
-        parseInt(
-            document.getElementById(
-                'cfg-draw-size'
-            ).value
-        )
-        ||
-        2;
+const k =
+    activeConfig.drawSize || 2;
 
 
 
@@ -1032,17 +1019,17 @@ function applySettings(){
         <br><br>
 
         <b>Teams:</b>
-        ${document.getElementById('cfg-team-count').value}
+        ${activeConfig.teamCount}
 
         <br><br>
 
         <b>Ball Pool:</b>
-        ${document.getElementById('cfg-balls-pool').value}
+        ${activeConfig.totalBalls}
 
         <br><br>
 
         <b>Draw Size:</b>
-        ${document.getElementById('cfg-draw-size').value}
+        ${activeConfig.drawSize}
 
         <br><br>
 
