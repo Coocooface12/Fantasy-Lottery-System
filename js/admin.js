@@ -1058,36 +1058,16 @@ function applyConfirmedSettings() {
     activeConfig.revealMode;
 
    const count =
-   parseInt(
-     document.getElementById(
-       'cfg-team-count'
-     ).value
-   );
+    activeConfig.teamCount;
 
   const n =
-    parseInt(
-      document.getElementById(
-        'cfg-balls-pool'
-      ).value
-    );
+    activeConfig.totalBalls;
 
+const k =
+    activeConfig.drawSize;
 
-
-  const k =
-    parseInt(
-      document.getElementById(
-        'cfg-draw-size'
-      ).value
-    );
-
-
-
-  const targetPerms =
-    parseInt(
-      document.getElementById(
-        'cfg-max-perms'
-      ).value
-    );
+const targetPerms =
+    activeConfig.targetPerms;
 
 
 
