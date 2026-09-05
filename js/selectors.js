@@ -27,7 +27,7 @@ function renderButtonSelector(
         button.className =
             "selector-tile";
 
-        if(value === selectedValue){
+        if(Number(value) === Number(selectedValue)){
 
             button.classList.add(
                 "active"

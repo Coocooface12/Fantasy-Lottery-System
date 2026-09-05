@@ -127,32 +127,56 @@ if(selected === "Custom"){
 
 
 
+   const teamInput =
     document.getElementById(
         'cfg-team-count'
-    ).value =
+    );
+
+if(teamInput){
+
+    teamInput.value =
         activeConfig.teamCount;
 
+}
 
 
+const ballInput =
     document.getElementById(
         'cfg-balls-pool'
-    ).value =
+    );
+
+if(ballInput){
+
+    ballInput.value =
         activeConfig.totalBalls;
 
+}
 
 
+const drawInput =
     document.getElementById(
         'cfg-draw-size'
-    ).value =
+    );
+
+if(drawInput){
+
+    drawInput.value =
         activeConfig.drawSize;
 
+}
 
 
+const permInput =
     document.getElementById(
         'cfg-max-perms'
-    ).value =
+    );
+
+if(permInput){
+
+    permInput.value =
         activeConfig.targetPerms;
 
+}
 
 
     activeConfig.teams =
@@ -823,13 +847,7 @@ function handleTeamCountChange() {
 
 
     let count =
-        parseInt(
-            document.getElementById(
-                'cfg-team-count'
-            ).value
-        )
-        ||
-        8;
+    activeConfig.teamCount || 8;
 
 
 
