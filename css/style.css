@@ -615,17 +615,21 @@
 
     gap:6px;
 
-    overflow-x:auto;
+    overflow:hidden;
 
     margin-top:10px;
 
     margin-bottom:20px;
+
+    padding:5px 2px;
 
 }
 
 
 
 .selector-tile{
+
+    flex-shrink:0;
 
     min-width:40px;
 
