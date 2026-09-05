@@ -66,9 +66,14 @@ function renderLotterySelectors(){
 
             activeConfig.teamCount = value;
 
-            document.getElementById(
-                "cfg-team-count"
-            ).value = value;
+            const input =
+    document.getElementById(
+        "cfg-team-count"
+    );
+
+if(input){
+    input.value = value;
+}
 
             handleTeamCountChange();
 
@@ -93,9 +98,14 @@ function renderLotterySelectors(){
 
             activeConfig.totalBalls = value;
 
-            document.getElementById(
-                "cfg-balls-pool"
-            ).value = value;
+            const input =
+    document.getElementById(
+        "cfg-balls-pool"
+    );
+
+if(input){
+    input.value = value;
+}
 
             renderLotterySelectors();
 
@@ -118,9 +128,14 @@ function renderLotterySelectors(){
 
             activeConfig.drawSize = value;
 
-            document.getElementById(
-                "cfg-draw-size"
-            ).value = value;
+            const input =
+    document.getElementById(
+        "cfg-draw-size"
+    );
+
+if(input){
+    input.value = value;
+}
 
             renderLotterySelectors();
 

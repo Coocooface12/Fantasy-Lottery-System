@@ -75,7 +75,6 @@ function populateLotteryFormats(){
 
 function applyLotteryFormat(selected, button){
 
-
     const format =
     lotteryFormats[selected];
 
@@ -169,10 +168,9 @@ if(selected === "Custom"){
         activeConfig.teams
     );
 
-
-
     updateLotteryFormatSelector();
 
+    renderLotterySelectors();
 
 }
 
