@@ -179,12 +179,108 @@ if(permInput){
 }
 
 
-    activeConfig.teams =
-    generateDefaultWeightedTeams(
-        activeConfig.teamCount,
-        activeConfig.targetPerms,
-        format.percentages || null
-    );
+activeConfig.curveType =
+    format.curve || "Flat Curve";
+
+const selectedCurve =
+    lotteryCurves[
+        activeConfig.curveType
+    ];
+
+
+let percentages = null;
+
+
+if(selectedCurve){
+
+    if(selectedCurve.type === "flat"){
+
+        percentages =
+            Array(
+                activeConfig.teamCount
+            )
+            .fill(
+                100 /
+                activeConfig.teamCount
+            );
+
+    }
+
+    else if(selectedCurve.values){
+
+        percentages =
+            [
+                ...selectedCurve.values
+            ];
+
+
+        while(
+            percentages.length <
+            activeConfig.teamCount
+        ){
+
+            const lastValue =
+                percentages[
+                    percentages.length - 1
+                ];
+
+
+            percentages.push(
+                Number(
+                    (
+                        lastValue / 2
+                    )
+                    .toFixed(2)
+                )
+            );
+
+        }
+
+
+        if(
+            percentages.length >
+            activeConfig.teamCount
+        ){
+
+            percentages =
+                percentages.slice(
+                    0,
+                    activeConfig.teamCount
+                );
+
+        }
+
+
+        const total =
+            percentages.reduce(
+                (sum,value)=>
+                    sum + value,
+                0
+            );
+
+
+        percentages =
+            percentages.map(value =>
+                Number(
+                    (
+                        (value / total) * 100
+                    )
+                    .toFixed(1)
+                )
+            );
+
+    }
+
+}
+
+
+
+activeConfig.teams =
+generateDefaultWeightedTeams(
+    activeConfig.teamCount,
+    activeConfig.targetPerms,
+    percentages
+);
 
 
 
@@ -873,10 +969,10 @@ function handleTeamCountChange() {
 
 
 
-    const currentPreset =
-        lotteryFormats[
-            activeConfig.lotteryFormat
-        ];
+    const currentCurve =
+    lotteryCurves[
+        activeConfig.curveType
+    ];
 
 
 
@@ -885,14 +981,14 @@ function handleTeamCountChange() {
 
 
    if(
-    currentPreset &&
-    currentPreset.percentages
+    currentCurve &&
+    currentCurve.values
 ){
 
     percentages =
-        [
-            ...currentPreset.percentages
-        ];
+    [
+        ...currentCurve.values
+    ];
 
 
 
