@@ -183,6 +183,7 @@
     </div>
 
 
+<div class="selector-block">
 
     <div class="selector-label">
         Draft Reveal Order
@@ -190,44 +191,39 @@
 
 
     <div
-    id="cfg-reveal-mode"
-    class="selector-row reveal-selector">
+        id="cfg-reveal-mode"
+        class="selector-row reveal-selector">
 
 
-        <div
-    id="cfg-reveal-mode"
-    class="selector-row">
+        <button
+            class="selector-tile active"
+            data-value="reverse"
+            onclick="setSelectorValue('revealMode','reverse',this)">
+
+            Reverse
+            <span>
+                (Last Pick - First Pick)
+            </span>
+
+        </button>
 
 
-    <button
-        class="selector-tile active"
-        data-value="reverse"
-        onclick="setSelectorValue('revealMode','reverse',this)">
+        <button
+            class="selector-tile"
+            data-value="standard"
+            onclick="setSelectorValue('revealMode','standard',this)">
 
-        Reverse
-        <span>
-            (Last Pick - First Pick)
-        </span>
+            Standard
+            <span>
+                (First Pick - Last Pick)
+            </span>
 
-    </button>
+        </button>
 
 
-    <button
-        class="selector-tile"
-        data-value="standard"
-        onclick="setSelectorValue('revealMode','standard',this)">
-
-        Standard
-        <span>
-            (First Pick - Last Pick)
-        </span>
-
-    </button>
-
+    </div>
 
 </div>
-
-
 
 
     <div class="selector-label">
