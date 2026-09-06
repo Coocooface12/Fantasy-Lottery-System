@@ -460,7 +460,12 @@ function switchTab(targetTabName) {
   
   document.getElementById('tab-' + targetTabName).classList.add('active');
   
-  const linkIndexMap = {'lottery': 0, 'picks': 1, 'admin': 2};
+  const linkIndexMap = {
+    'lottery': 0,
+    'picks': 1,
+    'admin': 2,
+    'information': 3
+};
   document.querySelectorAll('.tab')[linkIndexMap[targetTabName]].classList.add('active');
   
   if (targetTabName === 'picks') renderDraftBoardResults();
@@ -521,4 +526,26 @@ window.addEventListener('DOMContentLoaded', () => {
 
   initSystemOnBoot();
 
+  initializeInfoDropdowns();
+
 });
+
+function initializeInfoDropdowns() {
+
+    const dropdownButtons = document.querySelectorAll(".info-dropdown-header");
+
+    dropdownButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const content = button.nextElementSibling;
+
+            content.classList.toggle("open");
+
+            button.classList.toggle("active");
+
+        });
+
+    });
+
+}

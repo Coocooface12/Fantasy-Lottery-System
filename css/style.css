@@ -778,3 +778,57 @@
     scrollbar-color:#2a4a7a #0b1424;
 
 }
+
+.info-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    border: 2px solid currentColor;
+
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+.info-dropdown {
+    margin-bottom: 12px;
+}
+
+
+.info-dropdown-header {
+
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px;
+
+    cursor: pointer;
+}
+
+
+.info-dropdown-content {
+
+    max-height: 0;
+    overflow: hidden;
+
+    transition: max-height .3s ease;
+
+}
+
+
+.info-dropdown-content.open {
+
+    max-height: 500px;
+
+    padding: 12px;
+
+}
