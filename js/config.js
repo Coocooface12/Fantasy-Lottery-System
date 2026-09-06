@@ -56,9 +56,9 @@ const lotteryFormats = {
     totalBalls: 14,
     drawSize: 4,
 
-    curve: "Linear Draft Curve"
+    curve: "Linear Curve"
 
-  },
+},
 
 
   "Mild Slope Style Lottery": {
@@ -67,9 +67,9 @@ const lotteryFormats = {
     totalBalls: 10,
     drawSize: 3,
 
-    curve: "Mild Slope Style Curve"
+    curve: "Mild Slope Curve"
 
-  },
+},
 
 
   "Extreme Slope Style Lottery": {
@@ -78,9 +78,9 @@ const lotteryFormats = {
     totalBalls: 10,
     drawSize: 4,
 
-    curve: "Extreme Slope Style Curve"
+    curve: "Extreme Slope Curve"
 
-  },
+},
 
 
   "Custom": null
