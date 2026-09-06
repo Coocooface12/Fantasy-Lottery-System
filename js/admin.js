@@ -341,7 +341,7 @@ function setSelectorValue(configKey, value, button) {
 
 
     const selector =
-        button.closest('.button-selector');
+        button.closest('.selector-row');
 
 
     if (!selector) return;
@@ -350,20 +350,24 @@ function setSelectorValue(configKey, value, button) {
 
     const buttons =
         selector.querySelectorAll(
-            '.selector-btn'
+            '.selector-tile'
         );
 
 
 
     buttons.forEach(btn => {
 
-        btn.classList.remove('active');
+        btn.classList.remove(
+            'active'
+        );
 
     });
 
 
 
-    button.classList.add('active');
+    button.classList.add(
+        'active'
+    );
 
 
 }
