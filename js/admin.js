@@ -291,6 +291,8 @@ generateDefaultWeightedTeams(
 
     updateLotteryFormatSelector();
 
+    updateCurveSelector();
+
     renderLotterySelectors();
 
 }
