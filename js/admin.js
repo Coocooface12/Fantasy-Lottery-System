@@ -1337,7 +1337,7 @@ if(
 ){
 
     if(
-        Math.abs(percentageSum - 100) > 0.1
+        Math.abs(percentageSum - 100) > 0.000001
     ){
 
         showWarning(
