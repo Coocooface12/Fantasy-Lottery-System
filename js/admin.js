@@ -560,52 +560,68 @@ function renderAdminTeamRows(teamsArray) {
 
 
         const percentageHTML =
-            activeConfig.editMode === "percentages"
+    activeConfig.editMode === "percentages"
 
-            ?
+    ?
 
-            `
-            <input
-    class="clan-percent-input"
-    type="text"
-    inputmode="decimal"
-    oninput="this.value=this.value.replace(/[^0-9.]/g,'')">
-            `
+    `
+    <input
+        class="clan-percent-input"
+        type="text"
+        inputmode="decimal"
+        value="${Number(team.percentage).toFixed(1)}"
+        data-index="${index}"
+        oninput="
+            this.value=this.value.replace(/[^0-9.]/g,'');
+            activeConfig.teams[${index}].percentage =
+                parseFloat(this.value) || 0;
+            updateAdminTotal();
+        "
+    >
+    `
 
-            :
+    :
 
-            `
+    `
 
-            <div class="clan-pct-label">
-                ${Number(team.percentage).toFixed(1)}%
-            </div>
+    <div class="clan-pct-label">
+        ${Number(team.percentage).toFixed(1)}%
+    </div>
 
-            `;
+    `;
 
 
 
         const permutationHTML =
-            activeConfig.editMode === "permutations"
+    activeConfig.editMode === "permutations"
 
-            ?
+    ?
 
-            `
-           <input
-    class="clan-perm-input"
-    type="text"
-    inputmode="numeric"
-    oninput="this.value=this.value.replace(/[^0-9]/g,'')">
-            `
+    `
+    <input
+        class="clan-perm-input"
+        type="text"
+        inputmode="numeric"
+        value="${team.perms}"
+        data-index="${index}"
+        oninput="
+            this.value=this.value.replace(/[^0-9]/g,'');
+            activeConfig.teams[${index}].perms =
+                parseInt(this.value) || 0;
+            updateAdminTotal();
+        "
+    >
+    `
 
-            :
+    :
 
-            `
+    `
 
-            <div class="clan-perm-label">
-                ${team.perms}
-            </div>
+    <div class="clan-perm-label">
+        ${team.perms}
+    </div>
 
-            `;
+    `;
 
 
 
