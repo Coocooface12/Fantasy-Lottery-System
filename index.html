@@ -194,27 +194,38 @@
         class="selector-row">
 
 
-        <button
-            class="selector-tile active"
-            data-value="reverse"
-            onclick="setSelectorValue('revealMode','reverse',this)">
-
-            Reverse
-
-        </button>
+        <div
+    id="cfg-reveal-mode"
+    class="selector-row">
 
 
-        <button
-            class="selector-tile"
-            data-value="standard"
-            onclick="setSelectorValue('revealMode','standard',this)">
+    <button
+        class="selector-tile active"
+        data-value="reverse"
+        onclick="setSelectorValue('revealMode','reverse',this)">
 
-            Standard
+        Reverse
+        <span>
+            (Last Pick - First Pick)
+        </span>
 
-        </button>
+    </button>
 
 
-    </div>
+    <button
+        class="selector-tile"
+        data-value="standard"
+        onclick="setSelectorValue('revealMode','standard',this)">
+
+        Standard
+        <span>
+            (First Pick - Last Pick)
+        </span>
+
+    </button>
+
+
+</div>
 
 
 
