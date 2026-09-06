@@ -172,58 +172,44 @@
 
 
 
-    <div class="config-group">
-
-    <label>
-        Lottery Format (Preset for quick setup)
-    </label>
-
-
-    <div
-        class="button-selector"
-        id="cfg-lottery-format">
-
-
+    <div class="selector-label">
+        Lottery Format
     </div>
 
 
-</div>
+    <div
+        id="cfg-lottery-format"
+        class="selector-row">
+    </div>
 
 
 
-       <div class="config-group">
-
-    <label>
+    <div class="selector-label">
         Draft Reveal Order
-    </label>
+    </div>
 
 
-    <div 
-        class="button-selector"
-        id="cfg-reveal-mode">
+    <div
+        id="cfg-reveal-mode"
+        class="selector-row">
 
 
         <button
-            class="selector-btn active"
+            class="selector-tile active"
             data-value="reverse"
             onclick="setSelectorValue('revealMode','reverse',this)">
 
             Reverse
-            <span>
-                (Last Pick - First Pick)
-            </span>
 
         </button>
-        
+
+
         <button
-            class="selector-btn"
+            class="selector-tile"
             data-value="standard"
             onclick="setSelectorValue('revealMode','standard',this)">
 
             Standard
-            <span>
-                (First Pick - Last Pick)
-            </span>
 
         </button>
 
@@ -231,63 +217,71 @@
     </div>
 
 
-</div>
-
-    <h3>Curve Preset</h3>
-
-<div
-    id="curve-selector"
-    class="selector-row">
-</div>
-
-        <div class="selector-label">
-    Team Count
-</div>
-
-<div id="team-count-selector"
-     class="selector-row">
-</div>
 
 
-
-        <div class="selector-label">
-    Ball Pool Size
-</div>
-
-<div id="ball-pool-selector"
-     class="selector-row">
-</div>
-
-
-
-        <div class="selector-label">
-    Balls Drawn Per Round
-</div>
-
-<div id="draw-size-selector"
-     class="selector-row">
-</div>
-
-
-
-        <div class="config-group">
-
-            <label>
-                Total Permutations
-            </label>
-
-
-            <input
-    id="cfg-max-perms"
-    class="admin-input cfg-max-perms-input"
-    type="number"
-    value="720"
-    readonly>
-
-        </div>
-
-
+    <div class="selector-label">
+        Curve Preset
     </div>
+
+
+    <div
+        id="curve-selector"
+        class="selector-row">
+    </div>
+
+
+
+
+    <div class="selector-label">
+        Team Count
+    </div>
+
+
+    <div
+        id="team-count-selector"
+        class="selector-row">
+    </div>
+
+
+
+
+    <div class="selector-label">
+        Ball Pool Size
+    </div>
+
+
+    <div
+        id="ball-pool-selector"
+        class="selector-row">
+    </div>
+
+
+
+
+    <div class="selector-label">
+        Balls Drawn Per Round
+    </div>
+
+
+    <div
+        id="draw-size-selector"
+        class="selector-row">
+    </div>
+
+
+
+
+    <div class="selector-label">
+        Total Permutations
+    </div>
+
+
+    <input
+        id="cfg-max-perms"
+        class="admin-input cfg-max-perms-input"
+        type="number"
+        value="720"
+        readonly>
 
 
 </div>
@@ -295,13 +289,6 @@
 
 <span id="math-max-hint" class="math-hint">
 </span>
-
-
-
-
-                <!-- ==========================================
-     TEAM WEIGHT MANAGEMENT
-========================================== -->
 
 <div class="admin-card">
 
