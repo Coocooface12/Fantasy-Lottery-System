@@ -69,6 +69,7 @@ function populateLotteryFormats(){
 
 
     updateLotteryFormatSelector();
+    populateCurveSelector();
 
 
 }
@@ -980,15 +981,24 @@ function handleTeamCountChange() {
 
 
 
-   if(
-    currentCurve &&
-    currentCurve.values
-){
+   if(currentCurve){
 
-    percentages =
-    [
-        ...currentCurve.values
-    ];
+    if(currentCurve.type === "flat"){
+
+        percentages =
+            Array(count).fill(
+                100 / count
+            );
+
+    }
+    else{
+
+        percentages =
+        [
+            ...currentCurve.values
+        ];
+
+    }
 
 
 

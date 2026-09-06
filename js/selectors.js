@@ -143,8 +143,88 @@ if(input){
 
     renderLotterySelectors();
 
+    populateCurveSelector();
+
 }
 
     );
+
+}
+
+function populateCurveSelector(){
+
+    const selector =
+        document.getElementById(
+            "curve-selector"
+        );
+
+    if(!selector) return;
+
+    selector.innerHTML = "";
+
+    Object.keys(lotteryCurves).forEach(curve=>{
+
+        if(curve === "Custom Curve"){
+            return;
+        }
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "selector-btn";
+
+        button.dataset.value =
+            curve;
+
+        button.innerHTML =
+            curve;
+
+        button.onclick = ()=>{
+
+            applyCurvePreset(curve);
+
+        };
+
+        selector.appendChild(button);
+
+    });
+
+    updateCurveSelector();
+
+}
+
+function updateCurveSelector(){
+
+    const buttons =
+        document.querySelectorAll(
+            "#curve-selector .selector-btn"
+        );
+
+    buttons.forEach(btn=>{
+
+        btn.classList.toggle(
+
+            "active",
+
+            btn.dataset.value ===
+            activeConfig.curveType
+
+        );
+
+    });
+
+}
+
+function applyCurvePreset(curve){
+
+    activeConfig.curveType =
+        curve;
+
+    switchToCustomFormat();
+
+    handleTeamCountChange();
+
+    updateCurveSelector();
 
 }
