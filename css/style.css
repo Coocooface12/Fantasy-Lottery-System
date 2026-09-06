@@ -611,17 +611,15 @@
 
     display:flex;
 
-    flex-wrap:nowrap;
+    flex-wrap:wrap;
 
     gap:6px;
 
-    overflow:hidden;
+    overflow-x:auto;
 
     margin-top:10px;
 
     margin-bottom:20px;
-
-    padding:5px 2px;
 
 }
 
@@ -680,5 +678,23 @@
     border-color:var(--gold2);
 
     transform:scale(1.05);
+
+}
+
+.selector-label{
+
+    font-family:'Barlow Condensed', sans-serif;
+
+    font-size:14px;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    color:var(--silver);
+
+    margin-top:14px;
+
+    margin-bottom:6px;
 
 }
