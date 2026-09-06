@@ -462,6 +462,133 @@
 
 }
 
+/* ==========================================
+   INFORMATION TAB
+========================================== */
+
+
+.information-container {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 25px;
+
+}
+
+
+.information-container h2 {
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.info-dropdown {
+
+    margin-bottom: 15px;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border-color);
+
+}
+
+
+
+.info-dropdown-header {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+
+    padding: 15px 18px;
+
+
+    background: var(--panel-color);
+
+    color: inherit;
+
+
+    border: none;
+
+    cursor: pointer;
+
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+}
+
+
+
+.info-dropdown-header:hover {
+
+    filter: brightness(1.1);
+
+}
+
+
+
+.dropdown-arrow {
+
+    transition: transform .25s ease;
+
+}
+
+
+
+.info-dropdown-header.active .dropdown-arrow {
+
+    transform: rotate(180deg);
+
+}
+
+
+
+.info-dropdown-content {
+
+    max-height: 0;
+
+    overflow: hidden;
+
+
+    padding: 0 18px;
+
+
+    transition:
+
+        max-height .3s ease,
+
+        padding .3s ease;
+
+
+}
+
+
+
+.info-dropdown-content.open {
+
+    max-height: 500px;
+
+    padding: 15px 18px;
+
+}
+
 /* =======================================================
    UNIVERSAL MODAL SYSTEM
    ======================================================= */
@@ -831,4 +958,14 @@
 
     padding: 12px;
 
+}
+
+
+#tab-information {
+    display: none;
+    width: 100%;
+}
+
+#tab-information.active {
+    display: block;
 }
