@@ -91,8 +91,22 @@
     border: none;
   }
   .tab.active { color: var(--gold2); border-bottom: 3px solid var(--gold); background: var(--ice2); }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+  .tab-content {
+
+    display: none;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+}
+
+
+.tab-content.active {
+
+    display: block;
+
+}
 
   .dashboard-wrapper {
     display: grid;
@@ -465,20 +479,6 @@
 /* ==========================================
    INFORMATION TAB
 ========================================== */
-
-
-.information-container {
-
-    width: 100%;
-
-    max-width: 900px;
-
-    margin: 0 auto;
-
-    padding: 25px;
-
-}
-
 
 .information-container h2 {
 
@@ -961,11 +961,32 @@
 }
 
 
-#tab-information {
+
+
+
+.tab-content {
+
     display: none;
+
     width: 100%;
+
+    box-sizing: border-box;
+
 }
 
-#tab-information.active {
+
+.tab-content.active {
+
     display: block;
+
+}
+
+.information-container {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 30px;
+
 }
