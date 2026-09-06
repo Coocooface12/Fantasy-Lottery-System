@@ -566,18 +566,10 @@ function renderAdminTeamRows(teamsArray) {
 
             `
             <input
-                class="admin-input clan-percent-input"
-                type="number"
-                step="0.1"
-                data-index="${index}"
-                value="${team.percentage}"
-                oninput="
-                    updatePercentageMode(
-                        ${index},
-                        this.value
-                    );
-                "
-            />
+    class="clan-percent-input"
+    type="text"
+    inputmode="decimal"
+    oninput="this.value=this.value.replace(/[^0-9.]/g,'')">
             `
 
             :
@@ -598,19 +590,11 @@ function renderAdminTeamRows(teamsArray) {
             ?
 
             `
-            <input
-    class="admin-input clan-perm-input"
-    type="number"
-    min="0"
-    data-index="${index}"
-    value="${team.perms}"
-    oninput="
-        updatePermutationMode(
-            ${index},
-            this.value
-        );
-    "
-/>
+           <input
+    class="clan-perm-input"
+    type="text"
+    inputmode="numeric"
+    oninput="this.value=this.value.replace(/[^0-9]/g,'')">
             `
 
             :
