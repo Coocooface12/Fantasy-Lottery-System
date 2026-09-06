@@ -611,7 +611,7 @@
 
     display:flex;
 
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
 
     gap:6px;
 
@@ -696,5 +696,22 @@
     margin-top:14px;
 
     margin-bottom:6px;
+
+}
+
+.reveal-selector{
+
+    overflow:visible;
+
+    flex-wrap:nowrap;
+
+}
+
+
+.reveal-selector .selector-tile{
+
+    min-width:220px;
+
+    height:52px;
 
 }
