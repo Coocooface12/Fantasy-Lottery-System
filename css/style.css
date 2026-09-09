@@ -991,34 +991,173 @@
 
 }
 
+
 /* Advanced Lottery Features */
+
+.advanced-features-section {
+    margin-top: 25px;
+}
+
 
 .advanced-feature-dropdown {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
-    background: #10243d;
-    border: 1px solid #234a73;
+    background: var(--ice3);
+    border: 1px solid #1e3560;
+
     border-radius: 8px;
 
-    padding: 12px 15px;
-    margin-bottom: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
 }
 
 
 .advanced-feature-dropdown label {
-    color: white;
+    color: var(--gold2);
+
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 18px;
     font-weight: 600;
+
+    letter-spacing: .5px;
 }
 
 
 .advanced-feature-dropdown select {
-    background: #0b1a2d;
+
+    background: var(--ice2);
+
     color: white;
 
     border: 1px solid #356da8;
-    border-radius: 5px;
 
-    padding: 8px 12px;
+    border-radius: 6px;
+
+    padding: 8px 35px 8px 12px;
+
+    font-family: "Barlow", sans-serif;
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+
+.advanced-feature-dropdown select:hover {
+    border-color: var(--gold);
+}
+
+
+.advanced-feature-dropdown select:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+
+/* ==========================
+   Information Tab
+   ========================== */
+
+.information-container {
+    padding: 30px;
+}
+
+
+.information-container h2 {
+    color: var(--gold2);
+
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+
+    margin-top: 0;
+    margin-bottom: 20px;
+
+    letter-spacing: .5px;
+}
+
+
+
+.info-dropdown {
+    background: var(--ice3);
+
+    border: 1px solid #1e3560;
+
+    border-radius: 8px;
+
+    margin-bottom: 12px;
+
+    overflow: hidden;
+}
+
+
+
+.info-dropdown-header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 18px;
+
+    cursor: pointer;
+
+    color: var(--gold2);
+
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+
+    background: var(--ice3);
+
+    transition: background .2s ease;
+}
+
+
+
+.info-dropdown-header:hover {
+
+    background: #162c49;
+
+}
+
+
+
+.dropdown-arrow {
+
+    font-size: 16px;
+
+    color: var(--gold);
+
+    transition: transform .2s ease;
+
+}
+
+
+
+.info-dropdown-content {
+
+    display: none;
+
+    padding: 18px;
+
+    background: var(--ice2);
+
+    border-top: 1px solid #1e3560;
+
+    color: #d5dfeb;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+}
+
+
+
+.info-dropdown-content.open {
+
+    display: block;
+
 }
