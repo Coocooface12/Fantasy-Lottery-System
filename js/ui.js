@@ -205,7 +205,7 @@ if (activeConfig.revealMode === "reverse") {
 
 
       dynamicStatusText =
-        `${t.livePermutations.length} / ${t.allPermutations.length} Combinations Alive`;
+        `${t.livePermutations.length} / ${t.allPermutations.length} Permutations Alive`;
 
     }
 
