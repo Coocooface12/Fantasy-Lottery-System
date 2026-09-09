@@ -304,48 +304,93 @@
 
     <h2>Advanced Lottery Features</h2>
 
-    <div class="advanced-feature-grid">
 
-        <div class="advanced-feature-card">
-            <h3>Move Up Rule</h3>
-            <p>Placeholder for movement rules that allow teams to improve their draft position.</p>
+    <div class="advanced-feature-dropdown">
 
-            <button class="admin-placeholder-btn">
-                Configure
-            </button>
-        </div>
+        <label for="moveUpRule">
+            Move Up Rule
+        </label>
 
-
-        <div class="advanced-feature-card">
-            <h3>Move Down Rule</h3>
-            <p>Placeholder for rules that control how far teams can drop.</p>
-
-            <button class="admin-placeholder-btn">
-                Configure
-            </button>
-        </div>
-
-
-        <div class="advanced-feature-card">
-            <h3>Priority Picks Style</h3>
-            <p>Placeholder for protected picks and priority selection logic.</p>
-
-            <button class="admin-placeholder-btn">
-                Configure
-            </button>
-        </div>
-
-
-        <div class="advanced-feature-card">
-            <h3>Segmented Lottery</h3>
-            <p>Placeholder for multiple lottery pools within one draft.</p>
-
-            <button class="admin-placeholder-btn">
-                Configure
-            </button>
-        </div>
+        <select id="moveUpRule">
+            <option value="disabled">
+                Disabled
+            </option>
+            <option value="basic">
+                Basic Movement
+            </option>
+            <option value="custom">
+                Custom Rule
+            </option>
+        </select>
 
     </div>
+
+
+
+    <div class="advanced-feature-dropdown">
+
+        <label for="moveDownRule">
+            Move Down Rule
+        </label>
+
+        <select id="moveDownRule">
+            <option value="disabled">
+                Disabled
+            </option>
+            <option value="basic">
+                Basic Protection
+            </option>
+            <option value="custom">
+                Custom Rule
+            </option>
+        </select>
+
+    </div>
+
+
+
+    <div class="advanced-feature-dropdown">
+
+        <label for="priorityPicksStyle">
+            Priority Picks Style
+        </label>
+
+        <select id="priorityPicksStyle">
+            <option value="standard">
+                Standard Lottery
+            </option>
+            <option value="protected">
+                Protected Picks
+            </option>
+            <option value="tiered">
+                Tiered Priority Picks
+            </option>
+        </select>
+
+    </div>
+
+
+
+    <div class="advanced-feature-dropdown">
+
+        <label for="segmentedLottery">
+            Segmented Lottery
+        </label>
+
+        <select id="segmentedLottery">
+            <option value="disabled">
+                Disabled
+            </option>
+            <option value="twoPools">
+                Two Lottery Pools
+            </option>
+            <option value="multiplePools">
+                Multiple Segments
+            </option>
+        </select>
+
+    </div>
+
 
 </div>
 

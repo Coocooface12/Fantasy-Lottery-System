@@ -993,44 +993,32 @@
 
 /* Advanced Lottery Features */
 
-.advanced-feature-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-}
+.advanced-feature-dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-
-.advanced-feature-card {
     background: #10243d;
     border: 1px solid #234a73;
     border-radius: 8px;
-    padding: 15px;
+
+    padding: 12px 15px;
+    margin-bottom: 10px;
 }
 
 
-.advanced-feature-card h3 {
-    margin-top: 0;
+.advanced-feature-dropdown label {
     color: white;
+    font-weight: 600;
 }
 
 
-.advanced-feature-card p {
-    color: #b8c7d9;
-    font-size: 14px;
-    min-height: 40px;
-}
-
-
-.admin-placeholder-btn {
-    background: #1e5fa8;
+.advanced-feature-dropdown select {
+    background: #0b1a2d;
     color: white;
-    border: none;
-    padding: 8px 18px;
+
+    border: 1px solid #356da8;
     border-radius: 5px;
-    cursor: pointer;
-}
 
-
-.admin-placeholder-btn:hover {
-    background: #2876cc;
+    padding: 8px 12px;
 }
