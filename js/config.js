@@ -123,5 +123,6 @@ let runtimeState = {
   drawnBalls: [],
   roundWinner: null,
   roundDone: false,
-  currentRoundIndex: 0
+  currentRoundIndex: 0,
+  drawMode: "manual"
 };

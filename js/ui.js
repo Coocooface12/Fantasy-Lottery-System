@@ -528,7 +528,43 @@ window.addEventListener('DOMContentLoaded', () => {
 
   initializeInfoDropdowns();
 
+  setupDrawModeButtons();
+
 });
+
+function setupDrawModeButtons() {
+
+    const buttons = document.querySelectorAll(".draw-mode-btn");
+
+
+    buttons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const selectedMode = button.dataset.mode;
+
+
+            runtimeState.drawMode = selectedMode;
+
+
+            buttons.forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+
+            button.classList.add("active");
+
+
+            console.log(
+                "Drawing mode:",
+                runtimeState.drawMode
+            );
+
+        });
+
+    });
+
+}
 
 function initializeInfoDropdowns() {
 

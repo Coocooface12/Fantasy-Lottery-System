@@ -1161,3 +1161,64 @@
     display: block;
 
 }
+
+/* Drawing Mode Selector */
+
+.draw-mode-selector {
+
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.draw-mode-btn {
+
+    background: var(--ice3);
+
+    color: #cbd8e8;
+
+    border: 1px solid #1e3560;
+
+    border-radius: 8px;
+
+    padding: 10px 24px;
+
+    font-family: "Barlow Condensed", sans-serif;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+
+}
+
+
+
+.draw-mode-btn:hover {
+
+    border-color: var(--gold);
+
+    color: var(--gold2);
+
+}
+
+
+
+.draw-mode-btn.active {
+
+    background: var(--ice2);
+
+    color: var(--gold2);
+
+    border-color: var(--gold);
+
+    box-shadow: 0 0 8px rgba(255, 200, 50, .25);
+
+}
