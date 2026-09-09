@@ -1222,3 +1222,89 @@
     box-shadow: 0 0 8px rgba(255, 200, 50, .25);
 
 }
+
+/* ==========================
+   Lottery Machine Display
+   ========================== */
+
+
+.lottery-machine {
+
+    background: var(--ice3);
+
+    border: 1px solid #1e3560;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+}
+
+
+
+.lottery-machine.hidden {
+
+    display: none;
+
+}
+
+
+
+.machine-title {
+
+    color: var(--gold2);
+
+    font-family: "Barlow Condensed", sans-serif;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+.machine-ball {
+
+    width: 90px;
+
+    height: 90px;
+
+    margin: 0 auto 15px;
+
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+    background: white;
+
+    color: #111;
+
+
+    border-radius: 50%;
+
+    font-size: 45px;
+
+}
+
+
+
+.machine-status {
+
+    color: #cbd8e8;
+
+    font-size: 18px;
+
+}
