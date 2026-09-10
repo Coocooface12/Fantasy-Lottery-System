@@ -288,25 +288,44 @@ function runLotteryMachine(onComplete = null) {
     const machineStatus =
         document.getElementById("machine-status");
 
+    machineStatus.textContent = "Mixing Balls...";
 
-    machineStatus.textContent = "Drawing...";
+    let spinCount = 0;
 
-    machineBall.textContent = "⚪";
+    const spinAnimation = setInterval(() => {
 
+        const randomDisplay =
+            remainingBalls[
+                Math.floor(Math.random() * remainingBalls.length)
+            ];
 
-    setTimeout(() => {
+        machineBall.textContent = randomDisplay;
 
-        machineBall.textContent = selectedBall;
+        spinCount++;
 
-        machineStatus.textContent = "Ball Drawn";
+        if (spinCount >= 18) {
 
-        drawBall(selectedBall);
+            clearInterval(spinAnimation);
 
-        if (onComplete) {
-            onComplete();
+            machineBall.textContent = selectedBall;
+
+            machineStatus.textContent = "Ball Drawn";
+
+            setTimeout(() => {
+
+                drawBall(selectedBall);
+
+                machineStatus.textContent = "Ready";
+
+                if (onComplete) {
+                    onComplete();
+                }
+
+            }, 700);
+
         }
 
-    }, 1000);
+    }, 90);
 
 }
 
