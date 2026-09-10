@@ -17,11 +17,20 @@ function renderLotteryInterface() {
 
     btn.className = 'ball' + (isDrawn ? ' drawn' : '');
     btn.textContent = i;
-    btn.disabled = isDrawn || runtimeState.roundDone;
+    btn.disabled =
+    isDrawn ||
+    runtimeState.roundDone ||
+    runtimeState.drawMode !== "manual";
 
-    if (!isDrawn && !runtimeState.roundDone) {
-      btn.onclick = () => drawBall(i);
-    }
+    if (
+    !isDrawn &&
+    !runtimeState.roundDone &&
+    runtimeState.drawMode === "manual"
+) {
+
+    btn.onclick = () => drawBall(i);
+
+}
 
     row.appendChild(btn);
   }
