@@ -645,8 +645,6 @@ function renderDrawControls() {
 
         case "semi":
 
-    if (runtimeState.roundDone) {
-
         controls.innerHTML = `
             <button id="next-round-btn" class="draw-control-btn">
                 Next Round
@@ -699,8 +697,6 @@ function renderDrawControls() {
     }
 
     break;
-
-            break;
 
 
         case "auto":
