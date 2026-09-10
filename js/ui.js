@@ -398,7 +398,7 @@ if (completelyFinished) {
 }
 
   updateDrawModeUI();
-  
+
 }
 
     function renderDraftBoardResults() {
@@ -618,6 +618,10 @@ function renderDrawControls() {
 
     const controls = document.getElementById("controls-row");
 
+     if (runtimeState.roundDone) {
+        return;
+    }
+
     switch (runtimeState.drawMode) {
 
         case "manual":
@@ -629,24 +633,60 @@ function renderDrawControls() {
 
         case "semi":
 
-            controls.innerHTML = `
-                <button id="draw-next-ball-btn" class="draw-control-btn">
-                    Draw Next Ball
-                </button>
-            `;
+    if (runtimeState.roundDone) {
 
-            const drawButton =
-               document.getElementById("draw-next-ball-btn");
+        controls.innerHTML = `
+            <button id="next-round-btn" class="draw-control-btn">
+                Next Round
+            </button>
+        `;
 
-              if (drawButton) {
 
-              drawButton.addEventListener("click", () => {
+        const nextRoundButton =
+            document.getElementById("next-round-btn");
 
-              runLotteryMachine();
 
-          });
+        if (nextRoundButton) {
 
-      }
+            nextRoundButton.addEventListener("click", () => {
+
+                runtimeState.currentRoundIndex++;
+
+                initializeDrawSequenceRound();
+
+                updateDrawModeUI();
+
+            });
+
+        }
+
+
+    } else {
+
+        controls.innerHTML = `
+            <button id="draw-next-ball-btn" class="draw-control-btn">
+                Draw Next Ball
+            </button>
+        `;
+
+
+        const drawButton =
+            document.getElementById("draw-next-ball-btn");
+
+
+        if (drawButton) {
+
+            drawButton.addEventListener("click", () => {
+
+                runLotteryMachine();
+
+            });
+
+        }
+
+    }
+
+    break;
 
             break;
 
