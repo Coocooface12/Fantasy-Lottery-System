@@ -571,6 +571,8 @@ function setupDrawModeButtons() {
 
 updateDrawModeUI();
 
+renderLotteryInterface();
+
 console.log(
     "Drawing mode:",
     runtimeState.drawMode
