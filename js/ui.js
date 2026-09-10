@@ -606,6 +606,54 @@ function updateDrawModeUI() {
 
     }
 
+    renderDrawControls();
+
+}
+
+function renderDrawControls() {
+
+    const controls = document.getElementById("controls-row");
+
+    switch (runtimeState.drawMode) {
+
+        case "manual":
+
+            controls.innerHTML = "";
+
+            break;
+
+
+        case "semi":
+
+            controls.innerHTML = `
+                <button id="draw-next-ball-btn" class="draw-control-btn">
+                    Draw Next Ball
+                </button>
+            `;
+
+            break;
+
+
+        case "auto":
+
+            controls.innerHTML = `
+                <div class="auto-controls">
+
+                    <button id="run-round-btn" class="draw-control-btn">
+                        Run Round
+                    </button>
+
+                    <button id="run-lottery-btn" class="draw-control-btn">
+                        Run Lottery
+                    </button>
+
+                </div>
+            `;
+
+            break;
+
+    }
+
 }
 
 function initializeInfoDropdowns() {

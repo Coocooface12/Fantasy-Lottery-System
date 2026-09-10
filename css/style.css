@@ -1308,3 +1308,61 @@
     font-size: 18px;
 
 }
+
+/* Drawing Controls */
+
+.controls-row{
+
+    margin-top:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+.auto-controls{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+
+
+.draw-control-btn{
+
+    background:var(--ice3);
+
+    color:var(--gold2);
+
+    border:1px solid var(--gold);
+
+    border-radius:8px;
+
+    padding:12px 24px;
+
+    cursor:pointer;
+
+    font-family:"Barlow Condensed",sans-serif;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    transition:.2s ease;
+
+}
+
+
+
+.draw-control-btn:hover{
+
+    background:var(--gold);
+
+    color:#111;
+
+}
