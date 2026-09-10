@@ -332,10 +332,9 @@ function spinMachine() {
     }
 
 }
+spinMachine();
 
 }
-
-spinMachine();
 
 function resolveDrawSequenceWinner() {
   const finalizedSequence = runtimeState.drawnBalls;
