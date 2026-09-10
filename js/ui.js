@@ -627,6 +627,11 @@ function updateDrawModeUI() {
 
 function renderDrawControls() {
 
+  console.log(
+    "Rendering draw controls:",
+    runtimeState.drawMode
+);
+
     const controls =
     document.getElementById("lottery-machine-controls");
 
