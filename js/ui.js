@@ -631,6 +631,19 @@ function renderDrawControls() {
                 </button>
             `;
 
+            const drawButton =
+               document.getElementById("draw-next-ball-btn");
+
+              if (drawButton) {
+
+              drawButton.addEventListener("click", () => {
+
+              runLotteryMachine();
+
+          });
+
+      }
+
             break;
 
 

@@ -261,6 +261,55 @@ function drawBall(ballNumber) {
   renderLotteryInterface();
 }
 
+function runLotteryMachine(onComplete = null) {
+
+    if (runtimeState.roundDone) return;
+
+    const remainingBalls = [];
+
+    for (let i = 1; i <= activeConfig.totalBalls; i++) {
+
+        if (!runtimeState.drawnBalls.includes(i)) {
+            remainingBalls.push(i);
+        }
+
+    }
+
+    if (remainingBalls.length === 0) return;
+
+    const selectedBall =
+        remainingBalls[
+            Math.floor(Math.random() * remainingBalls.length)
+        ];
+
+    const machineBall =
+        document.getElementById("machine-ball");
+
+    const machineStatus =
+        document.getElementById("machine-status");
+
+
+    machineStatus.textContent = "Drawing...";
+
+    machineBall.textContent = "⚪";
+
+
+    setTimeout(() => {
+
+        machineBall.textContent = selectedBall;
+
+        machineStatus.textContent = "Ball Drawn";
+
+        drawBall(selectedBall);
+
+        if (onComplete) {
+            onComplete();
+        }
+
+    }, 1000);
+
+}
+
 function resolveDrawSequenceWinner() {
   const finalizedSequence = runtimeState.drawnBalls;
   let winner = null;
