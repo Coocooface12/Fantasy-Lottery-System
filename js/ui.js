@@ -530,6 +530,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   setupDrawModeButtons();
 
+  updateDrawModeUI();
+
 });
 
 function setupDrawModeButtons() {
@@ -554,15 +556,55 @@ function setupDrawModeButtons() {
 
             button.classList.add("active");
 
+updateDrawModeUI();
 
-            console.log(
-                "Drawing mode:",
-                runtimeState.drawMode
-            );
+console.log(
+    "Drawing mode:",
+    runtimeState.drawMode
+);
 
         });
 
     });
+
+}
+
+function updateDrawModeUI() {
+
+    const machine = document.getElementById("lottery-machine");
+    const instruction = document.getElementById("balls-instruction");
+
+    switch (runtimeState.drawMode) {
+
+        case "manual":
+
+            machine.classList.add("hidden");
+
+            instruction.textContent = "Select a Ball to Draw";
+
+            break;
+
+
+        case "semi":
+
+            machine.classList.remove("hidden");
+
+            instruction.textContent =
+                "Press 'Draw Next Ball' to continue";
+
+            break;
+
+
+        case "auto":
+
+            machine.classList.remove("hidden");
+
+            instruction.textContent =
+                "Automatic Drawing Mode";
+
+            break;
+
+    }
 
 }
 
