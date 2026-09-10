@@ -291,43 +291,51 @@ function runLotteryMachine(onComplete = null) {
     machineStatus.textContent = "Mixing Balls...";
 
     let spinCount = 0;
+let delay = 60;
 
-    const spinAnimation = setInterval(() => {
+function spinMachine() {
 
-        const randomDisplay =
-            remainingBalls[
-                Math.floor(Math.random() * remainingBalls.length)
-            ];
+    const randomDisplay =
+        remainingBalls[
+            Math.floor(Math.random() * remainingBalls.length)
+        ];
 
-        machineBall.textContent = randomDisplay;
+    machineBall.textContent = randomDisplay;
 
-        spinCount++;
+    spinCount++;
 
-        if (spinCount >= 18) {
+    // Slow down near the end
+    if (spinCount > 10) delay += 15;
 
-            clearInterval(spinAnimation);
+    if (spinCount < 20) {
 
-            machineBall.textContent = selectedBall;
+        setTimeout(spinMachine, delay);
 
-            machineStatus.textContent = "Ball Drawn";
+    } else {
 
-            setTimeout(() => {
+        machineBall.textContent = selectedBall;
 
-                drawBall(selectedBall);
+        machineStatus.textContent = "Ball Drawn";
 
-                machineStatus.textContent = "Ready";
+        setTimeout(() => {
 
-                if (onComplete) {
-                    onComplete();
-                }
+            drawBall(selectedBall);
 
-            }, 700);
+            machineStatus.textContent = "Ready";
 
-        }
+            if (onComplete) {
+                onComplete();
+            }
 
-    }, 90);
+        }, 800);
+
+    }
 
 }
+
+}
+
+spinMachine();
 
 function resolveDrawSequenceWinner() {
   const finalizedSequence = runtimeState.drawnBalls;
