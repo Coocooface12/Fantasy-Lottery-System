@@ -56,8 +56,6 @@ function renderLotteryInterface() {
 
       seqDisplay.appendChild(slot);
     }
-
-    updateDrawModeUI();
     
   }
 
@@ -398,6 +396,9 @@ if (completelyFinished) {
     `Round ${runtimeState.currentRoundIndex + 1} — Resolving Pick #${resolvingPick}`;
 
 }
+
+  updateDrawModeUI();
+  
 }
 
     function renderDraftBoardResults() {
