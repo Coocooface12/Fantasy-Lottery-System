@@ -315,11 +315,15 @@ function spinMachine() {
 
         machineBall.textContent = selectedBall;
 
+        machineBall.classList.add("reveal");
+
         machineStatus.textContent = "Ball Drawn";
 
         setTimeout(() => {
 
             drawBall(selectedBall);
+
+            machineBall.classList.remove("reveal");
 
             machineStatus.textContent = "Ready";
 

@@ -56,6 +56,9 @@ function renderLotteryInterface() {
 
       seqDisplay.appendChild(slot);
     }
+
+    updateDrawModeUI();
+    
   }
 
 
