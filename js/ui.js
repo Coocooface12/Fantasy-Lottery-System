@@ -630,10 +630,6 @@ function renderDrawControls() {
     const controls =
     document.getElementById("lottery-machine-controls");
 
-     if (runtimeState.roundDone) {
-        return;
-    }
-
     switch (runtimeState.drawMode) {
 
         case "manual":
@@ -644,6 +640,8 @@ function renderDrawControls() {
 
 
         case "semi":
+
+    if (runtimeState.roundDone) {
 
         controls.innerHTML = `
             <button id="next-round-btn" class="draw-control-btn">
