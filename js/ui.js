@@ -627,7 +627,8 @@ function updateDrawModeUI() {
 
 function renderDrawControls() {
 
-    const controls = document.getElementById("controls-row");
+    const controls =
+    document.getElementById("lottery-machine-controls");
 
      if (runtimeState.roundDone) {
         return;
