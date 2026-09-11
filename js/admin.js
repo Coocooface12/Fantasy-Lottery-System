@@ -398,11 +398,11 @@ function calculateMathLimits(){
   switchToCustomFormat();
 
     const n =
-    activeConfig.totalBalls || 4;
+    pendingConfig.totalBalls || 4;
 
 
 const k =
-    activeConfig.drawSize || 2;
+    pendingConfig.drawSize || 2;
 
 
 
@@ -428,18 +428,18 @@ const k =
 
 
 
-    activeConfig.targetPerms =
-        absoluteMax;
+    pendingConfig.targetPerms =
+    absoluteMax;
 
 
 
     if(
-        activeConfig.teams &&
-        activeConfig.teams.length > 0
-    ){
+    pendingConfig.teams &&
+    pendingConfig.teams.length > 0
+){
 
 
-        activeConfig.teams.forEach(team=>{
+        pendingConfig.teams.forEach(team=>{
 
 
             if(
@@ -451,7 +451,7 @@ const k =
                     Number(
                         (
                             (team.perms /
-                            activeConfig.targetPerms)
+                             pendingConfig.targetPerms)
                             *
                             100
                         )

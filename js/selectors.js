@@ -60,7 +60,7 @@ function renderLotterySelectors(){
 
         20,
 
-        activeConfig.teamCount,
+        pendingConfig.teamCount,
 
         function(value){
 
