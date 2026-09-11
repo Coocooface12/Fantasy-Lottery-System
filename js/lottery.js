@@ -398,7 +398,12 @@ if (activeConfig.revealMode === "reverse") {
 function redistributePermutations(eliminatedTeam) {
   // Pull the full set of combinations that belonged to the team that just
   // secured a draft slot — these are the ones that need to be handed off.
-  const orphanedPermutations = eliminatedTeam.allPermutations;
+  const orphanedPermutations =
+    eliminatedTeam.allPermutations.filter(p =>
+        !p.every((v, i) =>
+            v === runtimeState.drawnBalls[i]
+        )
+    );
   
   const survivingTeams = runtimeState.teams.filter(t => !t.hasSecuredPlacement);
   if (survivingTeams.length === 0 || orphanedPermutations.length === 0) return;
@@ -432,6 +437,7 @@ function redistributePermutations(eliminatedTeam) {
   
   // The eliminated team's own pool is now fully handed off.
   eliminatedTeam.allPermutations = [];
+  eliminatedTeam.assignedPermsCount = 0;
   eliminatedTeam.livePermutations = [];
 }
 
