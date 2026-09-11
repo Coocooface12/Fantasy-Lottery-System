@@ -406,6 +406,23 @@ if (activeConfig.revealMode === "reverse") {
 }
 
 function redistributePermutations(eliminatedTeam) {
+
+console.log(
+    "Redistributing from:",
+    eliminatedTeam.name,
+    "Keys:",
+    eliminatedTeam.allPermutations.length
+);
+
+console.log(
+    "Contains winning key:",
+    eliminatedTeam.allPermutations.some(
+        p => p.every(
+            (v,i)=>v === runtimeState.drawnBalls[i]
+        )
+    )
+);
+
   // Pull the full set of combinations that belonged to the team that just
   // secured a draft slot — these are the ones that need to be handed off.
   const orphanedPermutations =
