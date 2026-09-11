@@ -92,11 +92,11 @@ if(input){
 
         20,
 
-        activeConfig.totalBalls,
+        pendingConfig.totalBalls,
 
-        function(value){
+    function(value){
 
-    activeConfig.totalBalls = value;
+        pendingConfig.totalBalls = value;
 
     const input =
         document.getElementById(
@@ -122,13 +122,13 @@ if(input){
 
         1,
 
-        activeConfig.totalBalls - 1,
+         pendingConfig.totalBalls - 1,
 
-        activeConfig.drawSize,
+    pendingConfig.drawSize,
 
-        function(value){
+    function(value){
 
-    activeConfig.drawSize = value;
+        pendingConfig.drawSize = value;
 
     const input =
         document.getElementById(
