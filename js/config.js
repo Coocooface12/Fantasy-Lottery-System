@@ -94,24 +94,31 @@ const lotteryFormats = {
 
 let activeConfig = {
 
- teamCount: 8,
- totalBalls: 10,
- drawSize: 3,
- targetPerms: 720,
+    teamCount: 8,
 
- curveType: "NHL Draft Curve",
+    totalBalls: 10,
 
- curveSettings: {},
+    drawSize: 3,
 
- revealMode: "reverse",
+    targetPerms: 720,
 
-editMode: "permutations",
+    curveType: "NHL Draft Curve",
 
- weightEditMode: "weights",
+    curveSettings: {},
 
- teams: null
+    revealMode: "reverse",
+
+    editMode: "permutations",
+
+    weightEditMode: "weights",
+
+    teams: null
 
 };
+
+let pendingConfig = structuredClone(activeConfig);
+
+
 // =======================================================
 // RUNTIME STATE
 // Changes as the lottery progresses
