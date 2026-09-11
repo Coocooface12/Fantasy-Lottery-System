@@ -589,6 +589,34 @@ function updateDrawModeUI() {
     const machine = document.getElementById("lottery-machine");
     const instruction = document.getElementById("balls-instruction");
 
+    const modeButtons =
+        document.querySelectorAll(".draw-mode-btn");
+
+
+    const modeLocked =
+        runtimeState.drawnBalls.length > 0;
+
+
+
+    modeButtons.forEach(button => {
+
+        button.disabled = modeLocked;
+
+
+        if(modeLocked){
+
+            button.classList.add("mode-locked");
+
+        } else {
+
+            button.classList.remove("mode-locked");
+
+        }
+
+    });
+
+
+
     switch (runtimeState.drawMode) {
 
         case "manual":
