@@ -347,7 +347,17 @@ function resolveDrawSequenceWinner() {
   runtimeState.teams.forEach(t => {
     if (!t.hasSecuredPlacement) {
       const successfulMatch = t.allPermutations.find(p => p.every((v, idx) => v === finalizedSequence[idx]));
-      if (successfulMatch) winner = t;
+      if (successfulMatch) {
+
+    console.log(
+        "MATCH FOUND:",
+        t.name,
+        successfulMatch.join(" → ")
+    );
+
+    winner = t;
+
+}
     }
   });
   
