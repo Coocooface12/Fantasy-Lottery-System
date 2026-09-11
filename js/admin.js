@@ -937,7 +937,7 @@ function handleTeamCountChange() {
 
 
     let count =
-    activeConfig.teamCount || 8;
+    pendingConfig.teamCount || 8;
 
 
 
@@ -978,7 +978,7 @@ function handleTeamCountChange() {
 
     const currentCurve =
     lotteryCurves[
-        activeConfig.curveType
+        pendingConfig.curveType
     ];
 
 
@@ -1093,23 +1093,23 @@ function handleTeamCountChange() {
 
 
 
-    activeConfig.teamCount =
-        count;
+    pendingConfig.teamCount =
+    count;
 
 
 
-    activeConfig.teams =
-        generateDefaultWeightedTeams(
-            count,
-            targetPerms,
-            percentages
-        );
+    pendingConfig.teams =
+    generateDefaultWeightedTeams(
+        count,
+        targetPerms,
+        percentages
+    );
 
 
 
     renderAdminTeamRows(
-        activeConfig.teams
-    );
+    pendingConfig.teams
+);
 
 
 }

@@ -64,7 +64,7 @@ function renderLotterySelectors(){
 
         function(value){
 
-            activeConfig.teamCount = value;
+           pendingConfig.teamCount = value;
 
             const input =
     document.getElementById(
