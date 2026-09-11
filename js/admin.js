@@ -431,6 +431,12 @@ const k =
     pendingConfig.targetPerms =
     absoluteMax;
 
+    pendingConfig.teams =
+    generateDefaultWeightedTeams(
+        pendingConfig.teamCount,
+        absoluteMax
+    );
+
 
 
     if(
