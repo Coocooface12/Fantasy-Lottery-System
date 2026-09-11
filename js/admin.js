@@ -1167,19 +1167,19 @@ function applyConfirmedSettings() {
 
 
  const revealMode =
-    activeConfig.revealMode;
+    pendingConfig.revealMode;
 
-   const count =
-    activeConfig.teamCount;
+const count =
+    pendingConfig.teamCount;
 
-  const n =
-    activeConfig.totalBalls;
+const n =
+    pendingConfig.totalBalls;
 
 const k =
-    activeConfig.drawSize;
+    pendingConfig.drawSize;
 
 const targetPerms =
-    activeConfig.targetPerms;
+    pendingConfig.targetPerms;
 
 
 
