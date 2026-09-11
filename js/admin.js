@@ -1361,26 +1361,9 @@ if(
 
 }
 
-  activeConfig.teamCount =
-    count;
+activeConfig = structuredClone(pendingConfig);
 
-
-  activeConfig.totalBalls =
-    n;
-
-
-  activeConfig.drawSize =
-    k;
-
-
-  activeConfig.revealMode =
-    revealMode;
-
-
-  activeConfig.teams =
-    parsedTeams;
-
-
+pendingConfig = structuredClone(activeConfig);
 
   resetRuntimeEngine();
 
