@@ -355,9 +355,19 @@ function resolveDrawSequenceWinner() {
         successfulMatch.join(" → ")
     );
 
+    if (winner) {
+        console.log(
+            "DUPLICATE OWNER FOUND:",
+            winner.name,
+            "and",
+            t.name
+        );
+    }
+
     winner = t;
 
 }
+
     }
   });
   
