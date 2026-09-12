@@ -749,21 +749,67 @@ function renderDrawControls() {
 
         case "auto":
 
-            controls.innerHTML = `
-                <div class="auto-controls">
+    controls.innerHTML = `
+        <div class="auto-controls">
 
-                    <button id="run-round-btn" class="draw-control-btn">
-                        Run Round
-                    </button>
+            <button 
+                id="run-round-btn" 
+                class="draw-control-btn">
+                Run Round
+            </button>
 
-                    <button id="run-lottery-btn" class="draw-control-btn">
-                        Run Lottery
-                    </button>
 
-                </div>
-            `;
+            <button 
+                id="run-lottery-btn" 
+                class="draw-control-btn">
+                Run Lottery
+            </button>
 
-            break;
+        </div>
+    `;
+
+
+    const runRoundButton =
+        document.getElementById(
+            "run-round-btn"
+        );
+
+
+    if(runRoundButton){
+
+        runRoundButton.addEventListener(
+            "click",
+            () => {
+
+                runAutomaticRound();
+
+            }
+        );
+
+    }
+
+
+    const runLotteryButton =
+        document.getElementById(
+            "run-lottery-btn"
+        );
+
+
+    if(runLotteryButton){
+
+        runLotteryButton.addEventListener(
+            "click",
+            () => {
+
+                runAutomaticLottery();
+
+            }
+        );
+
+    }
+
+
+    break;
 
     }
 

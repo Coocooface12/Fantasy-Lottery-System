@@ -348,6 +348,30 @@ spinMachine();
 
 }
 
+function runAutomaticRound(){
+
+    if(runtimeState.roundDone){
+        return;
+    }
+
+
+    runLotteryMachine(() => {
+
+
+        if(!runtimeState.roundDone){
+
+            setTimeout(
+                runAutomaticRound,
+                500
+            );
+
+        }
+
+
+    });
+
+}
+
 function resolveDrawSequenceWinner() {
   const finalizedSequence = runtimeState.drawnBalls;
   let winner = null;
