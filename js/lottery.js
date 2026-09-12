@@ -348,7 +348,7 @@ spinMachine();
 
 }
 
-function runAutomaticRound(){
+function runAutomaticRound(onComplete = null){
 
     if(runtimeState.roundDone){
         return;
@@ -358,14 +358,53 @@ function runAutomaticRound(){
     runLotteryMachine(() => {
 
 
-        if(!runtimeState.roundDone){
+        if(runtimeState.roundDone){
 
-            setTimeout(
-                runAutomaticRound,
-                500
-            );
+            if(onComplete){
+                onComplete();
+            }
+
+            return;
 
         }
+
+
+        setTimeout(
+            () => runAutomaticRound(onComplete),
+            500
+        );
+
+
+    });
+
+}
+
+function runAutomaticLottery(){
+
+    if(runtimeState.draftBoard.every(slot => slot !== null)){
+        return;
+    }
+
+
+    runAutomaticRound(() => {
+
+
+        if(runtimeState.draftBoard.every(slot => slot !== null)){
+
+            return;
+
+        }
+
+
+        setTimeout(() => {
+
+            advanceToNextLotteryRound();
+
+
+            runAutomaticLottery();
+
+
+        }, 1000);
 
 
     });
