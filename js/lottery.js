@@ -450,6 +450,16 @@ console.log(
     const shareSize = baseShare + (idx < remainder ? 1 : 0);
     const grantedSlice = orphanedPermutations.slice(cursor, cursor + shareSize).map(p => [...p]);
     cursor += shareSize;
+
+    const winningInSlice = grantedSlice.some(
+    p => p.every((v, i) => v === runtimeState.drawnBalls[i])
+);
+
+if (winningInSlice) {
+    console.log("Winning key assigned to:", t.name);
+}
+
+t.allPermutations = t.allPermutations.concat(grantedSlice);
     
     t.allPermutations = t.allPermutations.concat(grantedSlice);
     console.log(
