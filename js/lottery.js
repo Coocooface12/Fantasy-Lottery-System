@@ -452,6 +452,16 @@ console.log(
     cursor += shareSize;
     
     t.allPermutations = t.allPermutations.concat(grantedSlice);
+    console.log(
+    "After redistribution:",
+    t.name,
+    "contains winning key:",
+    t.allPermutations.some(
+        p => p.every(
+            (v,i)=>v === runtimeState.drawnBalls[i]
+        )
+    )
+);
     t.assignedPermsCount = t.allPermutations.length;
     
     // Keep livePermutations in sync — re-filter against whatever has been
@@ -461,6 +471,14 @@ console.log(
       runtimeState.drawnBalls.every((drawn, i) => p[i] === drawn)
     );
   });
+
+  console.log(
+    "TOTAL AFTER REDISTRIBUTION:",
+    runtimeState.teams.reduce(
+        (sum, t) => sum + t.allPermutations.length,
+        0
+    )
+);
   
   // The eliminated team's own pool is now fully handed off.
   eliminatedTeam.allPermutations = [];
