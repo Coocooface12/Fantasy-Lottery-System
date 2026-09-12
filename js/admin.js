@@ -1264,7 +1264,7 @@ let percentageSum = 0;
 const parsedTeams = [];
 
 
-activeConfig.teams.forEach((team,index)=>{
+pendingConfig.teams.forEach((team,index)=>{
 
 
     const weight =
@@ -1286,7 +1286,7 @@ parsedTeams.push({
     index + 1,
 
   percentage:
-    activeConfig.teams[index]?.percentage
+    pendingConfig.teams[index]?.percentage
     ??
     Number(
       (
@@ -1368,6 +1368,8 @@ if(
 }
 
 activeConfig = structuredClone(pendingConfig);
+
+activeConfig.teams = parsedTeams;
 
 pendingConfig = structuredClone(activeConfig);
 
