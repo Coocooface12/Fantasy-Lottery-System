@@ -246,6 +246,10 @@ function drawBall(ballNumber) {
   if (runtimeState.roundDone || runtimeState.drawnBalls.includes(ballNumber)) return;
   
   runtimeState.drawnBalls.push(ballNumber);
+
+  updateDrawModeUI();
+
+  renderLotteryInterface();
   
   runtimeState.teams.forEach(t => {
     if (!t.hasSecuredPlacement) {

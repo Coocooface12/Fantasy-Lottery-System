@@ -556,10 +556,25 @@ function setupDrawModeButtons() {
 
         button.addEventListener("click", () => {
 
-            const selectedMode = button.dataset.mode;
+
+            // Lock draw mode after lottery has started
+            if (runtimeState.drawnBalls.length > 0) {
+
+                console.log(
+                    "Draw mode locked. Lottery already in progress."
+                );
+
+                return;
+
+            }
 
 
-            runtimeState.drawMode = selectedMode;
+            const selectedMode =
+                button.dataset.mode;
+
+
+            runtimeState.drawMode =
+                selectedMode;
 
 
             buttons.forEach(btn => {
@@ -569,14 +584,16 @@ function setupDrawModeButtons() {
 
             button.classList.add("active");
 
-updateDrawModeUI();
 
-renderLotteryInterface();
+            updateDrawModeUI();
 
-console.log(
-    "Drawing mode:",
-    runtimeState.drawMode
-);
+            renderLotteryInterface();
+
+
+            console.log(
+                "Drawing mode:",
+                runtimeState.drawMode
+            );
 
         });
 
