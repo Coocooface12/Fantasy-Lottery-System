@@ -1373,9 +1373,15 @@ activeConfig.teams = parsedTeams;
 
 pendingConfig = structuredClone(activeConfig);
 
-  resetRuntimeEngine();
+  console.log("Before reset");
 
-  switchTab('lottery');
+resetRuntimeEngine();
+
+console.log("After reset");
+
+switchTab('lottery');
+
+console.log("After switch tab");
 
 }
 
