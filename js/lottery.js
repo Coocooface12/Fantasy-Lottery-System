@@ -425,12 +425,8 @@ console.log(
 
   // Pull the full set of combinations that belonged to the team that just
   // secured a draft slot — these are the ones that need to be handed off.
-  const orphanedPermutations =
-    eliminatedTeam.allPermutations.filter(p =>
-        !p.every((v, i) =>
-            v === runtimeState.drawnBalls[i]
-        )
-    );
+ const orphanedPermutations =
+    eliminatedTeam.allPermutations.map(p => [...p]);
   
   const survivingTeams = runtimeState.teams.filter(t => !t.hasSecuredPlacement);
   if (survivingTeams.length === 0 || orphanedPermutations.length === 0) return;
