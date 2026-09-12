@@ -455,8 +455,6 @@ if (winningInSlice) {
     console.log("Winning key assigned to:", t.name);
 }
 
-t.allPermutations = t.allPermutations.concat(grantedSlice);
-    
     t.allPermutations = t.allPermutations.concat(grantedSlice);
     console.log(
     "After redistribution:",
@@ -477,6 +475,65 @@ t.allPermutations = t.allPermutations.concat(grantedSlice);
       runtimeState.drawnBalls.every((drawn, i) => p[i] === drawn)
     );
   });
+
+  const ownershipMap = new Map();
+
+runtimeState.teams
+    .filter(t => !t.hasSecuredPlacement)
+    .forEach(t => {
+
+        t.allPermutations.forEach(p => {
+
+            const key = p.join("-");
+
+            if (!ownershipMap.has(key)) {
+
+                ownershipMap.set(
+                    key,
+                    {
+                        owner: t,
+                        perm: p
+                    }
+                );
+
+            }
+
+        });
+
+    });
+
+
+// Rebuild each surviving team's pool uniquely
+
+runtimeState.teams
+    .filter(t => !t.hasSecuredPlacement)
+    .forEach(t => {
+
+        t.allPermutations = [];
+
+    });
+
+
+ownershipMap.forEach(entry => {
+
+    entry.owner.allPermutations.push(
+        entry.perm
+    );
+
+});
+
+
+runtimeState.teams
+    .filter(t => !t.hasSecuredPlacement)
+    .forEach(t => {
+
+        t.assignedPermsCount =
+            t.allPermutations.length;
+
+        t.livePermutations =
+            t.allPermutations.map(p => [...p]);
+
+    });
 
   console.log(
     "TOTAL AFTER REDISTRIBUTION:",
