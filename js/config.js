@@ -131,5 +131,6 @@ let runtimeState = {
   roundWinner: null,
   roundDone: false,
   currentRoundIndex: 0,
-  drawMode: "manual"
+  drawMode: "manual",
+  drawModeLocked: false,
 };

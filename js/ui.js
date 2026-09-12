@@ -611,7 +611,7 @@ function updateDrawModeUI() {
 
 
     const modeLocked =
-        runtimeState.drawnBalls.length > 0;
+    runtimeState.drawModeLocked;
 
 
 

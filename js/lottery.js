@@ -169,6 +169,8 @@ for (let i = 0; i < count; i++) {
 
 function resetRuntimeEngine() {
 
+  runtimeState.drawModeLocked = false;
+
   runtimeState.draftBoard =
     new Array(activeConfig.teamCount).fill(null);
 
@@ -246,6 +248,8 @@ function drawBall(ballNumber) {
   if (runtimeState.roundDone || runtimeState.drawnBalls.includes(ballNumber)) return;
   
   runtimeState.drawnBalls.push(ballNumber);
+
+  runtimeState.drawModeLocked = true;
 
   updateDrawModeUI();
 
