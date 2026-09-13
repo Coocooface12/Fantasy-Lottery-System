@@ -173,7 +173,7 @@ const permInput =
 if(permInput){
 
     permInput.value =
-        activeConfig.targetPerms;
+       pendingConfig.targetPerms;
 
 }
 
@@ -466,11 +466,20 @@ const k =
 
         });
 
+        console.log(
+    "Before recalculation",
+    pendingConfig.teams
+);
 
 
         recalculateTeamWeights(
             absoluteMax
         );
+
+        console.log(
+    "After recalculation",
+    pendingConfig.teams
+);
 
 
     }
@@ -559,7 +568,7 @@ function renderAdminTeamRows(teamsArray) {
 
 
         const percentageHTML =
-    activeConfig.editMode === "percentages"
+ pendingConfig.editMode === "percentages"
 
     ?
 
@@ -592,7 +601,7 @@ function renderAdminTeamRows(teamsArray) {
 
 
         const permutationHTML =
-    activeConfig.editMode === "permutations"
+    pendingConfig.editMode === "permutations"
 
     ?
 
@@ -677,7 +686,7 @@ function updatePermutationMode(index,value){
 
 
     const total =
-        activeConfig.teams.reduce(
+       pendingConfig.teams.reduce(
             (sum,team)=>
                 sum + team.perms,
             0
@@ -685,7 +694,7 @@ function updatePermutationMode(index,value){
 
 
 
-    activeConfig.teams.forEach(team=>{
+    pendingConfig.teams.forEach(team=>{
 
 
         team.percentage =
@@ -724,7 +733,7 @@ const pctLabels =
 pctInputs.forEach((input,i)=>{
 
     input.value =
-        activeConfig.teams[i].percentage;
+      pendingConfig.teams[i].percentage;
 
 
 });
@@ -734,7 +743,7 @@ pctInputs.forEach((input,i)=>{
 pctLabels.forEach((label,i)=>{
 
     label.textContent =
-        activeConfig.teams[i].percentage
+       pendingConfig.teams[i].percentage
         +
         "%";
 
@@ -779,12 +788,12 @@ function updatePercentageMode(index, value){
 
     console.log(
         "Before calculation:",
-        activeConfig.teams[index]
+       pendingConfig.teams[index]
     );
 
 
 
-    activeConfig.teams.forEach(team => {
+    pendingConfig.teams.forEach(team => {
 
         team.perms =
             Math.round(
@@ -799,7 +808,7 @@ function updatePercentageMode(index, value){
 
     console.log(
         "After calculation:",
-        activeConfig.teams[index]
+       pendingConfig.teams[index]
     );
 
 
@@ -1131,27 +1140,27 @@ function applySettings(){
     const summaryHTML = `
 
         <b>Lottery Format:</b>
-        ${activeConfig.lotteryFormat}
+        ${pendingConfig.lotteryFormat}
 
         <br><br>
 
         <b>Teams:</b>
-        ${activeConfig.teamCount}
+        ${pendingConfig.teamCount}
 
         <br><br>
 
         <b>Ball Pool:</b>
-        ${activeConfig.totalBalls}
+        ${pendingConfig.totalBalls}
 
         <br><br>
 
         <b>Draw Size:</b>
-        ${activeConfig.drawSize}
+        ${pendingConfig.drawSize}
 
         <br><br>
 
         <b>Reveal Mode:</b>
-        ${activeConfig.revealMode}
+        ${pendingConfig.revealMode}
 
     `;
 
@@ -1305,7 +1314,7 @@ parsedTeams.push({
 
 
 if(
-    activeConfig.editMode === "permutations"
+     pendingConfig.editMode === "permutations"
 ){
 
     if(weightSum !== targetPerms){
@@ -1338,7 +1347,7 @@ if(
 
 
 if(
-    activeConfig.editMode === "percentages"
+    pendingConfig.editMode === "percentages"
 ){
 
     if(
