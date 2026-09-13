@@ -484,10 +484,9 @@ const k =
 
 function recalculateTeamWeights(newTotal) {
 
-
     if(
-        !activeConfig.teams ||
-        activeConfig.teams.length === 0
+        !pendingConfig.teams ||
+        pendingConfig.teams.length === 0
     ){
         return;
     }
@@ -496,10 +495,9 @@ function recalculateTeamWeights(newTotal) {
     let runningTotal = 0;
 
 
-    activeConfig.teams.forEach((team,index)=>{
+    pendingConfig.teams.forEach((team,index)=>{
 
-
-        if(index === activeConfig.teams.length - 1){
+        if(index === pendingConfig.teams.length - 1){
 
             team.perms =
                 newTotal - runningTotal;
@@ -514,17 +512,15 @@ function recalculateTeamWeights(newTotal) {
                     newTotal
                 );
 
-
             runningTotal += team.perms;
 
         }
-
 
     });
 
 
     renderAdminTeamRows(
-        activeConfig.teams
+        pendingConfig.teams
     );
 
 }
