@@ -105,22 +105,20 @@ if(selected === "Custom"){
 
 
 
-    activeConfig.teamCount =
-        format.teamCount;
+    pendingConfig.teamCount =
+    format.teamCount;
+
+
+    pendingConfig.totalBalls =
+    format.totalBalls;
+
+
+    pendingConfig.drawSize =
+    format.drawSize;
 
 
 
-    activeConfig.totalBalls =
-        format.totalBalls;
-
-
-
-    activeConfig.drawSize =
-        format.drawSize;
-
-
-
-    activeConfig.targetPerms =
+    pendingConfig.targetPerms =
         getMathMaxPermutations(
             format.totalBalls,
             format.drawSize
@@ -276,18 +274,17 @@ if(selectedCurve){
 
 
 
-activeConfig.teams =
-generateDefaultWeightedTeams(
-    activeConfig.teamCount,
-    activeConfig.targetPerms,
-    percentages
-);
-
+pendingConfig.teams =
+    generateDefaultWeightedTeams(
+        count,
+        targetPerms,
+        percentages
+    );
 
 
     renderAdminTeamRows(
-        activeConfig.teams
-    );
+    pendingConfig.teams
+);
 
     updateLotteryFormatSelector();
 
@@ -378,11 +375,11 @@ function setSelectorValue(configKey, value, button) {
 
 function switchToCustomFormat(){
 
-    if(activeConfig.lotteryFormat === "Custom"){
+    if(pendingConfig.lotteryFormat === "Custom"){
         return;
     }
 
-    activeConfig.lotteryFormat = "Custom";
+    pendingConfig.lotteryFormat = "Custom";
 
     updateLotteryFormatSelector();
 
