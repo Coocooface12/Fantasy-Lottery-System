@@ -572,8 +572,8 @@ function renderAdminTeamRows(teamsArray) {
         data-index="${index}"
         oninput="
             this.value=this.value.replace(/[^0-9.]/g,'');
-            activeConfig.teams[${index}].percentage =
-                parseFloat(this.value) || 0;
+            pendingConfig.teams[${index}].percentage =
+    parseFloat(this.value) || 0;
             updateAdminTotal();
         "
     >
@@ -633,7 +633,7 @@ function renderAdminTeamRows(teamsArray) {
     value="${team.name}"
     placeholder="Team Name"
     oninput="
-        activeConfig.teams[${index}].name = this.value;
+        pendingConfig.teams[${index}].name = this.value;
     "
 />
 
@@ -671,7 +671,7 @@ function updatePermutationMode(index,value){
 
 
 
-    activeConfig.teams[index].perms =
+    pendingConfig.teams[index].perms =
         perms;
 
 
@@ -761,7 +761,7 @@ function updatePercentageMode(index, value){
         Number(value) || 0;
 
 
-    activeConfig.teams[index].percentage =
+   pendingConfig.teams[index].percentage  =
         percentage;
 
 
@@ -825,9 +825,15 @@ function updateAdminTotal(){
         0;
 
 
+        if(
+    !pendingConfig.teams ||
+    pendingConfig.teams.length === 0
+){
+    return;
+}
 
     const total =
-        activeConfig.teams.reduce(
+        pendingConfig.teams.reduce(
             (sum,team)=>
                 sum + team.perms,
             0
@@ -845,12 +851,12 @@ function updateAdminTotal(){
     pctLabels.forEach((label,index)=>{
 
 
-        if(activeConfig.teams[index]){
+        if(pendingConfig.teams[index]){
 
 
             label.textContent =
                 Number(
-                    activeConfig.teams[index].percentage
+                    pendingConfig.teams[index].percentage
                 )
                 .toFixed(1)
                 +
@@ -874,11 +880,11 @@ function updateAdminTotal(){
     permLabels.forEach((label,index)=>{
 
 
-        if(activeConfig.teams[index]){
+        if(pendingConfig.teams[index]){
 
 
             label.textContent =
-                activeConfig.teams[index].perms;
+             pendingConfig.teams[index].perms;
 
 
         }
