@@ -846,15 +846,22 @@ function renderDrawControls() {
         }
 
 
-        // -----------------------------
-        // Resume a paused lottery
-        // -----------------------------
-        runtimeState.autoPaused = false;
+// -----------------------------
+// Resume a paused lottery
+// -----------------------------
+runtimeState.autoPaused = false;
 
-        renderDrawControls();
+renderDrawControls();
 
-        runAutomaticLottery();
 
+if(runtimeState.roundDone){
+
+    advanceToNextLotteryRound();
+
+}
+
+
+runAutomaticLottery();
     }
 );
 
