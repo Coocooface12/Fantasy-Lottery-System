@@ -775,17 +775,26 @@ function initSystemOnBoot() {
   pendingConfig =
     structuredClone(activeConfig);
 
-
+console.log(
+    "BEFORE ADMIN RENDER",
+    {
+        target: pendingConfig.targetPerms,
+        balls: pendingConfig.totalBalls,
+        draw: pendingConfig.drawSize
+    }
+);
 
  renderAdminTeamRows(
     pendingConfig.teams
 );
 
 console.log(
-"BOOT CONFIG",
-pendingConfig.totalBalls,
-pendingConfig.drawSize,
-pendingConfig.targetPerms
+    "AFTER ADMIN RENDER",
+    {
+        target: pendingConfig.targetPerms,
+        input:
+          document.getElementById('cfg-max-perms')?.value
+    }
 );
 
 renderLotterySelectors();
