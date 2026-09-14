@@ -579,7 +579,17 @@ if (winningInSlice) {
     console.log("Winning key assigned to:", t.name);
 }
 
-    t.allPermutations = t.allPermutations.concat(grantedSlice);
+    t.allPermutations = [
+    ...t.allPermutations,
+    ...grantedSlice
+].filter(
+    (perm, index, self) =>
+        index === self.findIndex(
+            p => p.every(
+                (v,i)=>v === perm[i]
+            )
+        )
+);
     console.log(
     "After redistribution:",
     t.name,
@@ -742,11 +752,18 @@ function initSystemOnBoot() {
 
 
 
-  renderAdminTeamRows(
+ renderAdminTeamRows(
     pendingConfig.teams
-  );
+);
 
 
-  resetRuntimeEngine();
+renderLotterySelectors();
+
+updateLotteryFormatSelector();
+
+updateCurveSelector();
+
+
+resetRuntimeEngine();
 
 }
