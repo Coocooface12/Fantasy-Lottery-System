@@ -167,7 +167,7 @@ for (let i = 0; i < count; i++) {
 // =======================================================
 
 
-function resetRuntimeEngine() {
+function resetRuntimeEngine(render = true) {
 
 
   runtimeState.drawModeLocked = false;
@@ -218,7 +218,12 @@ function resetRuntimeEngine() {
 
   dealInitialPermutationPool();
 
-  initializeDrawSequenceRound();
+  initializeDrawSequenceRound(false);
+
+  if(render){
+    renderLotteryInterface();
+
+}
 
 }
 
@@ -276,7 +281,7 @@ function dealInitialPermutationPool() {
 // Handles ball drawing, winner selection and redistribution
 // =======================================================
 
-function initializeDrawSequenceRound() {
+function initializeDrawSequenceRound(render = true) {
   // NOTE: this no longer reshuffles/reslices the master pool each round.
   // Each team's allPermutations now persists across rounds (built once by
   // dealInitialPermutationPool, then adjusted by redistributePermutations
@@ -295,7 +300,11 @@ function initializeDrawSequenceRound() {
   runtimeState.roundWinner = null;
   runtimeState.roundDone = false;
   
-  renderLotteryInterface();
+  if(render){
+
+    renderLotteryInterface();
+
+}
 }
 
 function drawBall(ballNumber) {
@@ -780,6 +789,6 @@ updateLotteryFormatSelector();
 updateCurveSelector();
 
 
-resetRuntimeEngine();
+resetRuntimeEngine(false);
 
 }

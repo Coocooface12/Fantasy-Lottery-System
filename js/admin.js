@@ -1459,7 +1459,9 @@ function resetSettingsToDefault(){
 
     initSystemOnBoot();
 
+    setTimeout(() => {
     switchTab('lottery');
+}, 0);
 
   }
 
