@@ -757,19 +757,6 @@ function initSystemOnBoot() {
 );
 
 
-document.getElementById("cfg-team-count").value =
-    pendingConfig.teamCount;
-
-document.getElementById("cfg-balls-pool").value =
-    pendingConfig.totalBalls;
-
-document.getElementById("cfg-draw-size").value =
-    pendingConfig.drawSize;
-
-document.getElementById("cfg-max-perms").value =
-    pendingConfig.targetPerms;
-    
-
 renderLotterySelectors();
 
 updateLotteryFormatSelector();
