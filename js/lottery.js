@@ -207,7 +207,29 @@ function resetRuntimeEngine() {
 }
 
 function dealInitialPermutationPool() {
-  const allCombinationsPool = shuffle(generatePermutationPool(activeConfig.totalBalls, activeConfig.drawSize));
+
+  const generatedPool =
+      generatePermutationPool(
+          activeConfig.totalBalls,
+          activeConfig.drawSize
+      );
+
+
+  console.log(
+      "DEAL POOL CHECK:",
+      {
+          balls: activeConfig.totalBalls,
+          drawSize: activeConfig.drawSize,
+          target: activeConfig.targetPerms,
+          generated: generatedPool.length
+      }
+  );
+
+
+  const allCombinationsPool =
+      shuffle(generatedPool);
+
+
   let cursor = 0;
   
   runtimeState.teams.forEach(t => {
