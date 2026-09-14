@@ -400,38 +400,32 @@ function spinMachine() {
 
         setTimeout(() => {
 
-            drawBall(selectedBall);
+    drawBall(selectedBall);
 
-            machineBall.classList.remove("reveal");
+    machineBall.classList.remove("reveal");
 
-            machineStatus.textContent = "Ready";
+    machineStatus.textContent = "Ready";
 
-            if (onComplete) {
-                onComplete();
-            }
 
-        }, 800);
+    runtimeState.drawInProgress = false;
+
+    updateDrawModeUI();
+
+
+    if (onComplete) {
+        onComplete();
+    }
+
+}, 800);
 
     }
 
 }
 spinMachine();
 
-runtimeState.drawInProgress = false;
-
-updateDrawModeUI();
-
 }
 
 function runAutomaticRound(onComplete = null){
-
-  if(runtimeState.drawInProgress){
-    return;
-}
-
-runtimeState.drawInProgress = true;
-
-updateDrawModeUI();
 
     if(runtimeState.roundDone){
         return;
@@ -460,21 +454,9 @@ updateDrawModeUI();
 
     });
 
-    runtimeState.drawInProgress = false;
-
-updateDrawModeUI();
-
 }
 
 function runAutomaticLottery(){
-
-  if(runtimeState.drawInProgress){
-    return;
-}
-
-runtimeState.drawInProgress = true;
-
-updateDrawModeUI();
 
     if(runtimeState.draftBoard.every(slot => slot !== null)){
         return;
@@ -503,10 +485,6 @@ updateDrawModeUI();
 
 
     });
-
-    runtimeState.drawInProgress = false;
-
-updateDrawModeUI();
 
 }
 
