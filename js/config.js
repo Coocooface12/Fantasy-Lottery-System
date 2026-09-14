@@ -133,4 +133,5 @@ let runtimeState = {
   currentRoundIndex: 0,
   drawMode: "manual",
   drawModeLocked: false,
+  drawInProgress: false,
 };

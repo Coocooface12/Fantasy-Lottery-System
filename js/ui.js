@@ -725,11 +725,19 @@ function renderDrawControls() {
         const drawButton =
             document.getElementById("draw-next-ball-btn");
 
+            if(drawButton){
 
+    drawButton.disabled =
+        runtimeState.drawInProgress;
+
+}
         if (drawButton) {
 
             drawButton.addEventListener("click", () => {
 
+        if(runtimeState.drawInProgress){
+        return;
+    }
                 runLotteryMachine();
 
             });
@@ -772,13 +780,17 @@ function renderDrawControls() {
     if(runRoundButton){
 
         runRoundButton.addEventListener(
-            "click",
-            () => {
+    "click",
+    () => {
 
-                runAutomaticRound();
+        if(runtimeState.drawInProgress){
+            return;
+        }
 
-            }
-        );
+        runAutomaticRound();
+
+    }
+);
 
     }
 
@@ -792,13 +804,17 @@ function renderDrawControls() {
     if(runLotteryButton){
 
         runLotteryButton.addEventListener(
-            "click",
-            () => {
+    "click",
+    () => {
 
-                runAutomaticLottery();
+        if(runtimeState.drawInProgress){
+            return;
+        }
 
-            }
-        );
+        runAutomaticLottery();
+
+    }
+);
 
     }
 

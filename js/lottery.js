@@ -334,6 +334,14 @@ function drawBall(ballNumber) {
 
 function runLotteryMachine(onComplete = null) {
 
+  if(runtimeState.drawInProgress){
+    return;
+}
+
+runtimeState.drawInProgress = true;
+
+updateDrawModeUI();
+
     if (runtimeState.roundDone) return;
 
     const remainingBalls = [];
@@ -409,9 +417,21 @@ function spinMachine() {
 }
 spinMachine();
 
+runtimeState.drawInProgress = false;
+
+updateDrawModeUI();
+
 }
 
 function runAutomaticRound(onComplete = null){
+
+  if(runtimeState.drawInProgress){
+    return;
+}
+
+runtimeState.drawInProgress = true;
+
+updateDrawModeUI();
 
     if(runtimeState.roundDone){
         return;
@@ -440,9 +460,21 @@ function runAutomaticRound(onComplete = null){
 
     });
 
+    runtimeState.drawInProgress = false;
+
+updateDrawModeUI();
+
 }
 
 function runAutomaticLottery(){
+
+  if(runtimeState.drawInProgress){
+    return;
+}
+
+runtimeState.drawInProgress = true;
+
+updateDrawModeUI();
 
     if(runtimeState.draftBoard.every(slot => slot !== null)){
         return;
@@ -471,6 +503,10 @@ function runAutomaticLottery(){
 
 
     });
+
+    runtimeState.drawInProgress = false;
+
+updateDrawModeUI();
 
 }
 
