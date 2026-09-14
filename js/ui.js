@@ -570,6 +570,9 @@ function setupDrawModeButtons() {
             runtimeState.drawMode =
                 selectedMode;
 
+            runtimeState.autoRunning = false;
+            runtimeState.autoPaused = false;    
+
 
             buttons.forEach(btn => {
                 btn.classList.remove("active");
