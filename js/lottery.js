@@ -450,6 +450,21 @@ function runAutomaticLottery(){
 }
 
 function resolveDrawSequenceWinner() {
+
+  console.log(
+    "RESOLVE CHECK:",
+    {
+        balls: activeConfig.totalBalls,
+        drawSize: activeConfig.drawSize,
+        target: activeConfig.targetPerms,
+        totalRuntimePerms:
+            runtimeState.teams.reduce(
+                (sum,t)=>sum + t.allPermutations.length,
+                0
+            )
+    }
+);
+
   const finalizedSequence = runtimeState.drawnBalls;
   let winner = null;
   
