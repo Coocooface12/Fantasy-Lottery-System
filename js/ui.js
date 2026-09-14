@@ -761,11 +761,19 @@ function renderDrawControls() {
             </button>
 
 
-            <button 
-                id="run-lottery-btn" 
-                class="draw-control-btn">
-                Run Lottery
-            </button>
+            <button
+    id="run-lottery-btn"
+    class="draw-control-btn">
+    ${
+        runtimeState.autoRunning
+            ? (
+                runtimeState.autoPaused
+                    ? "Resume Lottery"
+                    : "Pause Lottery"
+              )
+            : "Run Lottery"
+    }
+</button>
 
         </div>
     `;
