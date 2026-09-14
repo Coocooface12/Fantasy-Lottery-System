@@ -1459,14 +1459,18 @@ function resetSettingsToDefault(){
 
     initSystemOnBoot();
 
-    pendingConfig =
-        structuredClone(activeConfig);
 
+    console.log(
+      "RESET COMPLETE CHECK",
+      {
+        activeBalls: activeConfig.totalBalls,
+        activeDraw: activeConfig.drawSize,
+        activePerms: activeConfig.targetPerms,
 
-    renderLotterySelectors();
-
-    renderAdminTeamRows(
-        pendingConfig.teams
+        pendingBalls: pendingConfig.totalBalls,
+        pendingDraw: pendingConfig.drawSize,
+        pendingPerms: pendingConfig.targetPerms
+      }
     );
 
 
