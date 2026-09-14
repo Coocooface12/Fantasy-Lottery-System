@@ -1419,6 +1419,16 @@ activeConfig.teams = parsedTeams;
 
 pendingConfig = structuredClone(activeConfig);
 
+console.log(
+    "AFTER APPLY ACTIVE CONFIG:",
+    {
+        balls: activeConfig.totalBalls,
+        drawSize: activeConfig.drawSize,
+        targetPerms: activeConfig.targetPerms,
+        teams: activeConfig.teams.length
+    }
+);
+
   console.log("Before reset");
 
 resetRuntimeEngine();
