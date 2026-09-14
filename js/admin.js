@@ -595,38 +595,23 @@ function renderAdminTeamRows(teamsArray) {
        oninput="
     this.value=this.value.replace(/[^0-9.]/g,'');
 
-    pendingConfig.teams[${index}].percentage =
-        parseFloat(this.value) || 0;
+    const value =
+        parseFloat(this.value);
 
 
-    pendingConfig.teams.forEach(team => {
+    if(!isNaN(value)){
 
-        team.perms =
+        pendingConfig.teams[${index}].percentage =
+            value;
+
+
+        pendingConfig.teams[${index}].perms =
             Math.round(
-                (team.percentage / 100) *
+                (value / 100) *
                 pendingConfig.targetPerms
             );
 
-    });
-
-
-    recalculateTeamWeights(
-        pendingConfig.targetPerms
-    );
-
-
-    pendingConfig.teams.forEach(team => {
-
-        team.percentage =
-            Number(
-                (
-                    (team.perms / pendingConfig.targetPerms)
-                    * 100
-                )
-                .toFixed(1)
-            );
-
-    });
+    }
 
 
     updateAdminTotal();
