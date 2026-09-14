@@ -48,6 +48,15 @@ function renderButtonSelector(
 
     }
 
+    console.log(
+    "SELECTOR RENDER:",
+    {
+        balls: pendingConfig.totalBalls,
+        draw: pendingConfig.drawSize,
+        perms: pendingConfig.targetPerms
+    }
+);
+
 }
 
 function renderLotterySelectors(){
