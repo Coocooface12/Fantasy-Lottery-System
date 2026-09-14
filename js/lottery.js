@@ -459,6 +459,17 @@ function runAutomaticRound(onComplete = null){
 function runAutomaticLottery(){
 
     if(runtimeState.draftBoard.every(slot => slot !== null)){
+
+    runtimeState.autoRunning = false;
+    runtimeState.autoPaused = false;
+
+    renderDrawControls();
+
+    return;
+
+}
+
+     if(runtimeState.autoPaused){
         return;
     }
 
@@ -475,13 +486,15 @@ function runAutomaticLottery(){
 
         setTimeout(() => {
 
-            advanceToNextLotteryRound();
+    if(runtimeState.autoPaused){
+        return;
+    }
 
+    advanceToNextLotteryRound();
 
-            runAutomaticLottery();
+    runAutomaticLottery();
 
-
-        }, 1000);
+}, 1000);
 
 
     });
