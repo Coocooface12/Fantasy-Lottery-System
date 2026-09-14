@@ -786,16 +786,8 @@ function updatePercentageMode(index, value){
 
 
 
-    const targetPerms =
-        parseInt(
-            document.getElementById(
-                'cfg-max-perms'
-            ).value
-        )
-        ||
-        0;
-
-
+const targetPerms =
+    pendingConfig.targetPerms;
 
     console.log(
         "Before calculation:",
