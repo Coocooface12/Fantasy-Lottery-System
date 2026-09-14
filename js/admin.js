@@ -850,13 +850,7 @@ function updateAdminTotal(){
 
 
     const targetPerms =
-        parseInt(
-            document.getElementById(
-                'cfg-max-perms'
-            ).value
-        )
-        ||
-        0;
+    pendingConfig.targetPerms;
 
 
         if(
