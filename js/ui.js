@@ -486,30 +486,12 @@ if (targetTabName === 'admin') {
 
 
     renderAdminTeamRows(
-        activeConfig.teams
+        pendingConfig.teams
     );
-    
-    renderLotterySelectors(
 
-    "team-count-selector",
 
-    4,
+    renderLotterySelectors();
 
-    20,
-
-    activeConfig.teamCount,
-
-    function(value){
-
-        activeConfig.teamCount = value;
-
-        handleTeamCountChange();
-
-        renderTeamSelectors();
-
-    }
-
-);
 
     const revealButtons =
         document.querySelectorAll(
@@ -519,15 +501,15 @@ if (targetTabName === 'admin') {
 
     revealButtons.forEach(btn => {
 
-
         btn.classList.toggle(
             'active',
-            btn.dataset.value === activeConfig.revealMode
+            btn.dataset.value === pendingConfig.revealMode
         );
 
-
     });
-updateLotteryFormatSelector();
+
+
+    updateLotteryFormatSelector();
 
 }
   if (targetTabName === 'lottery') renderLotteryInterface();
