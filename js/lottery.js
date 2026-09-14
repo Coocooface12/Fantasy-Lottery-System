@@ -231,12 +231,28 @@ function dealInitialPermutationPool() {
 
 
   let cursor = 0;
+
+  console.log(
+    "TEAM ALLOCATION BEFORE DEAL:",
+    runtimeState.teams.map(t => ({
+        name: t.name,
+        assigned: t.assignedPermsCount
+    }))
+);
   
   runtimeState.teams.forEach(t => {
     t.allPermutations = allCombinationsPool.slice(cursor, cursor + t.assignedPermsCount).map(p => [...p]);
     t.livePermutations = t.allPermutations.map(p => [...p]);
     cursor += t.assignedPermsCount;
   });
+
+  console.log(
+    "TOTAL ASSIGNED AFTER DEAL:",
+    runtimeState.teams.reduce(
+        (sum,t)=>sum + t.assignedPermsCount,
+        0
+    )
+);
 }
 
 // =======================================================
