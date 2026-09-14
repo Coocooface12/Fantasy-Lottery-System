@@ -1244,7 +1244,9 @@
 
 }
 
-
+.hidden {
+    display: none !important;
+}
 
 .lottery-machine.hidden {
 
