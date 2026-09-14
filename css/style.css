@@ -206,15 +206,8 @@
     font-size: 18px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--silver2); margin-bottom: 12px; border-bottom: 1px solid #1e3560; padding-bottom: 6px;
   }
- 
-  .teams-grid { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
-    max-height: none;
-    overflow: visible;
-    padding-right: 4px; 
-}
+  .teams-grid { display: flex; flex-direction: column; gap: 10px; max-height: 620px; overflow-y: auto; padding-right: 4px; }
+  
   .team-card {
     background: var(--panel);
     border: 1px solid #1e3560;
@@ -319,8 +312,7 @@
 
     margin-bottom:14px;
 
-} 
- .admin-team-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; align-items: center; margin-bottom: 8px; }
+}  .admin-team-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; align-items: center; margin-bottom: 8px; }
  .admin-input {
     background: #132645;
     border: 1px solid #2a4a7a;
@@ -378,11 +370,7 @@
   .legend-dot.struck { background: #1a0a0a; border: 1px solid #5a2020; }
   .legend-dot.winner-perm { background: #1a3010; border: 1px solid var(--green); }
   
- .perm-scroll { 
-    overflow: visible; 
-    padding: 18px 24px; 
-    flex: 1; 
-}
+  .perm-scroll { overflow-y: auto; padding: 18px 24px; flex: 1; }
   .perm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(95px, 1fr)); gap: 6px; }
   .perm-chip {
     padding: 6px; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif;
