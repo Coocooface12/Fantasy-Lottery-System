@@ -841,23 +841,42 @@ pendingConfig.teams.forEach((team,index)=>{
 function updateAdminTotal(){
 
 
+    if(
+        !pendingConfig.teams ||
+        pendingConfig.teams.length === 0
+    ){
+        return;
+    }
+
+
     const targetPerms =
-    pendingConfig.targetPerms;
+        pendingConfig.targetPerms || 0;
 
 
-        if(
-    !pendingConfig.teams ||
-    pendingConfig.teams.length === 0
-){
-    return;
-}
 
     const total =
         pendingConfig.teams.reduce(
-            (sum,team)=>
-                sum + team.perms,
+            (sum,team) =>
+                sum + Number(team.perms || 0),
             0
         );
+
+
+
+    // Keep Total Permutations display synced
+    const permInput =
+        document.getElementById(
+            'cfg-max-perms'
+        );
+
+
+    if(permInput){
+
+        permInput.value =
+            targetPerms;
+
+    }
+
 
 
 
@@ -867,26 +886,23 @@ function updateAdminTotal(){
         );
 
 
-
     pctLabels.forEach((label,index)=>{
-
 
         if(pendingConfig.teams[index]){
 
-
             label.textContent =
                 Number(
-                    pendingConfig.teams[index].percentage
+                    pendingConfig.teams[index].percentage || 0
                 )
                 .toFixed(1)
                 +
                 "%";
 
-
         }
 
-
     });
+
+
 
 
 
@@ -896,21 +912,18 @@ function updateAdminTotal(){
         );
 
 
-
     permLabels.forEach((label,index)=>{
-
 
         if(pendingConfig.teams[index]){
 
-
             label.textContent =
-             pendingConfig.teams[index].perms;
-
+                pendingConfig.teams[index].perms;
 
         }
 
-
     });
+
+
 
 
 
@@ -918,7 +931,6 @@ function updateAdminTotal(){
         document.getElementById(
             'total-label'
         );
-
 
 
     if(lbl){
