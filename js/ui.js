@@ -5,6 +5,16 @@
 
 function renderLotteryInterface() {
 
+  console.log(
+    "UI CONFIG CHECK:",
+    {
+        balls: activeConfig.totalBalls,
+        draw: activeConfig.drawSize,
+        perms: activeConfig.targetPerms,
+        teams: activeConfig.teams.map(t=>t.perms)
+    }
+);
+
   const row = document.getElementById('balls-row');
   if (!row) return;
 

@@ -169,17 +169,29 @@ for (let i = 0; i < count; i++) {
 
 function resetRuntimeEngine() {
 
+
   runtimeState.drawModeLocked = false;
 
-  runtimeState.draftBoard =
-    new Array(activeConfig.teamCount).fill(null);
+
+  runtimeState.drawnBalls = [];
+
+  runtimeState.roundWinner = null;
+
+  runtimeState.roundDone = false;
 
 
   runtimeState.currentRoundIndex = 0;
 
 
+  runtimeState.draftBoard =
+    new Array(activeConfig.teamCount).fill(null);
+
+
+
   runtimeState.teams =
     activeConfig.teams.map((t, idx) => ({
+
+      
 
       id: idx,
 
@@ -199,6 +211,10 @@ function resetRuntimeEngine() {
 
     }));
 
+    console.log(
+    "RUNTIME TEAM CHECK",
+    activeConfig.teams.map(t=>t.perms)
+);
 
   dealInitialPermutationPool();
 
