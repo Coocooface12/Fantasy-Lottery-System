@@ -1222,6 +1222,16 @@ const targetPerms =
       k
     );
 
+    console.log(
+    "APPLY CHECK:",
+    {
+        balls: n,
+        drawSize: k,
+        targetPerms: targetPerms,
+        calculated: absoluteMax
+    }
+);
+
 
 
 
