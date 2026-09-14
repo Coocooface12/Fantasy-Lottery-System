@@ -537,6 +537,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   updateDrawModeUI();
 
+  renderLotteryInterface(); 
+
 });
 
 function setupDrawModeButtons() {

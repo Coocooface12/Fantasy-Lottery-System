@@ -754,7 +754,7 @@ function initSystemOnBoot() {
 
 
   activeConfig.lotteryFormat =
-    "NHL Style Lottery";
+    "Fantasy Mini Lottery";
 
 
   activeConfig.editMode =
@@ -781,6 +781,12 @@ function initSystemOnBoot() {
     pendingConfig.teams
 );
 
+console.log(
+"BOOT CONFIG",
+pendingConfig.totalBalls,
+pendingConfig.drawSize,
+pendingConfig.targetPerms
+);
 
 renderLotterySelectors();
 

@@ -1459,9 +1459,18 @@ function resetSettingsToDefault(){
 
     initSystemOnBoot();
 
-    setTimeout(() => {
+    pendingConfig =
+        structuredClone(activeConfig);
+
+
+    renderLotterySelectors();
+
+    renderAdminTeamRows(
+        pendingConfig.teams
+    );
+
+
     switchTab('lottery');
-}, 0);
 
   }
 
