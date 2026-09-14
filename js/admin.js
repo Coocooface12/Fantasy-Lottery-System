@@ -134,7 +134,7 @@ if(selected === "Custom"){
 if(teamInput){
 
     teamInput.value =
-        activeConfig.teamCount;
+       pendingConfig.teamCount;
 
 }
 
@@ -147,7 +147,7 @@ const ballInput =
 if(ballInput){
 
     ballInput.value =
-        activeConfig.totalBalls;
+         pendingConfig.totalBalls;
 
 }
 
@@ -160,7 +160,7 @@ const drawInput =
 if(drawInput){
 
     drawInput.value =
-        activeConfig.drawSize;
+          pendingConfig.drawSize;
 
 }
 
@@ -178,12 +178,12 @@ if(permInput){
 }
 
 
-activeConfig.curveType =
+pendingConfig.curveType =
     format.curve || "Flat Curve";
 
 const selectedCurve =
     lotteryCurves[
-        activeConfig.curveType
+        pendingConfig.curveType
     ];
 
 
@@ -276,8 +276,8 @@ if(selectedCurve){
 
 pendingConfig.teams =
     generateDefaultWeightedTeams(
-        count,
-        targetPerms,
+        pendingConfig.teamCount,
+        pendingConfig.targetPerms,
         percentages
     );
 
@@ -1114,8 +1114,8 @@ function handleTeamCountChange() {
 
     pendingConfig.teams =
     generateDefaultWeightedTeams(
-        count,
-        targetPerms,
+        pendingConfig.teamCount,
+        pendingConfig.targetPerms,
         percentages
     );
 
@@ -1455,7 +1455,7 @@ function setTeamEditMode(mode){
 
 
     renderAdminTeamRows(
-        activeConfig.teams
+         pendingConfig.teams
     );
 
 }
