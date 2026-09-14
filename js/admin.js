@@ -85,7 +85,7 @@ function applyLotteryFormat(selected, button){
 
 if(selected === "Custom"){
 
-    activeConfig.lotteryFormat = "Custom";
+    pendingConfig.lotteryFormat = "Custom";
 
     updateLotteryFormatSelector();
 
@@ -100,8 +100,8 @@ if(selected === "Custom"){
 
 
 
-    activeConfig.lotteryFormat =
-        selected;
+    pendingConfig.lotteryFormat =
+    selected;
 
 
 
@@ -195,13 +195,13 @@ if(selectedCurve){
     if(selectedCurve.type === "flat"){
 
         percentages =
-            Array(
-                activeConfig.teamCount
-            )
-            .fill(
-                100 /
-                activeConfig.teamCount
-            );
+    Array(
+        pendingConfig.teamCount
+    )
+    .fill(
+        100 /
+        pendingConfig.teamCount
+    );
 
     }
 
@@ -215,7 +215,7 @@ if(selectedCurve){
 
         while(
             percentages.length <
-            activeConfig.teamCount
+            pendingConfig.teamCount
         ){
 
             const lastValue =
@@ -238,13 +238,13 @@ if(selectedCurve){
 
         if(
             percentages.length >
-            activeConfig.teamCount
+            pendingConfig.teamCount
         ){
 
             percentages =
                 percentages.slice(
                     0,
-                    activeConfig.teamCount
+                    pendingConfig.teamCount
                 );
 
         }
@@ -312,7 +312,7 @@ function updateLotteryFormatSelector(){
             'active',
 
             btn.dataset.value ===
-            activeConfig.lotteryFormat
+            pendingConfig.lotteryFormat
 
         );
 
@@ -333,7 +333,7 @@ function updateLotteryFormatSelector(){
 function setSelectorValue(configKey, value, button) {
 
 
-    activeConfig[configKey] = value;
+    pendingConfig[configKey] = value;
 
 
 
@@ -428,12 +428,25 @@ const k =
     pendingConfig.targetPerms =
     absoluteMax;
 
-    pendingConfig.teams =
-    generateDefaultWeightedTeams(
-        pendingConfig.teamCount,
-        absoluteMax
-    );
+    if(
+    !pendingConfig.teams ||
+    pendingConfig.teams.length === 0
+){
 
+    if(
+    !pendingConfig.teams ||
+    pendingConfig.teams.length === 0
+){
+
+    pendingConfig.teams =
+        generateDefaultWeightedTeams(
+            pendingConfig.teamCount,
+            absoluteMax
+        );
+
+}
+
+}
 
 
     if(
@@ -614,9 +627,7 @@ function renderAdminTeamRows(teamsArray) {
         data-index="${index}"
         oninput="
             this.value=this.value.replace(/[^0-9]/g,'');
-            activeConfig.teams[${index}].perms =
-                parseInt(this.value) || 0;
-            updateAdminTotal();
+            updatePermutationMode(${index}, this.value);
         "
     >
     `
@@ -793,7 +804,17 @@ function updatePercentageMode(index, value){
 
 
 
-    pendingConfig.teams.forEach(team => {
+    let runningTotal = 0;
+
+pendingConfig.teams.forEach((team,index)=>{
+
+    if(index === pendingConfig.teams.length - 1){
+
+        team.perms =
+            targetPerms - runningTotal;
+
+    }
+    else{
 
         team.perms =
             Math.round(
@@ -802,7 +823,11 @@ function updatePercentageMode(index, value){
                 targetPerms
             );
 
-    });
+        runningTotal += team.perms;
+
+    }
+
+});
 
 
 
@@ -980,13 +1005,7 @@ function handleTeamCountChange() {
 
 
     const targetPerms =
-        parseInt(
-            document.getElementById(
-                'cfg-max-perms'
-            ).value
-        )
-        ||
-        720;
+    pendingConfig.targetPerms || 720;
 
 
 
@@ -1115,7 +1134,7 @@ function handleTeamCountChange() {
     pendingConfig.teams =
     generateDefaultWeightedTeams(
         pendingConfig.teamCount,
-        pendingConfig.targetPerms,
+         targetPerms,
         percentages
     );
 
@@ -1281,14 +1300,23 @@ pendingConfig.teams.forEach((team,index)=>{
 
     weightSum += weight;
 
-percentageSum += Number(team.percentage) || 0;
+
+    if(
+        pendingConfig.editMode === "percentages"
+    ){
+
+        percentageSum += Number(team.percentage) || 0;
+
+    }
+
 
 parsedTeams.push({
 
   name:
-    nameInputs[index].value.trim()
-    ||
-    `Team ${index+1}`,
+    nameInputs[index]
+        ? nameInputs[index].value.trim()
+        : team.name
+        || `Team ${index+1}`,
 
   seed:
     index + 1,
@@ -1419,7 +1447,7 @@ function resetSettingsToDefault(){
 
 function setTeamEditMode(mode){
 
-    activeConfig.editMode = mode;
+   pendingConfig.editMode = mode;
 
 
     const permBtn =

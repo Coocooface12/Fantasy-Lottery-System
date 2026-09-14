@@ -665,15 +665,31 @@ function initSystemOnBoot() {
     "reverse";
 
 
+  activeConfig.lotteryFormat =
+    "NHL Style Lottery";
+
+
+  activeConfig.editMode =
+    "permutations";
+
+
   activeConfig.teams =
     generateDefaultWeightedTeams(
+
       activeConfig.teamCount,
+
       activeConfig.targetPerms
+
     );
 
 
+  pendingConfig =
+    structuredClone(activeConfig);
+
+
+
   renderAdminTeamRows(
-    activeConfig.teams
+    pendingConfig.teams
   );
 
 
