@@ -815,9 +815,43 @@ function renderDrawControls() {
     "click",
     () => {
 
-        if(runtimeState.drawInProgress){
+        // -----------------------------
+        // Start a brand new auto lottery
+        // -----------------------------
+        if(!runtimeState.autoRunning){
+
+            runtimeState.autoRunning = true;
+            runtimeState.autoPaused = false;
+
+            renderDrawControls();
+
+            runAutomaticLottery();
+
             return;
+
         }
+
+
+        // -----------------------------
+        // Pause an active lottery
+        // -----------------------------
+        if(!runtimeState.autoPaused){
+
+            runtimeState.autoPaused = true;
+
+            renderDrawControls();
+
+            return;
+
+        }
+
+
+        // -----------------------------
+        // Resume a paused lottery
+        // -----------------------------
+        runtimeState.autoPaused = false;
+
+        renderDrawControls();
 
         runAutomaticLottery();
 
