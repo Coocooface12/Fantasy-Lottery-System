@@ -158,6 +158,8 @@ if(input){
 
     );
 
+renderMoveUpRuleSelector();
+
 }
 
 function populateCurveSelector(){
@@ -235,5 +237,178 @@ function applyCurvePreset(curve){
     handleTeamCountChange();
 
     updateCurveSelector();
+
+}
+
+function renderMoveUpRuleSelector(){
+
+
+    const toggleContainer =
+        document.getElementById(
+            "move-up-toggle-selector"
+        );
+
+
+    if(!toggleContainer) return;
+
+
+    toggleContainer.innerHTML = "";
+
+
+    ["OFF","ON"].forEach(option=>{
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "selector-tile";
+
+
+        button.textContent =
+            option;
+
+
+
+        if(
+            (option === "ON" &&
+             pendingConfig.moveUpRule.enabled)
+            ||
+            (option === "OFF" &&
+             !pendingConfig.moveUpRule.enabled)
+        ){
+
+            button.classList.add("active");
+
+        }
+
+
+
+        button.onclick = ()=>{
+
+
+            pendingConfig.moveUpRule.enabled =
+                option === "ON";
+
+
+            if(
+                !pendingConfig.moveUpRule.enabled
+            ){
+
+                pendingConfig.moveUpRule.maxPositions =
+                    null;
+
+            }
+
+
+            renderMoveUpRuleSelector();
+
+
+        };
+
+
+        toggleContainer.appendChild(button);
+
+
+    });
+
+
+
+    renderMoveUpPositionSelector();
+
+
+}
+
+function renderMoveUpPositionSelector(){
+
+
+    const container =
+        document.getElementById(
+            "move-up-position-selector"
+        );
+
+
+    const wrapper =
+        document.getElementById(
+            "move-up-position-container"
+        );
+
+
+    if(!container || !wrapper) return;
+
+
+
+    container.innerHTML = "";
+
+
+
+    if(
+        !pendingConfig.moveUpRule.enabled
+    ){
+
+        wrapper.classList.add("hidden");
+
+        return;
+
+    }
+
+
+
+    wrapper.classList.remove("hidden");
+
+
+
+    const max =
+        pendingConfig.teamCount - 2;
+
+
+
+    for(
+        let i = 1;
+        i <= max;
+        i++
+    ){
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "selector-tile";
+
+
+        button.textContent =
+            i;
+
+
+
+        if(
+            pendingConfig.moveUpRule.maxPositions === i
+        ){
+
+            button.classList.add("active");
+
+        }
+
+
+
+        button.onclick = ()=>{
+
+
+            pendingConfig.moveUpRule.maxPositions =
+                i;
+
+
+            renderMoveUpPositionSelector();
+
+
+        };
+
+
+        container.appendChild(button);
+
+    }
 
 }

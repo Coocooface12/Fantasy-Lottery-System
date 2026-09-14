@@ -103,6 +103,11 @@ let activeConfig = {
     targetPerms: 720,
 
     curveType: "NHL Draft Curve",
+    
+       moveUpRule: {
+        enabled: false,
+        maxPositions: null
+    },
 
     curveSettings: {},
 
