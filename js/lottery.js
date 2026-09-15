@@ -211,6 +211,22 @@ function resetRuntimeEngine(render = true) {
 
     }));
 
+    console.log("===== BEST POSSIBLE PICKS =====");
+
+runtimeState.teams.forEach(team => {
+
+    console.log({
+
+        team: team.name,
+
+        seed: team.seed,
+
+        bestPick: getBestPossiblePick(team)
+
+    });
+
+});
+
   dealInitialPermutationPool();
 
   initializeDrawSequenceRound(false);
@@ -499,6 +515,42 @@ function getMoveUpAdjustedSlot(team){
 
 }
 
+function getBestPossiblePick(team){
+
+    if(
+        !activeConfig.moveUpRule ||
+        !activeConfig.moveUpRule.enabled
+    ){
+        return null;
+    }
+
+    const maxMove =
+        activeConfig.moveUpRule.maxPositions || 0;
+
+    let naturalPick;
+
+    if(activeConfig.revealMode === "reverse"){
+
+        naturalPick =
+            activeConfig.teamCount -
+            team.seed +
+            1;
+
+    }
+    else{
+
+        naturalPick =
+            team.seed;
+
+    }
+
+    return Math.max(
+        1,
+        naturalPick - maxMove
+    );
+
+}
+
 function resolveDrawSequenceWinner() {
   const finalizedSequence = runtimeState.drawnBalls;
   let winner = null;
@@ -564,43 +616,13 @@ if (activeConfig.revealMode === "reverse") {
 const originalPick =
     targetDraftSlotIndex + 1;
 
+// Final draft slot assignment
 
-
-// Apply Move Up Rule
-
-let moveUpApplied = false;
-let finalPick = originalPick;
-
-
-if(
-    activeConfig.moveUpRule &&
-    activeConfig.moveUpRule.enabled
-){
-
-    const maxMove =
-        activeConfig.moveUpRule.maxPositions || 0;
-
-
-    finalPick =
-        Math.max(
-            1,
-            originalPick - maxMove
-        );
-
-
-    if(finalPick !== originalPick){
-
-        moveUpApplied = true;
-
-    }
-
-}
-
-
-// Convert final pick back into array index
-
-targetDraftSlotIndex =
-    finalPick - 1;
+runtimeState.draftBoard[targetDraftSlotIndex] = {
+    teamName: winner.name,
+    sequenceString: finalizedSequence.join(' → '),
+    resolvedInRound: runtimeState.currentRoundIndex + 1
+};
 
   
 console.log(
