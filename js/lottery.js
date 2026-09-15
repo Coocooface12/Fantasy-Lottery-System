@@ -903,6 +903,18 @@ function resolveDrawSequenceWinner() {
     const worstPossiblePick =
         getWorstPossiblePick(winner);
 
+        console.log(
+    "MOVE DOWN CHECK",
+    {
+        team: winner.name,
+        seed: winner.seed,
+        revealMode: activeConfig.revealMode,
+        moveDownRule: activeConfig.moveDownRule,
+        worstPossiblePick,
+        originalPick
+    }
+);
+
 
 
     // Move Up Rule
