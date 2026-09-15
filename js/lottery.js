@@ -744,6 +744,125 @@ function insertWinnerIntoDraftBoard(
 
 }
 
+function validateDraftBoardAgainstRules(){
+
+
+    let adjustmentMade = true;
+
+
+
+    while(adjustmentMade){
+
+        adjustmentMade = false;
+
+
+
+        for(
+            let i = 0;
+            i < runtimeState.draftBoard.length;
+            i++
+        ){
+
+
+            const entry =
+                runtimeState.draftBoard[i];
+
+
+            if(!entry){
+                continue;
+            }
+
+
+
+            const team =
+                runtimeState.teams.find(
+                    t =>
+                    t.name === entry.teamName
+                );
+
+
+
+            if(!team){
+                continue;
+            }
+
+
+
+            const currentPick =
+                i + 1;
+
+
+
+            const worstPossiblePick =
+                getWorstPossiblePick(team);
+
+
+
+            if(
+                worstPossiblePick &&
+                currentPick > worstPossiblePick
+            ){
+
+
+
+                console.log(
+                    "POST PLACEMENT MOVE DOWN ADJUSTMENT",
+                    {
+                        team:
+                            team.name,
+
+                        currentPick,
+
+                        adjustedPick:
+                            worstPossiblePick
+                    }
+                );
+
+
+
+                const correctedIndex =
+                    worstPossiblePick - 1;
+
+
+
+                const movingEntry =
+                    runtimeState.draftBoard.splice(
+                        i,
+                        1
+                    )[0];
+
+
+
+                runtimeState.draftBoard.splice(
+                    correctedIndex,
+                    0,
+                    movingEntry
+                );
+
+
+
+                runtimeState.draftBoard =
+                    runtimeState.draftBoard.slice(
+                        0,
+                        activeConfig.teamCount
+                    );
+
+
+
+                adjustmentMade = true;
+
+
+                break;
+
+            }
+
+        }
+
+    }
+
+
+}
+
 function getNextDraftSlotToResolve(){
 
     // Reverse reveal:
@@ -1036,7 +1155,7 @@ function resolveDrawSequenceWinner() {
         targetDraftSlotIndex
     );
 
-
+    validateDraftBoardAgainstRules();
 
     redistributePermutations(winner);
 
@@ -1341,7 +1460,7 @@ function advanceToNextLotteryRound() {
             targetDraftSlotIndex
         );
 
-
+        validateDraftBoardAgainstRules();
 
         runtimeState.roundDone = true;
 
