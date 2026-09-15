@@ -470,6 +470,35 @@ function runAutomaticLottery(){
 
 }
 
+function getMoveUpAdjustedSlot(team){
+
+    // No rule enabled
+    if(
+        !activeConfig.moveUpRule ||
+        !activeConfig.moveUpRule.enabled
+    ){
+
+        return null;
+
+    }
+
+
+    const maxMove =
+        activeConfig.moveUpRule.maxPositions || 0;
+
+
+    const bestPossiblePick =
+        Math.max(
+            1,
+            team.seed - maxMove
+        );
+
+
+    // Convert pick number to array index
+    return bestPossiblePick - 1;
+
+}
+
 function resolveDrawSequenceWinner() {
   const finalizedSequence = runtimeState.drawnBalls;
   let winner = null;
@@ -510,27 +539,62 @@ if (!winner) {
   runtimeState.roundDone = true;
   winner.hasSecuredPlacement = true;
   
-  let targetDraftSlotIndex;
+let targetDraftSlotIndex;
+
+
+// First calculate normal lottery placement
 
 if (activeConfig.revealMode === "reverse") {
 
-  // Pick 8 → Pick 1
-  targetDraftSlotIndex =
-    activeConfig.teamCount - 1 - runtimeState.currentRoundIndex;
+    targetDraftSlotIndex =
+        activeConfig.teamCount - 1 - runtimeState.currentRoundIndex;
 
 } else {
 
-  // Pick 1 → Pick 8
-  targetDraftSlotIndex =
-    runtimeState.currentRoundIndex;
+    targetDraftSlotIndex =
+        runtimeState.currentRoundIndex;
+
+}
+
+
+
+// Then apply Move Up Rule
+
+const moveUpSlot =
+    getMoveUpAdjustedSlot(winner);
+
+
+if(moveUpSlot !== null){
+
+
+    // Only move if the rule improves placement
+
+    if(
+        moveUpSlot < targetDraftSlotIndex
+    ){
+
+        targetDraftSlotIndex =
+            moveUpSlot;
+
+    }
 
 }
   
   runtimeState.draftBoard[targetDraftSlotIndex] = {
+
     teamName: winner.name,
-    sequenceString: finalizedSequence.join(' → '),
-    resolvedInRound: runtimeState.currentRoundIndex + 1
-  };
+
+    sequenceString:
+        moveUpSlot !== null &&
+        moveUpSlot < targetDraftSlotIndex
+        ?
+        `Move Up Rule Applied (${activeConfig.moveUpRule.maxPositions} Positions): ${finalizedSequence.join(' → ')}`
+        :
+        finalizedSequence.join(' → '),
+
+    resolvedInRound:
+        runtimeState.currentRoundIndex + 1
+};
   
   redistributePermutations(winner);
 }
@@ -661,6 +725,59 @@ runtimeState.teams
   eliminatedTeam.allPermutations = [];
   eliminatedTeam.assignedPermsCount = 0;
   eliminatedTeam.livePermutations = [];
+}
+
+function getMoveUpAdjustedPick(team){
+
+    // If rule is disabled, return normal seed
+    if(
+        !pendingConfig.moveUpRule ||
+        !pendingConfig.moveUpRule.enabled
+    ){
+        return team.seed;
+    }
+
+
+    const maxMove =
+        pendingConfig.moveUpRule.maxPositions || 0;
+
+
+    const adjustedPick =
+        team.seed - maxMove;
+
+
+    return Math.max(
+        1,
+        adjustedPick
+    );
+
+}
+
+function getAvailableDraftSlot(team){
+
+    const preferredPick =
+        getMoveUpAdjustedPick(team);
+
+
+    for(
+        let pick = preferredPick;
+        pick <= runtimeState.draftBoard.length;
+        pick++
+    ){
+
+        if(
+            runtimeState.draftBoard[pick - 1] === null
+        ){
+
+            return pick - 1;
+
+        }
+
+    }
+
+
+    return null;
+
 }
 
 function advanceToNextLotteryRound() {
