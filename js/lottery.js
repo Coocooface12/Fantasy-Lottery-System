@@ -753,6 +753,7 @@ function validateDraftBoardAgainstRules(){
 
     while(adjustmentMade){
 
+
         adjustmentMade = false;
 
 
@@ -793,35 +794,89 @@ function validateDraftBoardAgainstRules(){
 
 
 
+            const bestPossiblePick =
+                getBestPossiblePick(team);
+
+
             const worstPossiblePick =
                 getWorstPossiblePick(team);
 
 
 
+            let correctedPick = null;
+
+            let adjustmentType = null;
+
+
+
+            /*
+                Team is too high.
+                Example:
+                Allowed range is 8-12.
+                Team is sitting at 5.
+            */
+
             if(
+                bestPossiblePick &&
+                currentPick < bestPossiblePick
+            ){
+
+                correctedPick =
+                    bestPossiblePick;
+
+
+                adjustmentType =
+                    "Move Down";
+
+
+            }
+
+
+
+            /*
+                Team is too low.
+                Example:
+                Allowed range is 8-12.
+                Team is sitting at 15.
+            */
+
+            else if(
                 worstPossiblePick &&
                 currentPick > worstPossiblePick
             ){
 
+                correctedPick =
+                    worstPossiblePick;
+
+
+                adjustmentType =
+                    "Move Up";
+
+            }
+
+
+
+            if(correctedPick !== null){
 
 
                 console.log(
-                    "POST PLACEMENT MOVE DOWN ADJUSTMENT",
+                    "LEGAL RANGE ADJUSTMENT",
                     {
                         team:
                             team.name,
 
                         currentPick,
 
-                        adjustedPick:
-                            worstPossiblePick
+                        correctedPick,
+
+                        adjustmentType,
+
+                        bestPossiblePick,
+
+                        worstPossiblePick
+
                     }
                 );
-
-
-
-                const correctedIndex =
-                    worstPossiblePick - 1;
 
 
 
@@ -834,7 +889,7 @@ function validateDraftBoardAgainstRules(){
 
 
                 runtimeState.draftBoard.splice(
-                    correctedIndex,
+                    correctedPick - 1,
                     0,
                     movingEntry
                 );
