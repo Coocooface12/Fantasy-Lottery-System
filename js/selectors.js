@@ -160,6 +160,10 @@ if(input){
 
 renderMoveUpRuleSelector();
 
+    renderMoveUpToggle();
+
+    renderMoveUpPositions();
+
 }
 
 function populateCurveSelector(){
@@ -410,5 +414,165 @@ function renderMoveUpPositionSelector(){
         container.appendChild(button);
 
     }
+
+}
+
+function renderMoveUpToggle(){
+
+    const container =
+        document.getElementById(
+            "move-up-toggle-selector"
+        );
+
+
+    if(!container) return;
+
+
+    container.innerHTML = "";
+
+
+    ["Off","On"].forEach(option=>{
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "selector-tile";
+
+
+        const value =
+            option === "On";
+
+
+        if(
+            pendingConfig.moveUpRule.enabled === value
+        ){
+
+            button.classList.add("active");
+
+        }
+
+
+        button.textContent =
+            option;
+
+
+        button.onclick = ()=>{
+
+
+            pendingConfig.moveUpRule.enabled =
+                value;
+
+
+            renderMoveUpToggle();
+
+
+            renderMoveUpPositions();
+
+
+        };
+
+
+        container.appendChild(button);
+
+
+    });
+
+
+}
+
+function renderMoveUpPositions(){
+
+    const container =
+        document.getElementById(
+            "move-up-position-container"
+        );
+
+
+    const selector =
+        document.getElementById(
+            "move-up-position-selector"
+        );
+
+
+    if(!container || !selector) return;
+
+
+
+    selector.innerHTML = "";
+
+
+
+    if(
+        !pendingConfig.moveUpRule.enabled
+    ){
+
+        container.classList.add("hidden");
+
+        return;
+
+    }
+
+
+
+    container.classList.remove("hidden");
+
+
+
+    const max =
+        pendingConfig.teamCount - 2;
+
+
+
+    for(
+        let i = 1;
+        i <= max;
+        i++
+    ){
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "selector-tile";
+
+
+        button.textContent =
+            i;
+
+
+
+        if(
+            pendingConfig.moveUpRule.maxPositions === i
+        ){
+
+            button.classList.add("active");
+
+        }
+
+
+
+        button.onclick = ()=>{
+
+
+            pendingConfig.moveUpRule.maxPositions =
+                i;
+
+
+            renderMoveUpPositions();
+
+
+        };
+
+
+        selector.appendChild(button);
+
+
+    }
+
 
 }
