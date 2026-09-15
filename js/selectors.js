@@ -464,18 +464,34 @@ function renderMoveUpToggle(){
         button.onclick = ()=>{
 
 
-            pendingConfig.moveUpRule.enabled =
-                value;
+    pendingConfig.moveUpRule.enabled =
+        value;
 
 
-            renderMoveUpToggle();
+    if(value){
 
-            renderMoveUpPositions();
+        pendingConfig.moveDownRule.enabled =
+            false;
 
-            renderMoveDownRule();
+        pendingConfig.moveDownRule.maxPositions =
+            null;
+
+    }
 
 
-        };
+    renderMoveUpToggle();
+
+
+    renderMoveUpPositions();
+
+
+    renderMoveDownToggle();
+
+
+    renderMoveDownPositions();
+
+
+};
 
 
         container.appendChild(button);
@@ -625,26 +641,34 @@ function renderMoveDownToggle(){
         button.onclick = ()=>{
 
 
-            pendingConfig.moveDownRule.enabled =
-                value;
+    pendingConfig.moveDownRule.enabled =
+        value;
 
 
-            if(
-                !pendingConfig.moveDownRule.enabled
-            ){
+    if(value){
 
-                pendingConfig.moveDownRule.maxPositions =
-                    null;
+        pendingConfig.moveUpRule.enabled =
+            false;
 
-            }
+        pendingConfig.moveUpRule.maxPositions =
+            null;
 
-
-            renderMoveDownToggle();
-
-            renderMoveDownPositions();
+    }
 
 
-        };
+    renderMoveDownToggle();
+
+
+    renderMoveDownPositions();
+
+
+    renderMoveUpToggle();
+
+
+    renderMoveUpPositions();
+
+
+};
 
 
         container.appendChild(button);

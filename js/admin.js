@@ -1400,40 +1400,64 @@ activeConfig.teams = parsedTeams;
 
 pendingConfig = structuredClone(activeConfig);
 
-activeConfig.moveUpRule =
-    structuredClone(
-        pendingConfig.moveUpRule
-    );
 
-    if(!pendingConfig.moveUpRule){
+// Ensure Move Up exists
+
+if(!pendingConfig.moveUpRule){
 
     pendingConfig.moveUpRule = {
 
         enabled:false,
 
-        maxPositions:0
+        maxPositions:null
 
     };
 
 }
+
+
+// Ensure Move Down exists
+
+if(!pendingConfig.moveDownRule){
+
+    pendingConfig.moveDownRule = {
+
+        enabled:false,
+
+        maxPositions:null
+
+    };
+
+}
+
+
+// Apply pending settings to active config
+
+activeConfig.moveUpRule =
+    structuredClone(
+        pendingConfig.moveUpRule
+    );
+
+
+activeConfig.moveDownRule =
+    structuredClone(
+        pendingConfig.moveDownRule
+    );
+
+
 
 console.log(
     "MOVE UP CHECK:",
     activeConfig.moveUpRule
 );
 
-  console.log("Before reset");
 
-resetRuntimeEngine();
-
-console.log("After reset");
-
-switchTab('lottery');
-
-console.log("After switch tab");
+console.log(
+    "MOVE DOWN CHECK:",
+    activeConfig.moveDownRule
+);
 
 }
-
 
 
 
