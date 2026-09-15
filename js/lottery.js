@@ -699,6 +699,50 @@ function insertWinnerIntoDraftBoard(
 
 }
 
+function getNextDraftSlotToResolve(){
+
+    // Reverse reveal:
+    // Resolve from last pick toward first pick.
+
+    if(activeConfig.revealMode === "reverse"){
+
+        for(
+            let i = activeConfig.teamCount - 1;
+            i >= 0;
+            i--
+        ){
+
+            if(runtimeState.draftBoard[i] === null){
+                return i;
+            }
+
+        }
+
+    }
+
+    // Standard reveal:
+    // Resolve from first pick toward last pick.
+
+    else{
+
+        for(
+            let i = 0;
+            i < activeConfig.teamCount;
+            i++
+        ){
+
+            if(runtimeState.draftBoard[i] === null){
+                return i;
+            }
+
+        }
+
+    }
+
+    return -1;
+
+}
+
 function resolveDrawSequenceWinner() {
   const finalizedSequence = runtimeState.drawnBalls;
   let winner = null;
@@ -739,24 +783,8 @@ if (!winner) {
   runtimeState.roundDone = true;
   winner.hasSecuredPlacement = true;
   
-let targetDraftSlotIndex;
-
-
-// Determine normal lottery placement
-
-if (activeConfig.revealMode === "reverse") {
-
-    // Pick 8 → Pick 1
-    targetDraftSlotIndex =
-        activeConfig.teamCount - 1 - runtimeState.currentRoundIndex;
-
-} else {
-
-    // Pick 1 → Pick 8
-    targetDraftSlotIndex =
-        runtimeState.currentRoundIndex;
-
-}
+let targetDraftSlotIndex =
+    getNextDraftSlotToResolve();
 
 
 // Store original pick number
