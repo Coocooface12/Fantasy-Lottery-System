@@ -542,20 +542,65 @@ if (!winner) {
 let targetDraftSlotIndex;
 
 
-// First calculate normal lottery placement
+// Determine normal lottery placement
 
 if (activeConfig.revealMode === "reverse") {
 
+    // Pick 8 → Pick 1
     targetDraftSlotIndex =
         activeConfig.teamCount - 1 - runtimeState.currentRoundIndex;
 
 } else {
 
+    // Pick 1 → Pick 8
     targetDraftSlotIndex =
         runtimeState.currentRoundIndex;
 
 }
 
+
+// Store original pick number before adjustments
+
+const originalPick =
+    targetDraftSlotIndex + 1;
+
+
+
+// Apply Move Up Rule
+
+let moveUpApplied = false;
+let finalPick = originalPick;
+
+
+if(
+    activeConfig.moveUpRule &&
+    activeConfig.moveUpRule.enabled
+){
+
+    const maxMove =
+        activeConfig.moveUpRule.maxPositions || 0;
+
+
+    finalPick =
+        Math.max(
+            1,
+            originalPick - maxMove
+        );
+
+
+    if(finalPick !== originalPick){
+
+        moveUpApplied = true;
+
+    }
+
+}
+
+
+// Convert final pick back into array index
+
+targetDraftSlotIndex =
+    finalPick - 1;
 
 
 // Then apply Move Up Rule
@@ -584,13 +629,14 @@ if(moveUpSlot !== null){
 
     teamName: winner.name,
 
+
     sequenceString:
-        moveUpSlot !== null &&
-        moveUpSlot < targetDraftSlotIndex
+        moveUpApplied
         ?
-        `Move Up Rule Applied (${activeConfig.moveUpRule.maxPositions} Positions): ${finalizedSequence.join(' → ')}`
+        `Move Up Rule Applied (${originalPick} → ${finalPick}) | ${finalizedSequence.join(' → ')}`
         :
         finalizedSequence.join(' → '),
+
 
     resolvedInRound:
         runtimeState.currentRoundIndex + 1
