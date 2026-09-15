@@ -281,12 +281,6 @@ pendingConfig.teams =
         percentages
     );
 
-console.log(
-    "MOVE UP CHECK:",
-    activeConfig.moveUpRule
-);
-
-
     renderAdminTeamRows(
     pendingConfig.teams
 );
@@ -1422,6 +1416,11 @@ activeConfig.moveUpRule =
     };
 
 }
+
+console.log(
+    "MOVE UP CHECK:",
+    activeConfig.moveUpRule
+);
 
   console.log("Before reset");
 
