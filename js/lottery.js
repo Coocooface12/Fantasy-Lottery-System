@@ -896,6 +896,11 @@ function resolveDrawSequenceWinner() {
 
     // Calculate legal placement range
 
+    console.log(
+    "BEFORE MOVE DOWN CALC",
+    winner.name
+);
+
     const bestPossiblePick =
         getBestPossiblePick(winner);
 
