@@ -109,6 +109,11 @@ let activeConfig = {
         maxPositions: null
     },
 
+       moveDownRule: {
+        enabled: false,
+        maxPositions: 0
+    },
+
     curveSettings: {},
 
     revealMode: "reverse",

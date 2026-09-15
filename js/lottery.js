@@ -551,6 +551,51 @@ function getBestPossiblePick(team){
 
 }
 
+function getWorstPossiblePick(team){
+
+    if(
+        !activeConfig.moveDownRule ||
+        !activeConfig.moveDownRule.enabled
+    ){
+
+        return null;
+
+    }
+
+
+
+    const maxMove =
+        activeConfig.moveDownRule.maxPositions || 0;
+
+
+
+    let naturalPick;
+
+
+
+    if(activeConfig.revealMode === "reverse"){
+
+        naturalPick =
+            activeConfig.teamCount -
+            team.seed +
+            1;
+
+    }
+    else{
+
+        naturalPick =
+            team.seed;
+
+    }
+
+
+
+    return Math.min(
+        activeConfig.teamCount,
+        naturalPick + maxMove
+    );
+
+}
 
 function insertDraftPickWithDisplacement(
     teamEntry,
@@ -744,132 +789,217 @@ function getNextDraftSlotToResolve(){
 }
 
 function resolveDrawSequenceWinner() {
-  const finalizedSequence = runtimeState.drawnBalls;
-  let winner = null;
-  
-  runtimeState.teams.forEach(t => {
-    if (!t.hasSecuredPlacement) {
-      const successfulMatch = t.allPermutations.find(p => p.every((v, idx) => v === finalizedSequence[idx]));
-      if (successfulMatch) {
 
-    console.log(
-        "MATCH FOUND:",
-        t.name,
-        successfulMatch.join(" → ")
-    );
-
-    if (winner) {
-        console.log(
-            "DUPLICATE OWNER FOUND:",
-            winner.name,
-            "and",
-            t.name
-        );
-    }
-
-    winner = t;
-
-}
-
-    }
-  });
-  
-if (!winner) {
-  alert("No team owns this sequence. Redistribution error detected.");
-  return;
-}
-  
-  runtimeState.roundWinner = winner;
-  runtimeState.roundDone = true;
-  winner.hasSecuredPlacement = true;
-  
-let targetDraftSlotIndex =
-    getNextDraftSlotToResolve();
+    const finalizedSequence =
+        runtimeState.drawnBalls;
 
 
-// Store original pick number
-
-const originalPick =
-    targetDraftSlotIndex + 1;
-
-
-let finalPick =
-    originalPick;
-
-
-let moveUpApplied = false;
-
-
-// Apply Move Up Rule based on team's calculated maximum
-
-const bestPossiblePick =
-    getBestPossiblePick(winner);
+    let winner = null;
 
 
 
-if(
-    bestPossiblePick &&
-    originalPick < bestPossiblePick
-){
+    runtimeState.teams.forEach(t => {
 
-    finalPick =
-        bestPossiblePick;
+        if(!t.hasSecuredPlacement){
+
+            const successfulMatch =
+                t.allPermutations.find(
+                    p =>
+                    p.every(
+                        (v, idx) =>
+                        v === finalizedSequence[idx]
+                    )
+                );
 
 
-    moveUpApplied = true;
+            if(successfulMatch){
+
+                console.log(
+                    "MATCH FOUND:",
+                    t.name,
+                    successfulMatch.join(" → ")
+                );
 
 
-    console.log(
-        "MOVE UP RULE APPLIED",
-        {
-            team: winner.name,
-            originalPick,
-            finalPick,
-            bestPossiblePick
+                if(winner){
+
+                    console.log(
+                        "DUPLICATE OWNER FOUND:",
+                        winner.name,
+                        "and",
+                        t.name
+                    );
+
+                }
+
+
+                winner = t;
+
+            }
+
         }
+
+    });
+
+
+
+    if(!winner){
+
+        alert(
+            "No team owns this sequence. Redistribution error detected."
+        );
+
+        return;
+
+    }
+
+
+
+    runtimeState.roundWinner =
+        winner;
+
+
+    runtimeState.roundDone =
+        true;
+
+
+    winner.hasSecuredPlacement =
+        true;
+
+
+
+    // Determine next available draft slot
+
+    let targetDraftSlotIndex =
+        getNextDraftSlotToResolve();
+
+
+
+    const originalPick =
+        targetDraftSlotIndex + 1;
+
+
+
+    let finalPick =
+        originalPick;
+
+
+
+    let moveUpApplied =
+        false;
+
+
+    let moveDownApplied =
+        false;
+
+
+
+    // Calculate legal placement range
+
+    const bestPossiblePick =
+        getBestPossiblePick(winner);
+
+
+    const worstPossiblePick =
+        getWorstPossiblePick(winner);
+
+
+
+    // Move Up Rule
+    // Team cannot fall below its worst allowed outcome
+
+    if(
+        bestPossiblePick &&
+        finalPick > bestPossiblePick
+    ){
+
+        finalPick =
+            bestPossiblePick;
+
+
+        moveUpApplied =
+            true;
+
+    }
+
+
+
+    // Move Down Rule
+    // Team cannot rise above its best allowed outcome
+
+    if(
+        worstPossiblePick &&
+        finalPick < worstPossiblePick
+    ){
+
+        finalPick =
+            worstPossiblePick;
+
+
+        moveDownApplied =
+            true;
+
+    }
+
+
+
+    // Convert pick number back to array index
+
+    targetDraftSlotIndex =
+        finalPick - 1;
+
+
+
+    const draftEntry = {
+
+
+        teamName:
+            winner.name,
+
+
+
+        sequenceString:
+
+            moveUpApplied
+
+            ?
+
+            `Move Up Rule Applied (${originalPick} → ${finalPick}) | ${finalizedSequence.join(' → ')}`
+
+
+            :
+
+
+            moveDownApplied
+
+            ?
+
+            `Move Down Rule Applied (${originalPick} → ${finalPick}) | ${finalizedSequence.join(' → ')}`
+
+
+            :
+
+
+            finalizedSequence.join(' → '),
+
+
+
+        resolvedInRound:
+            runtimeState.currentRoundIndex + 1
+
+    };
+
+
+
+    insertWinnerIntoDraftBoard(
+        draftEntry,
+        targetDraftSlotIndex
     );
 
-}
 
 
-// Convert final pick into array index
+    redistributePermutations(winner);
 
-targetDraftSlotIndex =
-    finalPick - 1;
-
-
-
-const draftEntry = {
-
-    teamName: winner.name,
-
-
-    sequenceString:
-        moveUpApplied
-
-        ?
-
-        `Move Up Rule Applied (${originalPick} → ${finalPick}) | ${finalizedSequence.join(' → ')}`
-
-        :
-
-        finalizedSequence.join(' → '),
-
-
-    resolvedInRound:
-        runtimeState.currentRoundIndex + 1
-
-};
-
-
-
-insertWinnerIntoDraftBoard(
-    draftEntry,
-    targetDraftSlotIndex
-);
-
-redistributePermutations(winner);
-  
 }
 
 

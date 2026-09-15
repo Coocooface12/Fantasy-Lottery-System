@@ -164,6 +164,8 @@ renderMoveUpRuleSelector();
 
     renderMoveUpPositions();
 
+    renderMoveDownRule();
+
 }
 
 function populateCurveSelector(){
@@ -468,8 +470,9 @@ function renderMoveUpToggle(){
 
             renderMoveUpToggle();
 
-
             renderMoveUpPositions();
+
+            renderMoveDownRule();
 
 
         };
@@ -574,5 +577,182 @@ function renderMoveUpPositions(){
 
     }
 
+
+}
+
+function renderMoveDownToggle(){
+
+    const container =
+        document.getElementById(
+            "move-down-toggle-selector"
+        );
+
+
+    if(!container) return;
+
+
+    container.innerHTML = "";
+
+
+    ["Off","On"].forEach(option=>{
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "selector-tile";
+
+
+        const value =
+            option === "On";
+
+
+        if(
+            pendingConfig.moveDownRule.enabled === value
+        ){
+
+            button.classList.add("active");
+
+        }
+
+
+        button.textContent =
+            option;
+
+
+        button.onclick = ()=>{
+
+
+            pendingConfig.moveDownRule.enabled =
+                value;
+
+
+            if(
+                !pendingConfig.moveDownRule.enabled
+            ){
+
+                pendingConfig.moveDownRule.maxPositions =
+                    null;
+
+            }
+
+
+            renderMoveDownToggle();
+
+            renderMoveDownPositions();
+
+
+        };
+
+
+        container.appendChild(button);
+
+
+    });
+
+
+}
+
+function renderMoveDownPositions(){
+
+    const container =
+        document.getElementById(
+            "move-down-position-container"
+        );
+
+
+    const selector =
+        document.getElementById(
+            "move-down-position-selector"
+        );
+
+
+    if(!container || !selector) return;
+
+
+
+    selector.innerHTML = "";
+
+
+
+    if(
+        !pendingConfig.moveDownRule.enabled
+    ){
+
+        container.classList.add("hidden");
+
+        return;
+
+    }
+
+
+
+    container.classList.remove("hidden");
+
+
+
+    const max =
+        pendingConfig.teamCount - 2;
+
+
+
+    for(
+        let i = 1;
+        i <= max;
+        i++
+    ){
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "selector-tile";
+
+
+        button.textContent =
+            i;
+
+
+
+        if(
+            pendingConfig.moveDownRule.maxPositions === i
+        ){
+
+            button.classList.add("active");
+
+        }
+
+
+
+        button.onclick = ()=>{
+
+
+            pendingConfig.moveDownRule.maxPositions =
+                i;
+
+
+            renderMoveDownPositions();
+
+
+        };
+
+
+        selector.appendChild(button);
+
+
+    }
+
+
+}
+
+function renderMoveDownRule(){
+
+    renderMoveDownToggle();
+
+    renderMoveDownPositions();
 
 }
