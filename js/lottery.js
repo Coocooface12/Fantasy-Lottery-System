@@ -551,6 +551,58 @@ function getBestPossiblePick(team){
 
 }
 
+
+function insertDraftPickWithDisplacement(
+    teamEntry,
+    targetIndex
+){
+
+    let displaced =
+        runtimeState.draftBoard[targetIndex];
+
+
+    // Put new team into requested slot
+
+    runtimeState.draftBoard[targetIndex] =
+        teamEntry;
+
+
+
+    // Nothing was displaced
+
+    if(!displaced){
+        return;
+    }
+
+
+
+    // Push displaced team down
+
+    for(
+        let i = targetIndex + 1;
+        i < runtimeState.draftBoard.length;
+        i++
+    ){
+
+        const next =
+            runtimeState.draftBoard[i];
+
+
+        runtimeState.draftBoard[i] =
+            displaced;
+
+
+        if(!next){
+            break;
+        }
+
+
+        displaced = next;
+
+    }
+
+}
+
 function resolveDrawSequenceWinner() {
   const finalizedSequence = runtimeState.drawnBalls;
   let winner = null;
@@ -663,7 +715,7 @@ targetDraftSlotIndex =
 
 
 
-runtimeState.draftBoard[targetDraftSlotIndex] = {
+const draftEntry = {
 
     teamName: winner.name,
 
@@ -684,7 +736,26 @@ runtimeState.draftBoard[targetDraftSlotIndex] = {
         runtimeState.currentRoundIndex + 1
 
 };
+
+
+
+insertDraftPickWithDisplacement(
+    draftEntry,
+    targetDraftSlotIndex
+);
   
+if(
+    activeConfig.revealMode === "standard" &&
+    runtimeState.draftBoard[0] === null
+){
+
+    console.log(
+        "STANDARD MODE: Pick #1 unresolved. Reattempt required."
+    );
+
+    runtimeState.currentRoundIndex--;
+}
+
   redistributePermutations(winner);
 }
 
