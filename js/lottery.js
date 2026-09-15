@@ -603,6 +603,102 @@ function insertDraftPickWithDisplacement(
 
 }
 
+function insertWinnerIntoDraftBoard(
+    draftEntry,
+    targetIndex
+){
+
+    const displaced =
+        runtimeState.draftBoard[targetIndex];
+
+
+    // Place winner
+
+    runtimeState.draftBoard[targetIndex] =
+        draftEntry;
+
+
+    // No displacement needed
+
+    if(!displaced){
+        return;
+    }
+
+
+
+    // Reverse reveal:
+    // Move displaced teams toward Pick 1
+
+    if(activeConfig.revealMode === "reverse"){
+
+        let current =
+            displaced;
+
+
+        for(
+            let i = targetIndex - 1;
+            i >= 0;
+            i--
+        ){
+
+            const next =
+                runtimeState.draftBoard[i];
+
+
+            runtimeState.draftBoard[i] =
+                current;
+
+
+            current =
+                next;
+
+
+            if(!current){
+                break;
+            }
+
+        }
+
+    }
+
+
+    // Standard reveal:
+    // Move displaced teams toward Pick N
+
+    else{
+
+        let current =
+            displaced;
+
+
+        for(
+            let i = targetIndex + 1;
+            i < runtimeState.draftBoard.length;
+            i++
+        ){
+
+            const next =
+                runtimeState.draftBoard[i];
+
+
+            runtimeState.draftBoard[i] =
+                current;
+
+
+            current =
+                next;
+
+
+            if(!current){
+                break;
+            }
+
+        }
+
+    }
+
+}
+
 function resolveDrawSequenceWinner() {
   const finalizedSequence = runtimeState.drawnBalls;
   let winner = null;
@@ -739,25 +835,15 @@ const draftEntry = {
 
 
 
-insertDraftPickWithDisplacement(
+insertWinnerIntoDraftBoard(
     draftEntry,
     targetDraftSlotIndex
 );
+
+redistributePermutations(winner);
   
-if(
-    activeConfig.revealMode === "standard" &&
-    runtimeState.draftBoard[0] === null
-){
-
-    console.log(
-        "STANDARD MODE: Pick #1 unresolved. Reattempt required."
-    );
-
-    runtimeState.currentRoundIndex--;
 }
 
-  redistributePermutations(winner);
-}
 
 function redistributePermutations(eliminatedTeam) {
 
