@@ -1055,36 +1055,136 @@ function getAvailableDraftSlot(team){
 }
 
 function advanceToNextLotteryRound() {
-  runtimeState.currentRoundIndex++;
-  const remainingUnseededCount = runtimeState.teams.filter(t => !t.hasSecuredPlacement).length;
-  
-  if (remainingUnseededCount === 1) {
-    const finalUnseededTeam = runtimeState.teams.find(t => !t.hasSecuredPlacement);
-    finalUnseededTeam.hasSecuredPlacement = true;
-    
-   const finalSlot =
-    getNextDraftSlotToResolve();
 
-runtimeState.draftBoard[finalSlot] = {
+    runtimeState.currentRoundIndex++;
 
-    teamName:
-        finalUnseededTeam.name,
 
-    sequenceString:
-        "Assigned Automatically (Last Remaining Contender)",
+    const remainingUnseededCount =
+        runtimeState.teams.filter(
+            t => !t.hasSecuredPlacement
+        ).length;
 
-    resolvedInRound:
-        runtimeState.currentRoundIndex + 1
 
-};
-    
-    runtimeState.roundDone = true;
-    renderLotteryInterface();
-    switchTab('picks');
-    return;
-  }
-  
-  initializeDrawSequenceRound();
+
+    if (remainingUnseededCount === 1) {
+
+        const finalUnseededTeam =
+            runtimeState.teams.find(
+                t => !t.hasSecuredPlacement
+            );
+
+
+        finalUnseededTeam.hasSecuredPlacement = true;
+
+
+
+        // The final team is still a lottery winner.
+        // Determine the remaining pick they win.
+
+        let targetDraftSlotIndex =
+            getNextDraftSlotToResolve();
+
+
+
+        const originalPick =
+            targetDraftSlotIndex + 1;
+
+
+        let finalPick =
+            originalPick;
+
+
+        let moveUpApplied = false;
+
+
+
+        const bestPossiblePick =
+            getBestPossiblePick(
+                finalUnseededTeam
+            );
+
+
+
+        if (
+            bestPossiblePick &&
+            originalPick < bestPossiblePick
+        ) {
+
+            finalPick =
+                bestPossiblePick;
+
+
+            moveUpApplied = true;
+
+
+            console.log(
+                "FINAL TEAM MOVE UP APPLIED",
+                {
+                    team:
+                        finalUnseededTeam.name,
+
+                    originalPick,
+
+                    finalPick
+                }
+            );
+
+        }
+
+
+
+        targetDraftSlotIndex =
+            finalPick - 1;
+
+
+
+        const draftEntry = {
+
+            teamName:
+                finalUnseededTeam.name,
+
+
+            sequenceString:
+
+                moveUpApplied
+
+                ?
+
+                `Move Up Rule Applied (${originalPick} → ${finalPick}) | Assigned Automatically (Last Remaining Contender)`
+
+                :
+
+                "Assigned Automatically (Last Remaining Contender)",
+
+
+            resolvedInRound:
+                runtimeState.currentRoundIndex + 1
+
+        };
+
+
+
+        insertWinnerIntoDraftBoard(
+            draftEntry,
+            targetDraftSlotIndex
+        );
+
+
+
+        runtimeState.roundDone = true;
+
+        renderLotteryInterface();
+
+        switchTab('picks');
+
+        return;
+
+    }
+
+
+
+    initializeDrawSequenceRound();
+
 }
 
 function initSystemOnBoot() {
