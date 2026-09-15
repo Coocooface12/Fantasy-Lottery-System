@@ -211,11 +211,6 @@ function resetRuntimeEngine(render = true) {
 
     }));
 
-    console.log(
-    "RUNTIME TEAM CHECK",
-    activeConfig.teams.map(t=>t.perms)
-);
-
   dealInitialPermutationPool();
 
   initializeDrawSequenceRound(false);
@@ -236,30 +231,11 @@ function dealInitialPermutationPool() {
       );
 
 
-  console.log(
-      "DEAL POOL CHECK:",
-      {
-          balls: activeConfig.totalBalls,
-          drawSize: activeConfig.drawSize,
-          target: activeConfig.targetPerms,
-          generated: generatedPool.length
-      }
-  );
-
-
   const allCombinationsPool =
       shuffle(generatedPool);
 
 
   let cursor = 0;
-
-  console.log(
-    "TEAM ALLOCATION BEFORE DEAL:",
-    runtimeState.teams.map(t => ({
-        name: t.name,
-        assigned: t.assignedPermsCount
-    }))
-);
   
   runtimeState.teams.forEach(t => {
     t.allPermutations = allCombinationsPool.slice(cursor, cursor + t.assignedPermsCount).map(p => [...p]);
@@ -267,13 +243,6 @@ function dealInitialPermutationPool() {
     cursor += t.assignedPermsCount;
   });
 
-  console.log(
-    "TOTAL ASSIGNED AFTER DEAL:",
-    runtimeState.teams.reduce(
-        (sum,t)=>sum + t.assignedPermsCount,
-        0
-    )
-);
 }
 
 // =======================================================
@@ -502,21 +471,6 @@ function runAutomaticLottery(){
 }
 
 function resolveDrawSequenceWinner() {
-
-  console.log(
-    "RESOLVE CHECK:",
-    {
-        balls: activeConfig.totalBalls,
-        drawSize: activeConfig.drawSize,
-        target: activeConfig.targetPerms,
-        totalRuntimePerms:
-            runtimeState.teams.reduce(
-                (sum,t)=>sum + t.allPermutations.length,
-                0
-            )
-    }
-);
-
   const finalizedSequence = runtimeState.drawnBalls;
   let winner = null;
   
@@ -583,22 +537,6 @@ if (activeConfig.revealMode === "reverse") {
 
 function redistributePermutations(eliminatedTeam) {
 
-console.log(
-    "Redistributing from:",
-    eliminatedTeam.name,
-    "Keys:",
-    eliminatedTeam.allPermutations.length
-);
-
-console.log(
-    "Contains winning key:",
-    eliminatedTeam.allPermutations.some(
-        p => p.every(
-            (v,i)=>v === runtimeState.drawnBalls[i]
-        )
-    )
-);
-
   // Pull the full set of combinations that belonged to the team that just
   // secured a draft slot — these are the ones that need to be handed off.
  const orphanedPermutations =
@@ -641,16 +579,6 @@ if (winningInSlice) {
                 (v,i)=>v === perm[i]
             )
         )
-);
-    console.log(
-    "After redistribution:",
-    t.name,
-    "contains winning key:",
-    t.allPermutations.some(
-        p => p.every(
-            (v,i)=>v === runtimeState.drawnBalls[i]
-        )
-    )
 );
     t.assignedPermsCount = t.allPermutations.length;
     

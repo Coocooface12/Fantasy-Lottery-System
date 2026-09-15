@@ -281,6 +281,11 @@ pendingConfig.teams =
         percentages
     );
 
+console.log(
+    "MOVE UP CHECK:",
+    activeConfig.moveUpRule
+);
+
 
     renderAdminTeamRows(
     pendingConfig.teams
@@ -479,20 +484,10 @@ const k =
 
         });
 
-        console.log(
-    "Before recalculation",
-    pendingConfig.teams
-);
-
 
         recalculateTeamWeights(
             absoluteMax
         );
-
-        console.log(
-    "After recalculation",
-    pendingConfig.teams
-);
 
 
     }
@@ -807,11 +802,6 @@ function updatePercentageMode(index, value){
 const targetPerms =
     pendingConfig.targetPerms;
 
-    console.log(
-        "Before calculation:",
-       pendingConfig.teams[index]
-    );
-
 
 
     let runningTotal = 0;
@@ -838,15 +828,6 @@ pendingConfig.teams.forEach((team,index)=>{
     }
 
 });
-
-
-
-    console.log(
-        "After calculation:",
-       pendingConfig.teams[index]
-    );
-
-
 
     updateAdminTotal();
 
@@ -1238,16 +1219,6 @@ const targetPerms =
       k
     );
 
-    console.log(
-    "APPLY CHECK:",
-    {
-        balls: n,
-        drawSize: k,
-        targetPerms: targetPerms,
-        calculated: absoluteMax
-    }
-);
-
 
 
 
@@ -1435,15 +1406,22 @@ activeConfig.teams = parsedTeams;
 
 pendingConfig = structuredClone(activeConfig);
 
-console.log(
-    "AFTER APPLY ACTIVE CONFIG:",
-    {
-        balls: activeConfig.totalBalls,
-        drawSize: activeConfig.drawSize,
-        targetPerms: activeConfig.targetPerms,
-        teams: activeConfig.teams.length
-    }
-);
+activeConfig.moveUpRule =
+    structuredClone(
+        pendingConfig.moveUpRule
+    );
+
+    if(!pendingConfig.moveUpRule){
+
+    pendingConfig.moveUpRule = {
+
+        enabled:false,
+
+        maxPositions:0
+
+    };
+
+}
 
   console.log("Before reset");
 
@@ -1474,21 +1452,6 @@ function resetSettingsToDefault(){
   ){
 
     initSystemOnBoot();
-
-
-    console.log(
-      "RESET COMPLETE CHECK",
-      {
-        activeBalls: activeConfig.totalBalls,
-        activeDraw: activeConfig.drawSize,
-        activePerms: activeConfig.targetPerms,
-
-        pendingBalls: pendingConfig.totalBalls,
-        pendingDraw: pendingConfig.drawSize,
-        pendingPerms: pendingConfig.targetPerms
-      }
-    );
-
 
     switchTab('lottery');
 
