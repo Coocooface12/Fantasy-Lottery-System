@@ -920,6 +920,18 @@ function resolveDrawSequenceWinner() {
         moveUpApplied =
             true;
 
+            "MOVE UP RULE APPLIED",
+        {
+            team:
+                winner.name,
+
+            originalPick,
+
+            finalPick,
+
+            bestPossiblePick
+        }
+
     }
 
 
@@ -1225,6 +1237,8 @@ function advanceToNextLotteryRound() {
 
 
         let moveUpApplied = false;
+
+        let moveDownApplied = false;
 
 
 
