@@ -611,48 +611,78 @@ if (activeConfig.revealMode === "reverse") {
 }
 
 
-// Store original pick number before adjustments
+// Store original pick number
 
 const originalPick =
     targetDraftSlotIndex + 1;
 
-// Final draft slot assignment
+
+let finalPick =
+    originalPick;
+
+
+let moveUpApplied = false;
+
+
+// Apply Move Up Rule based on team's calculated maximum
+
+const bestPossiblePick =
+    getBestPossiblePick(winner);
+
+
+
+if(
+    bestPossiblePick &&
+    originalPick < bestPossiblePick
+){
+
+    finalPick =
+        bestPossiblePick;
+
+
+    moveUpApplied = true;
+
+
+    console.log(
+        "MOVE UP RULE APPLIED",
+        {
+            team: winner.name,
+            originalPick,
+            finalPick,
+            bestPossiblePick
+        }
+    );
+
+}
+
+
+// Convert final pick into array index
+
+targetDraftSlotIndex =
+    finalPick - 1;
+
+
 
 runtimeState.draftBoard[targetDraftSlotIndex] = {
-    teamName: winner.name,
-    sequenceString: finalizedSequence.join(' → '),
-    resolvedInRound: runtimeState.currentRoundIndex + 1
-};
-
-  
-console.log(
-    "MOVE UP PLACEMENT CHECK",
-    {
-        revealMode: activeConfig.revealMode,
-        round: runtimeState.currentRoundIndex,
-        originalPick,
-        finalPick,
-        targetDraftSlotIndex,
-        existingSlot:
-            runtimeState.draftBoard[targetDraftSlotIndex]
-    }
-);
-
-  runtimeState.draftBoard[targetDraftSlotIndex] = {
 
     teamName: winner.name,
 
 
     sequenceString:
         moveUpApplied
+
         ?
+
         `Move Up Rule Applied (${originalPick} → ${finalPick}) | ${finalizedSequence.join(' → ')}`
+
         :
+
         finalizedSequence.join(' → '),
 
 
     resolvedInRound:
         runtimeState.currentRoundIndex + 1
+
 };
   
   redistributePermutations(winner);
