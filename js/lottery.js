@@ -603,6 +603,25 @@ targetDraftSlotIndex =
     finalPick - 1;
 
 
+// Make sure the destination is available
+
+while(
+    runtimeState.draftBoard[targetDraftSlotIndex]
+){
+
+    if(activeConfig.revealMode === "reverse"){
+
+        targetDraftSlotIndex++;
+
+    } else {
+
+        targetDraftSlotIndex--;
+
+    }
+
+}
+
+
 // Then apply Move Up Rule
 
 const moveUpSlot =
@@ -625,6 +644,19 @@ if(moveUpSlot !== null){
 
 }
   
+console.log(
+    "MOVE UP PLACEMENT CHECK",
+    {
+        revealMode: activeConfig.revealMode,
+        round: runtimeState.currentRoundIndex,
+        originalPick,
+        finalPick,
+        targetDraftSlotIndex,
+        existingSlot:
+            runtimeState.draftBoard[targetDraftSlotIndex]
+    }
+);
+
   runtimeState.draftBoard[targetDraftSlotIndex] = {
 
     teamName: winner.name,
