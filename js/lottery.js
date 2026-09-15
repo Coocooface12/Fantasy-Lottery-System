@@ -957,18 +957,29 @@ function resolveDrawSequenceWinner() {
     // Team cannot rise above its best allowed outcome
 
     if(
-        worstPossiblePick &&
-        finalPick < worstPossiblePick
-    ){
+    worstPossiblePick &&
+    finalPick > worstPossiblePick
+){
 
-        finalPick =
-            worstPossiblePick;
+    finalPick =
+        worstPossiblePick;
 
 
-        moveDownApplied =
-            true;
+    moveDownApplied =
+        true;
 
-    }
+
+    console.log(
+        "MOVE DOWN RULE APPLIED",
+        {
+            team: winner.name,
+            originalPick,
+            finalPick,
+            worstPossiblePick
+        }
+    );
+
+}
 
 
 
