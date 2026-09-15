@@ -1062,11 +1062,21 @@ function advanceToNextLotteryRound() {
     const finalUnseededTeam = runtimeState.teams.find(t => !t.hasSecuredPlacement);
     finalUnseededTeam.hasSecuredPlacement = true;
     
-    runtimeState.draftBoard[0] = {
-      teamName: finalUnseededTeam.name,
-      sequenceString: "Assigned Automatically (Last Remaining Contender)",
-      resolvedInRound: runtimeState.currentRoundIndex + 1
-    };
+   const finalSlot =
+    getNextDraftSlotToResolve();
+
+runtimeState.draftBoard[finalSlot] = {
+
+    teamName:
+        finalUnseededTeam.name,
+
+    sequenceString:
+        "Assigned Automatically (Last Remaining Contender)",
+
+    resolvedInRound:
+        runtimeState.currentRoundIndex + 1
+
+};
     
     runtimeState.roundDone = true;
     renderLotteryInterface();
