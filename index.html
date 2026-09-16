@@ -602,24 +602,175 @@
     Information
 </div>
 
+<div class="info-dropdown">
 
-        <div class="info-dropdown">
+    <button class="info-dropdown-header">
+        1. Purpose of the Application
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            Welcome to the Dynamic Fantasy Sports Lottery System. This application is not designed to replace your current fantasy sports league—it is designed to provide a brand-new way to determine your fantasy draft order.
+        </p>
+
+        <p>
+            Whether your league follows the NHL, NBA, NFL, MLB, or virtually any other sport, this application is flexible enough to recreate professional-style draft lotteries or completely custom systems.
+        </p>
+
+        <p>
+            I became tired of Yahoo Fantasy Sports only offering two methods for determining draft order: random selection or "pick your spot." I wanted something much more exciting, so I built this application to allow fantasy leagues to experience the same type of lottery excitement used by professional sports leagues.
+        </p>
+
+        <p>
+            Inside this application you will find numerous preset lottery systems, complete customization over your lottery configuration, and advanced rules that can dramatically change how your fantasy draft unfolds.
+        </p>
+
+        <p>
+            The sections below explain every feature available within the application so you can build exactly the type of lottery your league wants.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        2. What Are Permutations?
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            Permutations are the foundation of the entire Fantasy Lottery Engine. Every lottery outcome within this application is determined by permutations.
+        </p>
+
+        <p>
+            A permutation is simply an ordered arrangement of numbers.
+        </p>
+
+        <p>
+            Examples include:
+        </p>
+
+        <ul>
+            <li>[4, 2, 7, 8, 93, 54]</li>
+            <li>[1, 6]</li>
+        </ul>
+
+        <p>
+            Professional sports leagues use permutations when conducting draft lotteries. If you watch the 2026 NHL Draft Lottery, for example, Commissioner Gary Bettman draws numbered ping pong balls from a lottery machine to create these exact types of numbered sequences.
+        </p>
+
+        <p>
+            This application follows the same concept. Every lottery format uses permutations to determine which team wins each draft position.
+        </p>
+
+        <p>
+            Preset lottery formats are included if you want to closely replicate how professional leagues conduct their own lotteries.
+        </p>
+
+        <p>
+            Without permutations there would be no lottery. They are what determine every team's odds and ultimately decide the final draft order.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        3. Tabs Explained
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            The application contains four primary tabs. Each serves a different purpose throughout the lottery process.
+        </p>
+
+
+        <div class="info-sub-dropdown">
 
             <button class="info-dropdown-header">
-
-                How to Use the System
-
-                <span class="dropdown-arrow">
-                    ▼
-                </span>
-
+                Lottery Draw Arena
             </button>
-
 
             <div class="info-dropdown-content">
 
                 <p>
-                    Information about how to use the system will go here.
+                    The Lottery Draw Arena is where every lottery is conducted.
+                </p>
+
+                <p>
+                    At the top of the application you will notice a gold status box displaying both the current lottery round and the draft pick currently being resolved. Keep an eye on this indicator throughout the lottery.
+                </p>
+
+                <p>
+                    At any time you may restart the current lottery by clicking <em>Reset Draft Engine</em>. This resets only the active lottery and preserves all of your configured settings.
+                </p>
+
+                <p>
+                    The left side of the screen contains the lottery drawing controls.
+                </p>
+
+                <h4>Manual Mode</h4>
+
+                <p>
+                    Manual Mode requires an external source to determine each lottery number, such as a bingo ball machine, dice, or an online random number generator.
+                </p>
+
+                <p>
+                    Simply click each numbered ball as it is drawn to build the permutation. Once the required number of balls has been entered, click <em>Initialize Next Lottery Round</em> to finalize that round and begin the next one.
+                </p>
+
+                <h4>Semi-Automatic Mode</h4>
+
+                <p>
+                    Semi-Automatic Mode uses the application's built-in random number generator. Simply click <em>Draw Next Ball</em> until the permutation is complete, then initialize the next lottery round.
+                </p>
+
+                <h4>Automatic Mode</h4>
+
+                <p>
+                    Automatic Mode provides two options:
+                </p>
+
+                <ul>
+                    <li><strong>Run Round</strong> — Simulates one complete lottery round.</li>
+                    <li><strong>Run Lottery</strong> — Simulates the entire lottery automatically.</li>
+                </ul>
+
+                <p>
+                    While the lottery is running you may pause it. The application will finish the current round before pausing to protect the integrity of the lottery engine. Press <em>Resume Lottery</em> to continue.
+                </p>
+
+                <p>
+                    Once at least one ball has been drawn, the selected draw mode becomes locked. To change modes you must first reset the draft engine.
+                </p>
+
+                <p>
+                    The right side of the Lottery Draw Arena displays every team participating in the lottery.
+                </p>
+
+                <p>
+                    Each team card displays:
+                </p>
+
+                <ul>
+                    <li>Total assigned permutations</li>
+                    <li>Live permutations remaining</li>
+                    <li>Current lottery odds</li>
+                    <li>A visual odds bar</li>
+                    <li>A button allowing you to inspect every active and eliminated permutation assigned to that team</li>
+                </ul>
+
+                <p>
+                    Every statistic updates live after each ball is drawn, allowing you to watch the odds evolve throughout the lottery.
                 </p>
 
             </div>
@@ -627,23 +778,20 @@
         </div>
 
 
-        <div class="info-dropdown">
+        <div class="info-sub-dropdown">
 
             <button class="info-dropdown-header">
-
-                Lottery System Explained
-
-                <span class="dropdown-arrow">
-                    ▼
-                </span>
-
+                Draft Board
             </button>
-
 
             <div class="info-dropdown-content">
 
                 <p>
-                    Explanation of the lottery mechanics will go here.
+                    The Draft Board displays the current results of the lottery as it progresses.
+                </p>
+
+                <p>
+                    At any point during the lottery you may switch to this tab to view every draft position that has already been resolved.
                 </p>
 
             </div>
@@ -651,27 +799,532 @@
         </div>
 
 
-        <div class="info-dropdown">
+        <div class="info-sub-dropdown">
 
             <button class="info-dropdown-header">
-
-                Advanced Features
-
-                <span class="dropdown-arrow">
-                    ▼
-                </span>
-
+                League Controls &amp; Settings
             </button>
-
 
             <div class="info-dropdown-content">
 
                 <p>
-                    Advanced feature explanations will go here.
+                    This tab contains every configurable setting within the application.
+                </p>
+
+                <p>
+                    Because of the number of available options, each setting is explained individually throughout the remainder of this Information page.
                 </p>
 
             </div>
 
+        </div>
+
+
+        <div class="info-sub-dropdown">
+
+            <button class="info-dropdown-header">
+                Information
+            </button>
+
+            <div class="info-dropdown-content">
+
+                <p>
+                    This is the page you are currently viewing.
+                </p>
+
+                <p>
+                    Every feature available within the Dynamic Fantasy Sports Lottery System is explained here, from the basic lottery engine to advanced customization options.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        4. Lottery Format
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            Lottery Formats were created for users who want to quickly recreate existing professional lottery systems or who are new to draft lotteries.
+        </p>
+
+        <p>
+            The application includes multiple preset formats that automatically configure:
+        </p>
+
+        <ul>
+            <li>Lottery curve</li>
+            <li>Ball pool size</li>
+            <li>Balls drawn per round</li>
+            <li>Lottery odds</li>
+        </ul>
+
+        <p>
+            Once you manually change the curve preset, ball pool count, balls drawn per round, or edit team percentages/permutations, the lottery format automatically changes to <strong>Custom</strong>.
+        </p>
+
+        <p>
+            Changing only the following settings will <strong>not</strong> switch the format to Custom:
+        </p>
+
+        <ul>
+            <li>Draft Reveal Order</li>
+            <li>Team Count</li>
+            <li>Team Names</li>
+        </ul>
+
+    </div>
+
+</div>
+
+
+<div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        5. Draft Reveal Order
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            Draft Reveal Order determines the order in which draft picks are resolved.
+        </p>
+
+        <h4>Reverse Reveal Order (Recommended)</h4>
+
+        <p>
+            Picks are resolved from the final draft position toward the first overall pick.
+        </p>
+
+        <p>
+            Because the final draft position is resolved first, the lottery odds should also be reversed. The team with the highest odds should therefore have the greatest chance of receiving the final draft position.
+        </p>
+
+        <p>
+            Example:
+        </p>
+
+        <p>
+            In an eight-team lottery using Reverse Reveal Order, the team with the best odds is competing primarily for the <strong>8th overall pick</strong>, not the 1st overall pick.
+        </p>
+
+        <h4>Standard Reveal Order</h4>
+
+        <p>
+            Picks are resolved from first overall to the final draft position.
+        </p>
+
+        <p>
+            This follows the traditional professional sports lottery model where the team with the highest odds has the greatest chance of receiving the first overall selection.
+        </p>
+
+    </div>
+
+    </div>
+
+    <div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        6. Curve Preset
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            The Curve Preset determines how lottery odds are distributed across all participating teams.
+        </p>
+
+        <p>
+            Professional sports leagues each use their own unique odds curve. These preset curves are included so you can quickly recreate existing draft lottery systems.
+        </p>
+
+        <p>
+            Selecting a different curve automatically recalculates every team's lottery odds while maintaining the current number of participating teams.
+        </p>
+
+        <p>
+            If you prefer complete control, choose <strong>Custom</strong> and manually assign every team's percentages or permutations.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        7. Team Count
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            Team Count determines how many teams participate in the draft lottery.
+        </p>
+
+        <p>
+            The Fantasy Lottery System currently supports anywhere from <strong>4 to 20 teams</strong>.
+        </p>
+
+        <p>
+            Increasing or decreasing the number of teams automatically updates the draft board, lottery odds, permutation allocation, and every configuration that depends on the number of participating teams.
+        </p>
+
+        <p>
+            Team Count does <strong>not</strong> automatically change your selected Lottery Format. This allows you to experiment with different league sizes while preserving the rest of your configuration.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        8. Ball Pool Count &amp; Balls Drawn per Round
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            These two settings work together to determine the total number of unique permutations available within your lottery.
+        </p>
+
+        <p>
+            <strong>Ball Pool Count</strong> determines how many numbered lottery balls are available to be drawn.
+        </p>
+
+        <p>
+            <strong>Balls Drawn Per Round</strong> determines how many of those balls are drawn to create each winning permutation.
+        </p>
+
+        <p>
+            Every unique ordered sequence of drawn balls becomes one possible lottery outcome.
+        </p>
+
+        <p>
+            For example:
+        </p>
+
+        <ul>
+
+            <li>10 Balls • Draw 3 = 720 total permutations</li>
+
+            <li>14 Balls • Draw 4 = 24,024 total permutations</li>
+
+            <li>16 Balls • Draw 5 = 524,160 total permutations</li>
+
+        </ul>
+
+        <p>
+            As either value increases, the total number of possible lottery outcomes grows extremely quickly.
+        </p>
+
+        <p>
+            Larger permutation pools create finer odds distributions and allow much greater customization when assigning lottery chances to teams.
+        </p>
+
+        <p>
+            The application automatically calculates the maximum number of available permutations based on your selected settings.
+        </p>
+
+        <p>
+            Team permutation assignments may never exceed the total number of available permutations.
+        </p>
+
+        <p>
+            Likewise, every available permutation must ultimately be assigned to a team before the lottery can begin.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        9. Team Weight Allocation
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            Team Weight Allocation determines each team's probability of winning every lottery draw.
+        </p>
+
+        <p>
+            The application allows two different methods for editing lottery odds.
+        </p>
+
+        <h4>Percentage Mode</h4>
+
+        <p>
+            Percentage Mode allows you to assign each team's lottery odds using percentages.
+        </p>
+
+        <p>
+            As percentages are entered, the application automatically converts them into the appropriate number of permutations while ensuring the total allocation remains mathematically accurate.
+        </p>
+
+        <p>
+            The combined percentage of every team must always equal <strong>100%</strong>.
+        </p>
+
+        <h4>Permutation Mode</h4>
+
+        <p>
+            Permutation Mode allows you to assign the exact number of winning permutations owned by each team.
+        </p>
+
+        <p>
+            This provides complete mathematical control over the lottery and closely mirrors how professional draft lotteries are conducted.
+        </p>
+
+        <p>
+            Every available permutation must be assigned before the lottery can begin.
+        </p>
+
+        <p>
+            Throughout the lottery, each team's live permutation count decreases as sequences become mathematically impossible, causing every team's odds to update dynamically after each ball is drawn.
+        </p>
+
+        <p>
+            This live redistribution of odds is one of the defining features of the Dynamic Fantasy Sports Lottery System.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        10. How to Use the System
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            Once your lottery configuration has been completed, you're ready to begin your draft lottery.
+        </p>
+
+        <ol>
+
+            <li>Select your preferred Lottery Format or create a completely custom configuration.</li>
+
+            <li>Choose the number of participating teams.</li>
+
+            <li>Configure the Ball Pool Count and Balls Drawn Per Round.</li>
+
+            <li>Assign every team's lottery odds using either Percentages or Permutations.</li>
+
+            <li>Review your settings before confirming the configuration.</li>
+
+            <li>Choose your preferred draw mode within the Lottery Draw Arena.</li>
+
+            <li>Run the lottery until every draft position has been resolved.</li>
+
+            <li>View the completed draft order on the Draft Board.</li>
+
+        </ol>
+
+        <p>
+            At any point before the lottery begins, you may return to the League Controls &amp; Settings tab to modify your configuration.
+        </p>
+
+        <p>
+            Once the first lottery ball has been drawn, the draw mode becomes locked to preserve the integrity of the lottery. If you wish to change draw modes, simply reset the Draft Engine before beginning a new lottery.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<div class="info-dropdown">
+
+    <button class="info-dropdown-header">
+        11. Advanced Settings
+    </button>
+
+    <div class="info-dropdown-content">
+
+        <p>
+            Advanced Settings allow league commissioners to introduce additional draft rules that go beyond a traditional lottery. These options can dramatically change how draft positions are ultimately awarded and are intended for leagues that want greater customization.
+        </p>
+
+
+
+        <div class="info-sub-dropdown">
+
+            <button class="info-dropdown-header">
+                Move Up Rule
+            </button>
+
+            <div class="info-dropdown-content">
+
+                <p>
+                    The Move Up Rule limits how far a team may improve its draft position compared to its natural position.
+                </p>
+
+                <p>
+                    If a team wins a lottery draw that would place it above its maximum allowed improvement, the application automatically adjusts that team to its highest legal draft position.
+                </p>
+
+                <p>
+                    If another team already occupies that position, the draft board automatically shifts teams to create space while preserving every team's legal placement.
+                </p>
+
+                <p>
+                    Example:
+                </p>
+
+                <ul>
+
+                    <li>16 teams</li>
+
+                    <li>Maximum Move Up: 2 positions</li>
+
+                    <li>Team 16 wins a draw that would normally award Pick #1.</li>
+
+                    <li>The highest legal result for Team 16 is Pick #3.</li>
+
+                    <li>The application automatically places Team 16 into Pick #3 and adjusts the draft board accordingly.</li>
+
+                </ul>
+
+                <p>
+                    This rule is commonly used by fantasy leagues that wish to reward weaker teams while preventing dramatic jumps up the draft order.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="info-sub-dropdown">
+
+            <button class="info-dropdown-header">
+                Move Down Rule
+            </button>
+
+            <div class="info-dropdown-content">
+
+                <p>
+                    The Move Down Rule limits how far a team may fall in the draft order after winning a lottery draw.
+                </p>
+
+                <p>
+                    If a winning team would naturally receive a draft position worse than its permitted range, the application automatically moves that team to its lowest legal draft position.
+                </p>
+
+                <p>
+                    As with the Move Up Rule, the draft board is automatically adjusted whenever another team already occupies the required position.
+                </p>
+
+                <p>
+                    Example:
+                </p>
+
+                <ul>
+
+                    <li>16 teams</li>
+
+                    <li>Maximum Move Down: 2 positions</li>
+
+                    <li>Team 1 wins the first lottery draw during Reverse Reveal Order.</li>
+
+                    <li>Without the rule, Team 1 would receive Pick #16.</li>
+
+                    <li>The lowest legal result for Team 1 is Pick #14.</li>
+
+                    <li>The application automatically adjusts Team 1 to Pick #14 and shifts the remaining draft positions as required.</li>
+
+                </ul>
+
+                <p>
+                    This rule allows leagues to prevent high-probability teams from falling too far in the final draft order.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="info-sub-dropdown">
+
+            <button class="info-dropdown-header">
+                Priority Picks Style
+            </button>
+
+            <div class="info-dropdown-content">
+
+                <p>
+                    <strong>Coming Soon</strong>
+                </p>
+
+                <p>
+                    Priority Picks Style will introduce alternate methods for assigning specific draft selections after portions of the lottery have been completed.
+                </p>
+
+                <p>
+                    This feature is currently under development.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="info-sub-dropdown">
+
+            <button class="info-dropdown-header">
+                Segmented Lottery
+            </button>
+
+            <div class="info-dropdown-content">
+
+                <p>
+                    <strong>Coming Soon</strong>
+                </p>
+
+                <p>
+                    Segmented Lottery will allow commissioners to divide participating teams into multiple lottery groups, each with its own independent lottery rules and draft position ranges.
+                </p>
+
+                <p>
+                    This feature is currently under development.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+       
         </div>
 
 
