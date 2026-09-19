@@ -114,6 +114,14 @@ let activeConfig = {
         maxPositions: 0
     },
 
+    priorityPicksRule:{
+
+    enabled:false,
+
+    picks:3
+
+},
+
     curveSettings: {},
 
     revealMode: "reverse",

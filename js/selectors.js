@@ -780,3 +780,172 @@ function renderMoveDownRule(){
     renderMoveDownPositions();
 
 }
+
+function renderPriorityPicksToggle(){
+
+    const container =
+        document.getElementById(
+            "priority-picks-toggle-selector"
+        );
+
+
+    if(!container) return;
+
+
+    container.innerHTML = "";
+
+
+    ["Off","On"].forEach(option=>{
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "selector-tile";
+
+
+        const value =
+            option === "On";
+
+
+        if(
+            pendingConfig.priorityPicksRule.enabled === value
+        ){
+
+            button.classList.add("active");
+
+        }
+
+
+        button.textContent =
+            option;
+
+
+        button.onclick = ()=>{
+
+
+pendingConfig.priorityPicksRule.enabled =
+    value;
+
+
+if(value){
+
+    pendingConfig.revealMode =
+        "standard";
+
+}
+
+
+renderPriorityPicksToggle();
+
+renderPriorityPicksCount();
+
+renderRevealModeSelector();
+
+
+};
+
+
+        container.appendChild(button);
+
+
+    });
+
+
+}
+
+function renderPriorityPicksCount(){
+
+    const container =
+        document.getElementById(
+            "move-down-position-container"
+        );
+
+
+    const selector =
+        document.getElementById(
+            "move-down-position-selector"
+        );
+
+
+    if(!container || !selector) return;
+
+
+
+    selector.innerHTML = "";
+
+
+
+    if(
+        !pendingConfig.moveDownRule.enabled
+    ){
+
+        container.classList.add("hidden");
+
+        return;
+
+    }
+
+
+
+    container.classList.remove("hidden");
+
+
+
+    const max =
+        pendingConfig.teamCount - 1;
+
+
+
+    for(
+        let i = 1;
+        i <= max;
+        i++
+    ){
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "selector-tile";
+
+
+        button.textContent =
+            i;
+
+
+
+        if(
+            pendingConfig.priorityPicksRule.picks === i
+        ){
+
+            button.classList.add("active");
+
+        }
+
+
+
+        button.onclick = ()=>{
+
+
+            pendingConfig.priorityPicksRule.picks =
+                i;
+
+
+            renderMoveDownPositions();
+
+
+        };
+
+
+        selector.appendChild(button);
+
+
+    }
+
+
+}

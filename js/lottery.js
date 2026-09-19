@@ -1402,6 +1402,21 @@ function advanceToNextLotteryRound() {
 
     runtimeState.currentRoundIndex++;
 
+    if(
+
+    activeConfig.priorityPicksRule.enabled &&
+
+    runtimeState.currentRoundIndex >=
+    activeConfig.priorityPicksRule.picks
+
+){
+
+    finishPriorityPicksLottery();
+
+    return;
+
+}
+
 
     const remainingUnseededCount =
         runtimeState.teams.filter(
@@ -1607,5 +1622,60 @@ updateCurveSelector();
 
 
 resetRuntimeEngine(false);
+
+}
+
+function finishPriorityPicksLottery(){
+
+    const remainingTeams =
+
+        runtimeState.teams
+
+            .filter(
+                t=>!t.hasSecuredPlacement
+            )
+
+            .sort(
+                (a,b)=>
+                    a.seed-b.seed
+            );
+
+
+
+    remainingTeams.forEach(team=>{
+
+        const slot =
+
+            getNextDraftSlotToResolve();
+
+
+
+        runtimeState.draftBoard[slot]={
+
+            teamName:
+                team.name,
+
+            sequenceString:
+                "Assigned Automatically (Priority Picks Rule)",
+
+            resolvedInRound:
+                runtimeState.currentRoundIndex + 1
+
+        };
+
+
+
+        team.hasSecuredPlacement =
+            true;
+
+    });
+
+
+
+    runtimeState.roundDone = true;
+
+    renderLotteryInterface();
+
+    switchTab("picks");
 
 }
