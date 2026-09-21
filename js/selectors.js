@@ -166,6 +166,8 @@ renderMoveUpRuleSelector();
 
     renderMoveDownRule();
 
+    renderPriorityPicksToggle();
+
 }
 
 function populateCurveSelector(){
