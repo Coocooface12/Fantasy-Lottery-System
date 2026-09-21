@@ -291,6 +291,8 @@ pendingConfig.teams =
 
     renderLotterySelectors();
 
+    renderPriorityPicksSelectors();
+
 }
 
 function updateLotteryFormatSelector(){

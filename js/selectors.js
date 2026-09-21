@@ -166,7 +166,7 @@ renderMoveUpRuleSelector();
 
     renderMoveDownRule();
 
-    renderPriorityPicksToggle();
+    renderPriorityPicksToggle()
 
 }
 
@@ -862,26 +862,24 @@ function renderPriorityPicksCount(){
 
     const container =
         document.getElementById(
-            "move-down-position-container"
+            "priority-picks-count-container"
         );
 
 
     const selector =
         document.getElementById(
-            "move-down-position-selector"
+            "priority-picks-count-selector"
         );
 
 
     if(!container || !selector) return;
 
 
-
     selector.innerHTML = "";
 
 
-
     if(
-        !pendingConfig.moveDownRule.enabled
+        !pendingConfig.priorityPicksRule.enabled
     ){
 
         container.classList.add("hidden");
@@ -891,14 +889,11 @@ function renderPriorityPicksCount(){
     }
 
 
-
     container.classList.remove("hidden");
-
 
 
     const max =
         pendingConfig.teamCount - 1;
-
 
 
     for(
@@ -906,7 +901,6 @@ function renderPriorityPicksCount(){
         i <= max;
         i++
     ){
-
 
         const button =
             document.createElement("button");
@@ -920,7 +914,6 @@ function renderPriorityPicksCount(){
             i;
 
 
-
         if(
             pendingConfig.priorityPicksRule.picks === i
         ){
@@ -930,24 +923,19 @@ function renderPriorityPicksCount(){
         }
 
 
-
         button.onclick = ()=>{
-
 
             pendingConfig.priorityPicksRule.picks =
                 i;
 
 
-            renderMoveDownPositions();
-
+            renderPriorityPicksCount();
 
         };
 
 
         selector.appendChild(button);
 
-
     }
-
 
 }
