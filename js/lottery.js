@@ -1629,35 +1629,35 @@ resetRuntimeEngine(false);
 function finishPriorityPicksLottery(){
 
     const remainingTeams =
-
         runtimeState.teams
 
             .filter(
-                t=>!t.hasSecuredPlacement
+                t => !t.hasSecuredPlacement
             )
 
             .sort(
-                (a,b)=>
-                    a.seed-b.seed
+                (a,b) =>
+                    a.seed - b.seed
             );
-
 
 
     remainingTeams.forEach(team=>{
 
-        const slot =
 
+        const slot =
             getNextDraftSlotToResolve();
 
 
 
-        runtimeState.draftBoard[slot]={
+        const draftEntry = {
 
             teamName:
                 team.name,
 
+
             sequenceString:
                 "Assigned Automatically (Priority Picks Rule)",
+
 
             resolvedInRound:
                 runtimeState.currentRoundIndex + 1
@@ -1665,17 +1665,26 @@ function finishPriorityPicksLottery(){
         };
 
 
+        insertWinnerIntoDraftBoard(
+            draftEntry,
+            slot
+        );
 
-        team.hasSecuredPlacement =
-            true;
+
+        team.hasSecuredPlacement = true;
+
 
     });
 
 
+    validateDraftBoardAgainstRules();
+
 
     runtimeState.roundDone = true;
 
+
     renderLotteryInterface();
+
 
     switchTab("picks");
 
