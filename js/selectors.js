@@ -846,8 +846,7 @@ renderPriorityPicksToggle();
 
 renderPriorityPicksCount();
 
-renderRevealModeSelector();
-
+updateRevealModeLock();
 
 };
 
@@ -939,5 +938,31 @@ function renderPriorityPicksCount(){
         selector.appendChild(button);
 
     }
+
+}
+
+function updateRevealModeLock(){
+
+    const reverseButton =
+        document.querySelector(
+            '#cfg-reveal-mode [data-value="reverse"]'
+        );
+
+
+    if(!reverseButton) return;
+
+
+    const locked =
+        pendingConfig.priorityPicksRule.enabled;
+
+
+    reverseButton.disabled = locked;
+
+
+    reverseButton.classList.toggle(
+        "disabled",
+        locked
+    );
+
 
 }

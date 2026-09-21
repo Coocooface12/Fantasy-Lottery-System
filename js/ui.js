@@ -518,6 +518,7 @@ if (targetTabName === 'admin') {
 
     });
 
+    updateRevealModeLock();
 
     updateLotteryFormatSelector();
 

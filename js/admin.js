@@ -333,6 +333,16 @@ function updateLotteryFormatSelector(){
 
 function setSelectorValue(configKey, value, button) {
 
+    if(
+    configKey === "revealMode" &&
+    value === "reverse" &&
+    pendingConfig.priorityPicksRule.enabled
+){
+
+    return;
+
+}
+
 
     pendingConfig[configKey] = value;
 
@@ -1194,6 +1204,14 @@ function applyConfirmedSettings() {
 
  const revealMode =
     pendingConfig.revealMode;
+
+if(
+    pendingConfig.priorityPicksRule.enabled
+){
+
+    pendingConfig.revealMode = "standard";
+
+}
 
 const count =
     pendingConfig.teamCount;

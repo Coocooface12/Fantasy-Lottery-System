@@ -463,6 +463,16 @@
 
 }
 
+.selector-tile.disabled {
+
+    opacity:0.45;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
 .cfg-max-perms-input {
 
     background: #132645 !important;
