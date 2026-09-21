@@ -1432,6 +1432,20 @@ if(!pendingConfig.moveDownRule){
 
 }
 
+// Ensure Priority Picks exists
+
+if(!pendingConfig.priorityPicksRule){
+
+    pendingConfig.priorityPicksRule = {
+
+        enabled:false,
+
+        picks:3
+
+    };
+
+}
+
 
 // Apply pending settings to active config
 
@@ -1447,6 +1461,12 @@ activeConfig.moveDownRule =
     );
 
 
+ activeConfig.priorityPicksRule =
+    structuredClone(
+        pendingConfig.priorityPicksRule
+    );
+
+
 
 console.log(
     "MOVE UP CHECK:",
@@ -1458,6 +1478,10 @@ console.log(
     "MOVE DOWN CHECK:",
     activeConfig.moveDownRule
 );
+
+resetRuntimeEngine(false);
+
+renderLotteryInterface();
 
 }
 
