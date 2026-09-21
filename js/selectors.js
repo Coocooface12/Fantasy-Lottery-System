@@ -160,13 +160,15 @@ if(input){
 
 renderMoveUpRuleSelector();
 
-    renderMoveUpToggle();
+renderMoveUpToggle();
 
-    renderMoveUpPositions();
+renderMoveUpPositions();
 
-    renderMoveDownRule();
+renderMoveDownRule();
 
-    renderPriorityPicksToggle()
+renderPriorityPicksToggle();
+
+renderPriorityPicksCount();
 
 }
 

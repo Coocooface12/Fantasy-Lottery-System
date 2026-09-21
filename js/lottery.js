@@ -1620,7 +1620,6 @@ updateLotteryFormatSelector();
 
 updateCurveSelector();
 
-renderPriorityPicksSelectors();
 
 
 resetRuntimeEngine(false);
