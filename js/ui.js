@@ -504,9 +504,9 @@ if (targetTabName === 'admin') {
 
 
     const revealButtons =
-        document.querySelectorAll(
-            '#cfg-reveal-mode .selector-btn'
-        );
+    document.querySelectorAll(
+        '#cfg-reveal-mode .selector-tile'
+    );
 
 
     revealButtons.forEach(btn => {

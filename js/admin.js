@@ -298,8 +298,8 @@ function updateLotteryFormatSelector(){
 
     const buttons =
         document.querySelectorAll(
-            '#cfg-lottery-format .selector-btn'
-        );
+    '#cfg-lottery-format .selector-tile'
+);
 
 
 
