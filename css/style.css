@@ -114,7 +114,7 @@
 
     grid-template-columns:1.1fr 0.9fr;
 
-    grid-template-rows:auto;
+    grid-template-rows:minmax(0, auto);
 
     gap:24px;
 
@@ -129,6 +129,14 @@
   @media(max-width: 1024px) {
     .dashboard-wrapper { grid-template-columns: 1fr; }
   }
+
+.dashboard-wrapper > .teams-panel {
+
+    min-height:0;
+
+    overflow:hidden;
+
+}
 
 .teams-panel {
 
@@ -279,6 +287,8 @@
 .teams-grid {
 
     display:flex;
+
+    flex:1;
 
     flex-direction:column;
 
