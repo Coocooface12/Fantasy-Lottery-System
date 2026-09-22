@@ -114,24 +114,6 @@
 
 }
 
-.dashboard-wrapper > aside {
-
-    display:flex;
-
-    flex-direction:column;
-
-    height:100%;
-
-}
-
-.dashboard-wrapper > aside .teams-grid {
-
-    flex:1;
-
-    min-height:0;
-
-}
-
 .dashboard-wrapper {
 
     display: grid;
