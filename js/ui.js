@@ -373,19 +373,32 @@ if (activeConfig.revealMode === "reverse") {
     'Reset Draft Engine';
 
 
-  abortResetBtn.onclick = () => {
+abortResetBtn.onclick = () => {
 
-    if (
-      confirm(
-        "Reset active tracking setups? Progress details will be dropped."
-      )
-    ) {
+    showConfirm(
 
-      resetRuntimeEngine();
+        "Reset Draft Engine",
 
-    }
+        `
+        <p>
+            Are you sure you want to reset the draft engine?
+        </p>
 
-  };
+        <p>
+            All current lottery progress, drawn balls, and draft placements
+            will be cleared.
+        </p>
+
+        <p>
+            This action cannot be undone.
+        </p>
+        `,
+
+        resetRuntimeEngine
+
+    );
+
+};
 
 
   controlsStrip.appendChild(abortResetBtn);
