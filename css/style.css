@@ -141,12 +141,6 @@
 
     padding:24px;
 
-    display:flex;
-
-    flex-direction:column;
-
-    overflow:hidden;
-
 }
 
   .main-draw-zone {
@@ -252,13 +246,11 @@
 
     gap:10px;
 
+    max-height:620px;
+
     overflow-y:auto;
 
     padding-right:4px;
-
-    flex:1;
-
-    min-height:0;
 
 }
 
