@@ -108,12 +108,6 @@
 
 }
 
-.teams-side .teams-grid {
-
-    flex:1;
-
-}
-
 .dashboard-wrapper {
 
     display:grid;
@@ -133,13 +127,19 @@
 
 .teams-panel {
 
-    background: rgba(11,20,36,0.4);
+    display:flex;
 
-    border:1px solid #1e3560;
+    flex-direction:column;
 
-    border-radius:8px;
+    min-height:0;
 
-    padding:24px;
+}
+
+.teams-panel .teams-grid {
+
+    flex:1;
+
+    min-height:0;
 
 }
 
@@ -235,8 +235,24 @@
   .winner-banner .winner-perm { font-size: 16px; color: var(--white); margin-top: 6px; }
 
   .teams-pane-title {
-        flex-shrink:0;
-  }
+
+    font-family: 'Barlow Condensed', sans-serif;
+
+    font-size:18px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    color:var(--silver2);
+
+    margin-bottom:12px;
+
+    border-bottom:1px solid #1e3560;
+
+    padding-bottom:6px;
+
+}
 
 .teams-grid {
 
@@ -245,8 +261,6 @@
     flex-direction:column;
 
     gap:10px;
-
-    max-height:620px;
 
     overflow-y:auto;
 
