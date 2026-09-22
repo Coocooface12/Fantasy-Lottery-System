@@ -120,12 +120,22 @@
 
     align-items:stretch;
 
+    min-height:0;
+
 }
   @media(max-width: 1024px) {
     .dashboard-wrapper { grid-template-columns: 1fr; }
   }
 
 .teams-panel {
+
+    background: rgba(11,20,36,0.4);
+
+    border:1px solid #1e3560;
+
+    border-radius:8px;
+
+    padding:24px;
 
     display:flex;
 
@@ -136,8 +146,6 @@
 }
 
 .teams-panel .teams-grid {
-
-    flex:1;
 
     min-height:0;
 
@@ -261,6 +269,10 @@
     flex-direction:column;
 
     gap:10px;
+
+    flex:1;
+
+    min-height:0;
 
     overflow-y:auto;
 
