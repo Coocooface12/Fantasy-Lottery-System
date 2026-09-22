@@ -114,6 +114,20 @@
 
 }
 
+.dashboard-wrapper > aside {
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.dashboard-wrapper > aside .teams-grid {
+
+    flex:1;
+
+}
+
 .dashboard-wrapper {
 
     display: grid;
@@ -227,8 +241,22 @@
     font-size: 18px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--silver2); margin-bottom: 12px; border-bottom: 1px solid #1e3560; padding-bottom: 6px;
   }
-  .teams-grid { display: flex; flex-direction: column; gap: 10px; max-height: 620px; overflow-y: auto; padding-right: 4px; }
   
+.teams-grid {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding-right:4px;
+
+}  
   .team-card {
     background: var(--panel);
     border: 1px solid #1e3560;
