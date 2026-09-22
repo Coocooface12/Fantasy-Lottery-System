@@ -123,6 +123,10 @@
     min-height:0;
 
 }
+
+.dashboard-wrapper > * {
+    min-height:0;
+}
   @media(max-width: 1024px) {
     .dashboard-wrapper { grid-template-columns: 1fr; }
   }
@@ -142,6 +146,8 @@
     flex-direction:column;
 
     min-height:0;
+
+    overflow:hidden;
 
 }
 
@@ -277,19 +283,25 @@
 
     gap:10px;
 
+    min-height:0;
+
     overflow-y:auto;
 
     padding-right:4px;
 
 }
 
-  .team-card {
-    background: var(--panel);
-    border: 1px solid #1e3560;
-    border-radius: 6px;
-    padding: 16px;
-    transition: all 0.2s;
-  }
+.team-card {
+
+    background:var(--panel);
+
+    border:1px solid #1e3560;
+
+    border-radius:6px;
+
+    padding:10px;
+
+}
   .team-card.eliminated { opacity: 0.3; border-color: #111; background: #08101c; }
   .team-card.winner-card { border-color: var(--green); background: #0f2d19; }
   .team-card.no-surviving { border-color: var(--red); opacity: 0.5; }
