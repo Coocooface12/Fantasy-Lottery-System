@@ -114,16 +114,15 @@
 
     grid-template-columns:1.1fr 0.9fr;
 
+    grid-template-rows:auto;
+
     gap:24px;
 
     padding:24px;
 
     align-items:stretch;
 
-    min-height:0;
-
 }
-
 .dashboard-wrapper > * {
     min-height:0;
 }
@@ -157,7 +156,14 @@
 
 }
 
-  .main-draw-zone {
+.main-draw-zone,
+.teams-panel {
+
+    min-height:0;
+
+}
+
+.main-draw-zone {
 
     background: rgba(11,20,36,0.4);
 
@@ -172,6 +178,8 @@
     flex-direction:column;
 
     justify-content:flex-start;
+
+    min-height:0;
 
 }
 
@@ -265,13 +273,6 @@
     border-bottom:1px solid #1e3560;
 
     padding-bottom:6px;
-
-}
-
-.main-draw-zone,
-.teams-panel {
-
-    min-height:0;
 
 }
 
