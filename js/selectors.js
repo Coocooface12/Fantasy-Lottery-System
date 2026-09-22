@@ -244,14 +244,29 @@ function applyCurvePreset(curve){
         curve;
 
 
-    pendingConfig.lotteryFormat =
-        "Custom";
+    const currentFormat =
+        lotteryFormats[
+            pendingConfig.lotteryFormat
+        ];
+
+
+    if(
+        !currentFormat ||
+        currentFormat.curve !== curve
+    ){
+
+        pendingConfig.lotteryFormat =
+            "Custom";
+
+    }
 
 
     handleTeamCountChange();
 
 
     updateCurveSelector();
+
+    updateLotteryFormatSelector();
 
 }
 
