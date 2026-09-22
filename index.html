@@ -450,28 +450,6 @@
 </div>
 
 
-
-    <div class="advanced-feature-dropdown">
-
-        <label for="segmentedLottery">
-            Segmented Lottery
-        </label>
-
-        <select id="segmentedLottery">
-            <option value="disabled">
-                Disabled
-            </option>
-            <option value="twoPools">
-                Two Lottery Pools
-            </option>
-            <option value="multiplePools">
-                Multiple Segments
-            </option>
-        </select>
-
-    </div>
-
-
 </div>
 
 <div class="admin-card">
@@ -1277,55 +1255,110 @@
 
 
 
-        <div class="info-sub-dropdown">
+       <div class="info-section">
 
-            <button class="info-dropdown-header">
-                Priority Picks Style
-            </button>
+    <h3>Priority Picks Lottery</h3>
 
-            <div class="info-dropdown-content">
+    <p>
+        The Priority Picks Lottery is a specialized lottery format that allows
+        the system to determine the first set of draft selections through the
+        lottery process while automatically assigning the remaining selections
+        afterward.
+    </p>
 
-                <p>
-                    <strong>Coming Soon</strong>
-                </p>
-
-                <p>
-                    Priority Picks Style will introduce alternate methods for assigning specific draft selections after portions of the lottery have been completed.
-                </p>
-
-                <p>
-                    This feature is currently under development.
-                </p>
-
-            </div>
-
-        </div>
+    <p>
+        When Priority Picks are enabled, the commissioner selects the number of
+        draft positions that will be determined through the lottery draw. The
+        lottery will run normally until the selected number of priority picks
+        has been awarded.
+    </p>
 
 
+    <h4>How It Works</h4>
 
-        <div class="info-sub-dropdown">
+    <ol>
+        <li>
+            Enable Priority Picks in the League Controls &amp; Settings tab.
+        </li>
 
-            <button class="info-dropdown-header">
-                Segmented Lottery
-            </button>
+        <li>
+            Select the number of lottery picks that should be determined by the
+            draw.
+        </li>
 
-            <div class="info-dropdown-content">
+        <li>
+            The lottery determines those priority selections.
+        </li>
 
-                <p>
-                    <strong>Coming Soon</strong>
-                </p>
+        <li>
+            After the final priority pick is awarded, all remaining teams are
+            automatically assigned to the remaining draft positions based on
+            their original seed order.
+        </li>
+    </ol>
 
-                <p>
-                    Segmented Lottery will allow commissioners to divide participating teams into multiple lottery groups, each with its own independent lottery rules and draft position ranges.
-                </p>
 
-                <p>
-                    This feature is currently under development.
-                </p>
+    <h4>Example</h4>
 
-            </div>
+    <p>
+        A league with 10 teams enables Priority Picks and selects 3 lottery
+        picks.
+    </p>
 
-        </div>
+    <div class="info-example">
+
+        <p>
+            <strong>Lottery Results:</strong>
+        </p>
+
+        <ul>
+            <li>Pick #1 — Lottery Winner</li>
+            <li>Pick #2 — Lottery Winner</li>
+            <li>Pick #3 — Lottery Winner</li>
+        </ul>
+
+
+        <p>
+            <strong>Automatic Assignment:</strong>
+        </p>
+
+        <ul>
+            <li>Pick #4 — Highest remaining seed</li>
+            <li>Pick #5 — Next remaining seed</li>
+            <li>Pick #6 — Next remaining seed</li>
+            <li>Continues until the draft order is complete</li>
+        </ul>
+
+    </div>
+
+
+    <h4>Important Notes</h4>
+
+    <ul>
+
+        <li>
+            Priority Picks automatically use Standard Reveal Mode because the
+            remaining draft positions are assigned after the lottery portion is
+            complete.
+        </li>
+
+        <li>
+            Reverse Reveal Mode is unavailable while Priority Picks are active.
+        </li>
+
+        <li>
+            Priority Picks work alongside team weighting and custom lottery
+            configurations.
+        </li>
+
+        <li>
+            The system continues tracking permutations and live odds throughout
+            the lottery process.
+        </li>
+
+    </ul>
+
+</div>
 
     </div>
 
