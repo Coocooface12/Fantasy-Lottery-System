@@ -108,12 +108,33 @@
 
 }
 
-  .dashboard-wrapper {
+.teams-side {
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.teams-side .teams-grid {
+
+    flex:1;
+
+}
+
+.dashboard-wrapper {
+
     display: grid;
+
     grid-template-columns: 1.1fr 0.9fr;
+
     gap: 24px;
+
     padding: 24px;
-  }
+
+    align-items: stretch;
+
+}
   @media(max-width: 1024px) {
     .dashboard-wrapper { grid-template-columns: 1fr; }
   }
