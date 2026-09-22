@@ -394,7 +394,9 @@ abortResetBtn.onclick = () => {
         </p>
         `,
 
-        resetRuntimeEngine
+        resetRuntimeEngine,
+
+              "Confirm Lottery Reset"
 
     );
 

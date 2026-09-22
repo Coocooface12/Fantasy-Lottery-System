@@ -200,13 +200,13 @@ function showSuccess(title, message){
 // CONFIRMATION MODAL
 // =======================================================
 
-function showConfirm(title, html, continueFunction){
+function showConfirm(title, message, callback, confirmText = "Continue to Lottery"){
 
     showModal({
 
         title: title,
 
-        html: html,
+        html: message,
 
         buttons:[
 
@@ -216,9 +216,9 @@ function showConfirm(title, html, continueFunction){
             },
 
             {
-                text:"Continue to Lottery",
+                text: confirmText,
                 className:"btn btn-gold",
-                action:continueFunction
+                action: callback
             }
 
         ]
