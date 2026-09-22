@@ -116,15 +116,15 @@
 
 .dashboard-wrapper {
 
-    display: grid;
+    display:grid;
 
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns:1.1fr 0.9fr;
 
-    gap: 24px;
+    gap:24px;
 
-    padding: 24px;
+    padding:24px;
 
-    align-items: stretch;
+    align-items:stretch;
 
 }
   @media(max-width: 1024px) {
@@ -145,7 +145,7 @@
 
     flex-direction:column;
 
-    min-height:0;
+    overflow:hidden;
 
 }
 
@@ -244,19 +244,20 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 18px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--silver2); margin-bottom: 12px; border-bottom: 1px solid #1e3560; padding-bottom: 6px;
+        flex-shrink:0;
   }
 
 .teams-grid {
 
     display:flex;
 
+    flex:1;
+
     flex-direction:column;
 
     gap:10px;
 
-    flex:1;
-
-    min-height:0;
+    max-height:620px;
 
     overflow-y:auto;
 
