@@ -805,12 +805,30 @@
 
     transition:all .15s ease;
 
+    font-family:'Barlow Condensed', sans-serif;
+
+    font-size:16px;
+
     font-weight:600;
 
     white-space:nowrap;
 
 }
 
+
+.reveal-selector .selector-tile span {
+
+    display:block;
+
+    font-family:'Barlow', sans-serif;
+
+    font-size:12px;
+
+    font-weight:400;
+
+    line-height:1.1;
+
+}
 
 
 .selector-tile:hover{
