@@ -131,6 +131,22 @@
     .dashboard-wrapper { grid-template-columns: 1fr; }
   }
 
+.teams-panel {
+
+    background: rgba(11, 20, 36, 0.4);
+
+    border: 1px solid #1e3560;
+
+    border-radius: 8px;
+
+    padding: 24px;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
   .main-draw-zone {
 
     background: rgba(11,20,36,0.4);
@@ -237,6 +253,8 @@
     gap:10px;
 
     overflow-y:auto;
+
+    max-height:620px;
 
     padding-right:4px;
 
