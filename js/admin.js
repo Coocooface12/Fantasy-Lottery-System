@@ -1048,26 +1048,38 @@ function handleTeamCountChange() {
         Expanding team count
     */
 
-    while(percentages.length < count){
+while(percentages.length < count){
+
+    const lastValue =
+        percentages[
+            percentages.length - 1
+        ];
 
 
-        const lastValue =
-            percentages[
-                percentages.length - 1
-            ];
+    const previousValue =
+        percentages[
+            percentages.length - 2
+        ];
 
 
-        percentages.push(
-            Number(
-                (
-                    lastValue / 2
-                )
-                .toFixed(2)
-            )
+    const slope =
+        lastValue - previousValue;
+
+
+    const nextValue =
+        Math.max(
+            0.1,
+            lastValue + slope
         );
 
 
-    }
+    percentages.push(
+        Number(
+            nextValue.toFixed(2)
+        )
+    );
+
+}
 
 
 
