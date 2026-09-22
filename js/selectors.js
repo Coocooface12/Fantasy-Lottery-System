@@ -222,6 +222,7 @@ function updateCurveSelector(){
             "#curve-selector .selector-btn"
         );
 
+
     buttons.forEach(btn=>{
 
         btn.classList.toggle(
@@ -229,7 +230,7 @@ function updateCurveSelector(){
             "active",
 
             btn.dataset.value ===
-            activeConfig.curveType
+            pendingConfig.curveType
 
         );
 
@@ -239,12 +240,16 @@ function updateCurveSelector(){
 
 function applyCurvePreset(curve){
 
-    activeConfig.curveType =
+    pendingConfig.curveType =
         curve;
 
-    switchToCustomFormat();
+
+    pendingConfig.lotteryFormat =
+        "Custom";
+
 
     handleTeamCountChange();
+
 
     updateCurveSelector();
 
