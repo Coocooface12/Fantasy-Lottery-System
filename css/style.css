@@ -110,7 +110,9 @@
 
 .dashboard-wrapper {
 
-    display:flex;
+    display:grid;
+
+    grid-template-columns:1.1fr 0.9fr;
 
     gap:24px;
 
@@ -118,10 +120,7 @@
 
     align-items:stretch;
 
-    height:auto;
-
 }
-
 @media(max-width:1024px){
 
     .dashboard-wrapper{
@@ -132,13 +131,22 @@
 
 }
 
-.teams-column {
-
-    flex:0.9;
+.dashboard-wrapper > .main-draw-zone {
 
     min-height:0;
 
-    overflow:hidden;
+}
+
+
+.dashboard-wrapper > .teams-column {
+
+    min-height:0;
+
+}
+
+.teams-column {
+
+    min-height:0;
 
     display:flex;
 
@@ -148,7 +156,7 @@
 
 .teams-panel {
 
-    flex:1;
+    height:100%;
 
     min-height:0;
 
