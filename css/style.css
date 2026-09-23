@@ -130,9 +130,19 @@
 
 }
 
-.teams-panel {
+.teams-column {
 
     flex:0.9;
+
+    min-height:0;
+
+    overflow:hidden;
+
+}
+
+.teams-panel {
+
+    height:100%;
 
     background:rgba(11,20,36,0.4);
 
@@ -267,15 +277,15 @@
 
     flex:1;
 
+    min-height:0;
+
+    overflow-y:auto;
+
     display:flex;
 
     flex-direction:column;
 
     gap:10px;
-
-    overflow-y:auto;
-
-    padding-right:4px;
 
 }
 
