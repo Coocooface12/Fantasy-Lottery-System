@@ -118,10 +118,6 @@
 
     padding:24px;
 
-    height:100%;
-
-    min-height:0;
-
     align-items:stretch;
 
 }
@@ -150,17 +146,18 @@
 
 .teams-column {
 
-    min-height:0;
-
     display:flex;
 
     flex-direction:column;
 
+    min-height:0;
+
 }
+
 
 .teams-panel {
 
-    height:100%;
+    flex:1;
 
     min-height:0;
 
@@ -180,15 +177,7 @@
 
 }
 
-#tab-lottery {
-
-    height:600px;
-
-}
-
 .main-draw-zone {
-
-    flex:1.1;
 
     background:rgba(11,20,36,0.4);
 
@@ -202,7 +191,7 @@
 
     flex-direction:column;
 
-    justify-content:flex-start;
+    min-height:0;
 
 }
 
@@ -301,7 +290,7 @@
 
 .teams-grid {
 
-    flex:1 1 auto;
+    flex:1;
 
     min-height:0;
 
