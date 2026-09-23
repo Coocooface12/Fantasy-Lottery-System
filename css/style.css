@@ -116,7 +116,7 @@
 
     padding:24px;
 
-    align-items:stretch;
+    align-items:flex-start;
 
 }
 
@@ -138,11 +138,13 @@
 
     overflow:hidden;
 
+    align-self:stretch;
+
 }
 
 .teams-panel {
 
-    height:100%;
+    height:auto;
 
     background:rgba(11,20,36,0.4);
 
@@ -286,6 +288,8 @@
     flex-direction:column;
 
     gap:10px;
+
+    max-height:100%;
 
 }
 
