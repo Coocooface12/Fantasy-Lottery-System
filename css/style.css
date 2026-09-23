@@ -140,13 +140,17 @@
 
     overflow:hidden;
 
-    height:100%;
+    display:flex;
+
+    flex-direction:column;
 
 }
 
 .teams-panel {
 
-    height:auto;
+    flex:1;
+
+    min-height:0;
 
     background:rgba(11,20,36,0.4);
 
@@ -181,8 +185,6 @@
     flex-direction:column;
 
     justify-content:flex-start;
-
-    min-height:829px;
 
 }
 
