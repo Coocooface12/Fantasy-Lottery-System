@@ -120,6 +120,8 @@
 
     align-items:stretch;
 
+    min-height:0;
+
 }
 @media(max-width:1024px){
 
@@ -159,6 +161,8 @@
 
     flex:1;
 
+    height:100%;
+
     min-height:0;
 
     background:rgba(11,20,36,0.4);
@@ -191,7 +195,7 @@
 
     flex-direction:column;
 
-    min-height:0;
+    min-height:650px;
 
 }
 
@@ -288,6 +292,16 @@
 
 }
 
+#tab-lottery {
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-height:0;
+
+}
+
 .teams-grid {
 
     flex:1;
@@ -295,12 +309,6 @@
     min-height:0;
 
     overflow-y:auto;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
 
 }
 
