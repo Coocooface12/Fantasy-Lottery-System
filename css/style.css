@@ -118,6 +118,10 @@
 
     padding:24px;
 
+    height:100%;
+
+    min-height:0;
+
     align-items:stretch;
 
 }
@@ -173,6 +177,12 @@
     flex-direction:column;
 
     overflow:hidden;
+
+}
+
+.tab-lottery {
+
+    height:600px;
 
 }
 
