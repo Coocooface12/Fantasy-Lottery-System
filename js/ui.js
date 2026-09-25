@@ -479,11 +479,23 @@ function updateRoundBadgeVisibility(tabName){
 
 }
 
+
 function syncTeamsPanelHeight() {
   const mainZone = document.querySelector('.main-draw-zone');
   const teamsPanel = document.querySelector('.teams-panel');
   if (!mainZone || !teamsPanel) return;
   teamsPanel.style.height = mainZone.offsetHeight + 'px';
+}
+
+new ResizeObserver(syncTeamsPanelHeight).observe(document.querySelector('.main-draw-zone'));
+
+window.addEventListener('load', () => {
+  requestAnimationFrame(syncTeamsPanelHeight);
+});
+window.addEventListener('resize', syncTeamsPanelHeight);
+
+if (document.fonts) {
+  document.fonts.ready.then(syncTeamsPanelHeight);   // ADD — re-sync once webfont finishes loading
 }
 
 new ResizeObserver(syncTeamsPanelHeight).observe(document.querySelector('.main-draw-zone'));

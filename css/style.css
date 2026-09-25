@@ -363,7 +363,7 @@
   .btn-red { background: transparent; border-color: var(--red); color: #e57373; }
   .btn-red:hover { background: #3a0808; }
 
-  .picks-list { padding: 34px; max-width: 900px; margin: 0 auto; }
+  .picks-list {  width: 100%; padding: 34px; max-width: 900px; margin: 0 auto; }
   .pick-row {
     display: flex; align-items: center; gap: 20px; padding: 18px 24px;
     margin-bottom: 12px; background: var(--panel); border: 1px solid #1e3560; border-radius: 6px;
