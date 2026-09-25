@@ -211,6 +211,8 @@
 
     min-height:650px;
 
+    overflow-y: auto;
+
 }
 
   .balls-section { text-align: center; margin-bottom: 24px; }
