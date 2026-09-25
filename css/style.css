@@ -374,7 +374,7 @@
   .pick-perm { font-size: 14px; color: var(--silver); margin-top: 2px; }
   .pick-pending { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; color: #2a4a7a; font-style: italic; }
   
-  .admin-panel { padding: 30px; max-width: 1000px; margin: 0 auto; }
+  .admin-panel { width: 100%;  padding: 30px; max-width: 1000px; margin: 0 auto; }
   .config-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; background: #0b1424; padding: 16px; border-radius: 8px; border: 1px solid #1e3560; }
   .config-group { display: flex; flex-direction: column; gap: 6px; }
   .config-group label { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; color: var(--silver); }
