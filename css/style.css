@@ -23,27 +23,21 @@
     align-items: flex-start;
     min-height: 100vh;
   }
- #lottery-root {
 
+#lottery-root {
     background: var(--ice2);
-
     border: 1px solid #1e3560;
-
     border-radius: 12px;
-
     width:100%;
-
     max-width:1400px;
-
     height:calc(100vh - 60px);
-
     min-height:700px;
-
     box-shadow:0 15px 40px rgba(0,0,0,0.6);
-
     overflow:hidden;
-
+    display: flex;              /* ADD */
+    flex-direction: column;     /* ADD */
 }
+
   .condensed { font-family: 'Barlow Condensed', sans-serif; }
   
   .header {
@@ -120,7 +114,7 @@
 
     flex-direction:column;
 
-    height:100%;
+    flex: 1; 
 
     min-height:0;
 
@@ -318,7 +312,7 @@
 
     flex-direction:column;
 
-    min-height:0;
+    flex: 1; 
 
     height:100%;
 
