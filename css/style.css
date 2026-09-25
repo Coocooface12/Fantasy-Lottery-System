@@ -165,29 +165,18 @@
 
     min-height:0;
 
-    position: relative;
-
 }
 
 
 .teams-panel {
-
-    position: absolute; 
-
     background:rgba(11,20,36,0.4);
-
     border:1px solid #1e3560;
-
     border-radius:8px;
-
     padding:24px;
-
     display:flex;
-
     flex-direction:column;
-
     overflow:hidden;
-
+    min-height:0;
 }
 
 .main-draw-zone {

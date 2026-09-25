@@ -479,6 +479,16 @@ function updateRoundBadgeVisibility(tabName){
 
 }
 
+function syncTeamsPanelHeight() {
+  const mainZone = document.querySelector('.main-draw-zone');
+  const teamsPanel = document.querySelector('.teams-panel');
+  if (!mainZone || !teamsPanel) return;
+  teamsPanel.style.height = mainZone.offsetHeight + 'px';
+}
+
+new ResizeObserver(syncTeamsPanelHeight).observe(document.querySelector('.main-draw-zone'));
+window.addEventListener('load', syncTeamsPanelHeight);
+
 function switchTab(targetTabName) {
 
   updateRoundBadgeVisibility(targetTabName);
